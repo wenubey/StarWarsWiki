@@ -1,4 +1,4 @@
-package com.wenubey.starwarswiki.ui.theme
+package com.wenubey.starwarswiki.presentation.ui.theme
 
 import android.app.Activity
 import android.os.Build
