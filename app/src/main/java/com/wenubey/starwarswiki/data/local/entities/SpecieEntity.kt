@@ -1,10 +1,12 @@
 package com.wenubey.starwarswiki.data.local.entities
 
+import androidx.room.Entity
 import com.wenubey.starwarswiki.core.Constants.UNDEFINED
 import com.wenubey.starwarswiki.domain.models.SpecieModel
 
+@Entity(tableName = "species")
 data class SpecieEntity(
-    val name: String?,
+    val specieName: String?,
     val classification: String?,
     val averageHeight: String?,
     val averageLifespan: String?,
@@ -12,7 +14,7 @@ data class SpecieEntity(
 ) {
     fun mapToDomainModel(): SpecieModel {
         return SpecieModel(
-            name = name ?: UNDEFINED,
+            name = specieName ?: UNDEFINED,
             classification = classification ?: UNDEFINED,
             averageHeight = averageHeight ?: UNDEFINED,
             averageLifespan = averageLifespan ?: UNDEFINED,

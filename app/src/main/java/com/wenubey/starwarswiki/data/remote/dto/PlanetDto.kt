@@ -3,7 +3,6 @@ package com.wenubey.starwarswiki.data.remote.dto
 import com.google.gson.annotations.SerializedName
 import com.wenubey.starwarswiki.core.Constants.UNDEFINED
 import com.wenubey.starwarswiki.data.local.entities.PlanetEntity
-import com.wenubey.starwarswiki.domain.models.PlanetModel
 
 data class PlanetDto(
     @SerializedName("name") val name: String?,
@@ -13,7 +12,7 @@ data class PlanetDto(
 ) {
     fun mapToEntity(): PlanetEntity {
         return PlanetEntity(
-            name = name ?: UNDEFINED,
+            planetName = name ?: UNDEFINED,
             climate = climate ?: UNDEFINED,
             population = population ?: UNDEFINED,
             terrain = terrain ?: UNDEFINED,

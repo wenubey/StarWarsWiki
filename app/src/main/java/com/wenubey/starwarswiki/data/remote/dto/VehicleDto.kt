@@ -3,7 +3,6 @@ package com.wenubey.starwarswiki.data.remote.dto
 import com.google.gson.annotations.SerializedName
 import com.wenubey.starwarswiki.core.Constants.UNDEFINED
 import com.wenubey.starwarswiki.data.local.entities.VehicleEntity
-import com.wenubey.starwarswiki.domain.models.VehicleModel
 
 data class VehicleDto(
     @SerializedName("name") val name: String?,
@@ -18,12 +17,12 @@ data class VehicleDto(
 ) {
     fun mapToEntity(): VehicleEntity {
         return VehicleEntity(
-            name = name ?: UNDEFINED,
-            model = model ?: UNDEFINED,
-            manufacturer = manufacturer ?: UNDEFINED,
-            costInCredits = costInCredits ?: UNDEFINED,
-            length = length ?: UNDEFINED,
-            crew = crew ?: UNDEFINED,
+            vehicleName = name ?: UNDEFINED,
+            vehicleModel = model ?: UNDEFINED,
+            vehicleManufacturer = manufacturer ?: UNDEFINED,
+            vehicleCostInCredits = costInCredits ?: UNDEFINED,
+            vehicleLength = length ?: UNDEFINED,
+            vehicleCrew = crew ?: UNDEFINED,
             passengers = passengers ?: UNDEFINED,
             consumables = consumables ?: UNDEFINED,
             vehicleClass = vehicleClass ?: UNDEFINED,

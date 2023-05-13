@@ -1,5 +1,6 @@
 package com.wenubey.starwarswiki.core
 
+import com.wenubey.starwarswiki.data.local.entities.PlanetEntity
 import com.wenubey.starwarswiki.domain.models.PlanetModel
 
 fun String?.getIdFromUrl() : Int {
@@ -8,4 +9,5 @@ fun String?.getIdFromUrl() : Int {
 }
 
 fun emptyPlanet(): PlanetModel = PlanetModel("", "", "", "")
+fun emptyPlanetEntity(): PlanetEntity = PlanetEntity("", "", "", "")
 

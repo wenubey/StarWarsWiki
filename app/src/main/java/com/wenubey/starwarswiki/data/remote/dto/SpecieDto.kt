@@ -3,7 +3,6 @@ package com.wenubey.starwarswiki.data.remote.dto
 import com.google.gson.annotations.SerializedName
 import com.wenubey.starwarswiki.core.Constants.UNDEFINED
 import com.wenubey.starwarswiki.data.local.entities.SpecieEntity
-import com.wenubey.starwarswiki.domain.models.SpecieModel
 
 data class SpecieDto(
     @SerializedName("name") val name: String?,
@@ -14,7 +13,7 @@ data class SpecieDto(
 ){
      fun mapToEntity(): SpecieEntity {
         return SpecieEntity(
-            name = name ?: UNDEFINED,
+            specieName = name ?: UNDEFINED,
             classification = classification ?: UNDEFINED,
             averageHeight = averageHeight ?: UNDEFINED,
             averageLifespan = averageLifespan ?: UNDEFINED,

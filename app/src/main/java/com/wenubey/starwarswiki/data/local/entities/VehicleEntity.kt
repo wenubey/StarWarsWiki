@@ -1,27 +1,29 @@
 package com.wenubey.starwarswiki.data.local.entities
 
+import androidx.room.Entity
 import com.wenubey.starwarswiki.core.Constants.UNDEFINED
 import com.wenubey.starwarswiki.domain.models.VehicleModel
 
+@Entity(tableName = "vehicles")
 data class VehicleEntity(
-    val name: String?,
-    val model: String?,
-    val manufacturer: String?,
-    val costInCredits: String?,
-    val length: String?,
-    val crew: String?,
+    val vehicleName: String?,
+    val vehicleModel: String?,
+    val vehicleManufacturer: String?,
+    val vehicleCostInCredits: String?,
+    val vehicleLength: String?,
+    val vehicleCrew: String?,
     val passengers: String?,
     val consumables: String?,
     val vehicleClass: String?,
 ) {
     fun mapToDomainModel(): VehicleModel {
         return VehicleModel(
-            name = name ?: UNDEFINED,
-            model = model ?: UNDEFINED,
-            manufacturer = manufacturer ?: UNDEFINED,
-            costInCredits = costInCredits ?: UNDEFINED,
-            length = length ?: UNDEFINED,
-            crew = crew ?: UNDEFINED,
+            name = vehicleName ?: UNDEFINED,
+            model = vehicleModel ?: UNDEFINED,
+            manufacturer = vehicleManufacturer ?: UNDEFINED,
+            costInCredits = vehicleCostInCredits ?: UNDEFINED,
+            length = vehicleLength ?: UNDEFINED,
+            crew = vehicleCrew ?: UNDEFINED,
             passengers = passengers ?: UNDEFINED,
             consumables = consumables ?: UNDEFINED,
             vehicleClass = vehicleClass ?: UNDEFINED,
