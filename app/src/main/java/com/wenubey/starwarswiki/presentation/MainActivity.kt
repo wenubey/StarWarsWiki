@@ -27,7 +27,7 @@ class MainActivity : ComponentActivity() {
                 ) {
                     val viewModel = hiltViewModel<StarWarsViewModel>()
                     val characters = viewModel.characterPagingFlow.collectAsLazyPagingItems()
-
+                    CharacterScreen(characters = characters)
                 }
             }
 

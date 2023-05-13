@@ -1,8 +1,10 @@
 package com.wenubey.starwarswiki.di
 
+import android.content.Context
 import androidx.paging.ExperimentalPagingApi
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
+import androidx.room.Room
 import com.wenubey.starwarswiki.data.local.StarWarsDatabase
 import com.wenubey.starwarswiki.data.local.entities.CharacterEntity
 import com.wenubey.starwarswiki.data.remote.StarWarsApi
@@ -10,6 +12,7 @@ import com.wenubey.starwarswiki.data.remote.StarWarsRemoteMediator
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
+import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
@@ -21,6 +24,16 @@ import javax.inject.Singleton
 @Module
 @InstallIn(SingletonComponent::class)
 object AppModule {
+
+    @Singleton
+    @Provides
+    fun provideStarWarsDatabase(@ApplicationContext context: Context): StarWarsDatabase {
+        return Room.databaseBuilder(
+            context,
+            StarWarsDatabase::class.java,
+            "characters.db"
+        ).build()
+    }
 
 
     @Singleton

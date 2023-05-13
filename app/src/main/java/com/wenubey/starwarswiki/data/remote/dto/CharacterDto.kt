@@ -37,7 +37,6 @@ data class CharacterDto(
             species = species?.map { it.mapToEntity() } ?: emptyList(),
             starships = starships?.map { it.mapToEntity() } ?: emptyList(),
             id = url.getIdFromUrl(),
-
         )
     }
 }
