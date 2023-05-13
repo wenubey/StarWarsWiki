@@ -1,19 +1,30 @@
 package com.wenubey.starwarswiki.data.local.entities
 
+import androidx.room.Embedded
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 import com.wenubey.starwarswiki.core.Constants.UNDEFINED
+import com.wenubey.starwarswiki.core.emptyPlanet
 import com.wenubey.starwarswiki.domain.models.CharacterModel
 
+@Entity(tableName = "characters")
 data class CharacterEntity(
+    @PrimaryKey(autoGenerate = true) val id: Int,
     val name: String?,
     val height: String?,
     val mass: String?,
     val birthYear: String?,
     val gender: String?,
-    val homeWorld: String?,
-    val films: List<String>?,
-    val vehicles: List<String>?,
-    val species: List<String>?,
-    val starships: List<String>?,
+    @Embedded
+    val homeWorld: PlanetEntity?,
+    @Embedded
+    val films: List<FilmEntity>?,
+    @Embedded
+    val vehicles: List<VehicleEntity>?,
+    @Embedded
+    val species: List<SpecieEntity>?,
+    @Embedded
+    val starships: List<StarshipEntity>?,
 ) {
     fun mapToDomainModel(): CharacterModel {
         return CharacterModel(
@@ -22,11 +33,11 @@ data class CharacterEntity(
             mass = mass ?: UNDEFINED,
             birthYear = birthYear ?: UNDEFINED,
             gender = gender ?: UNDEFINED,
-            homeWorld = homeWorld ?: UNDEFINED,
-            films = films ?: emptyList(),
-            vehicles = vehicles ?: emptyList(),
-            species = species ?: emptyList(),
-            starships = starships ?: emptyList(),
+            homeWorld = homeWorld?.mapToDomainModel() ?: emptyPlanet(),
+            films = films?.map { it.mapToDomainModel() } ?: emptyList(),
+            vehicles = vehicles?.map { it.mapToDomainModel() } ?: emptyList(),
+            species = species?.map { it.mapToDomainModel() } ?: emptyList(),
+            starships = starships?.map { it.mapToDomainModel() } ?: emptyList(),
         )
     }
 }

@@ -6,30 +6,29 @@ import com.wenubey.starwarswiki.data.remote.dto.PlanetDto
 import com.wenubey.starwarswiki.data.remote.dto.SpecieDto
 import com.wenubey.starwarswiki.data.remote.dto.StarshipDto
 import com.wenubey.starwarswiki.data.remote.dto.VehicleDto
-import retrofit2.Response
 import retrofit2.http.GET
+import retrofit2.http.Path
 import retrofit2.http.Query
-import retrofit2.http.Url
 
 interface StarWarsApi {
 
     @GET("people/")
-    suspend fun getCharacters(@Query("page") page: Int): Response<ListCharacterDto>
+    suspend fun getCharacters(@Query("page") page: Int): ListCharacterDto
 
-    @GET
-    suspend fun getPlanet(@Url planetUrl: String): Response<PlanetDto>
+    @GET("planets/{id}/")
+    suspend fun getPlanet(@Path("id") id: Int): PlanetDto
 
-    @GET
-    suspend fun getSpecie(@Url specieUrl: String): Response<SpecieDto>
+    @GET("species/{id}/")
+    suspend fun getSpecie(@Path("id") id: Int): SpecieDto
 
-    @GET
-    suspend fun getFilm(@Url filmUrl: String): Response<FilmDto>
+    @GET("films/{id}/")
+    suspend fun getFilm(@Path("id") id: Int): FilmDto
 
-    @GET
-    suspend fun getVehicle(@Url vehicleUrl: String): Response<VehicleDto>
+    @GET("vehicles/{id}/")
+    suspend fun getVehicle(@Path("id") id: Int): VehicleDto
 
-    @GET
-    suspend fun getStarship(@Url starshipUrl: String): Response<StarshipDto>
+    @GET("starships/{id}/")
+    suspend fun getStarship(@Path("id") id: Int): StarshipDto
 
     companion object {
         const val BASE_URL = "https://swapi.dev/api/"

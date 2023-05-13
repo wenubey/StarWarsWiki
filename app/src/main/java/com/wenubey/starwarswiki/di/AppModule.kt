@@ -1,6 +1,12 @@
 package com.wenubey.starwarswiki.di
 
+import androidx.paging.ExperimentalPagingApi
+import androidx.paging.Pager
+import androidx.paging.PagingConfig
+import com.wenubey.starwarswiki.data.local.StarWarsDatabase
+import com.wenubey.starwarswiki.data.local.entities.CharacterEntity
 import com.wenubey.starwarswiki.data.remote.StarWarsApi
+import com.wenubey.starwarswiki.data.remote.StarWarsRemoteMediator
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -11,9 +17,26 @@ import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
 import javax.inject.Singleton
 
+@OptIn(ExperimentalPagingApi::class)
 @Module
 @InstallIn(SingletonComponent::class)
 object AppModule {
+
+
+    @Singleton
+    @Provides
+    fun provideStarWarsPager(db: StarWarsDatabase, api: StarWarsApi): Pager<Int, CharacterEntity> {
+        return Pager(
+            config = PagingConfig(pageSize = 10),
+            remoteMediator = StarWarsRemoteMediator(
+                db = db,
+                api = api,
+            ),
+            pagingSourceFactory = {
+                db.dao.pagingSource()
+            }
+        )
+    }
 
     @Singleton
     @Provides
