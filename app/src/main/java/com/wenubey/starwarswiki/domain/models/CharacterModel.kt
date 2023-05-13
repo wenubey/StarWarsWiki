@@ -13,5 +13,6 @@ data class CharacterModel(
     @SerializedName("vehicles") val vehicles: List<String>?,
     @SerializedName("species") val species: List<String>?,
     @SerializedName("starships") val starships: List<String>?,
-
 )
+
+
