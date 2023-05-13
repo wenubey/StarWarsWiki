@@ -1,10 +1,11 @@
-package com.wenubey.starwarswiki.data.dto
+package com.wenubey.starwarswiki.data.remote.dto
 
 import com.google.gson.annotations.SerializedName
 import com.wenubey.starwarswiki.core.Constants.UNDEFINED
-import com.wenubey.starwarswiki.domain.models.StarshipModel
+import com.wenubey.starwarswiki.data.local.entities.VehicleEntity
+import com.wenubey.starwarswiki.domain.models.VehicleModel
 
-data class StarshipDto(
+data class VehicleDto(
     @SerializedName("name") val name: String?,
     @SerializedName("model") val model: String?,
     @SerializedName("manufacturer") val manufacturer: String?,
@@ -12,10 +13,11 @@ data class StarshipDto(
     @SerializedName("length") val length: String?,
     @SerializedName("crew") val crew: String?,
     @SerializedName("passengers") val passengers: String?,
-    @SerializedName("starship_class") val starshipClass: String?,
-) : DomainMapper<StarshipModel> {
-    override fun mapToDomainModel(): StarshipModel {
-        return StarshipModel(
+    @SerializedName("consumables") val consumables: String?,
+    @SerializedName("vehicle_class") val vehicleClass: String?,
+) {
+    fun mapToEntity(): VehicleEntity {
+        return VehicleEntity(
             name = name ?: UNDEFINED,
             model = model ?: UNDEFINED,
             manufacturer = manufacturer ?: UNDEFINED,
@@ -23,7 +25,8 @@ data class StarshipDto(
             length = length ?: UNDEFINED,
             crew = crew ?: UNDEFINED,
             passengers = passengers ?: UNDEFINED,
-            starshipClass = starshipClass ?: UNDEFINED,
+            consumables = consumables ?: UNDEFINED,
+            vehicleClass = vehicleClass ?: UNDEFINED,
         )
     }
 }

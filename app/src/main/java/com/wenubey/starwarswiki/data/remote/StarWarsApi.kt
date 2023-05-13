@@ -1,11 +1,11 @@
 package com.wenubey.starwarswiki.data.remote
 
-import com.wenubey.starwarswiki.data.dto.FilmDto
-import com.wenubey.starwarswiki.data.dto.ListCharacterDto
-import com.wenubey.starwarswiki.data.dto.PlanetDto
-import com.wenubey.starwarswiki.data.dto.SpecieDto
-import com.wenubey.starwarswiki.data.dto.StarshipDto
-import com.wenubey.starwarswiki.data.dto.VehicleDto
+import com.wenubey.starwarswiki.data.remote.dto.FilmDto
+import com.wenubey.starwarswiki.data.remote.dto.ListCharacterDto
+import com.wenubey.starwarswiki.data.remote.dto.PlanetDto
+import com.wenubey.starwarswiki.data.remote.dto.SpecieDto
+import com.wenubey.starwarswiki.data.remote.dto.StarshipDto
+import com.wenubey.starwarswiki.data.remote.dto.VehicleDto
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Query

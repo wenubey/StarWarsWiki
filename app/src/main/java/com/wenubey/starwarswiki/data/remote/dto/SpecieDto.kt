@@ -1,7 +1,8 @@
-package com.wenubey.starwarswiki.data.dto
+package com.wenubey.starwarswiki.data.remote.dto
 
 import com.google.gson.annotations.SerializedName
 import com.wenubey.starwarswiki.core.Constants.UNDEFINED
+import com.wenubey.starwarswiki.data.local.entities.SpecieEntity
 import com.wenubey.starwarswiki.domain.models.SpecieModel
 
 data class SpecieDto(
@@ -10,9 +11,9 @@ data class SpecieDto(
     @SerializedName("average_height") val averageHeight: String?,
     @SerializedName("average_lifespan") val averageLifespan: String?,
     @SerializedName("language") val language: String?,
-): DomainMapper<SpecieModel> {
-    override fun mapToDomainModel(): SpecieModel {
-        return SpecieModel(
+){
+     fun mapToEntity(): SpecieEntity {
+        return SpecieEntity(
             name = name ?: UNDEFINED,
             classification = classification ?: UNDEFINED,
             averageHeight = averageHeight ?: UNDEFINED,

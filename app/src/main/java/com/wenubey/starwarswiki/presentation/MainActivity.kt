@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.Text
 import androidx.compose.ui.Modifier
+import com.wenubey.starwarswiki.data.remote.dto.FilmDto
 import com.wenubey.starwarswiki.presentation.ui.theme.StarWarsWikiTheme
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -20,6 +21,7 @@ class MainActivity : ComponentActivity() {
                     Text(text = "HELLO")
                 }
             }
+
         }
     }
 }

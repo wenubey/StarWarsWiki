@@ -1,7 +1,8 @@
-package com.wenubey.starwarswiki.data.dto
+package com.wenubey.starwarswiki.data.remote.dto
 
 import com.google.gson.annotations.SerializedName
 import com.wenubey.starwarswiki.core.Constants.UNDEFINED
+import com.wenubey.starwarswiki.data.local.entities.CharacterEntity
 import com.wenubey.starwarswiki.domain.models.CharacterModel
 
 data class CharacterDto(
@@ -15,9 +16,9 @@ data class CharacterDto(
     @SerializedName("vehicles") val vehicles: List<String>?,
     @SerializedName("species") val species: List<String>?,
     @SerializedName("starships") val starships: List<String>?,
-) : DomainMapper<CharacterModel> {
-    override fun mapToDomainModel(): CharacterModel {
-        return CharacterModel(
+)  {
+     fun mapToEntity(): CharacterEntity {
+        return CharacterEntity(
             name = name ?: UNDEFINED,
             height = height ?: UNDEFINED,
             mass = mass ?: UNDEFINED,
