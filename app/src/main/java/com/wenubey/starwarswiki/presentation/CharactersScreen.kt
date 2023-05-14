@@ -3,9 +3,9 @@ package com.wenubey.starwarswiki.presentation
 import android.widget.Toast
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.LazyItemScope
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -18,7 +18,7 @@ import androidx.paging.LoadState
 import androidx.paging.compose.LazyPagingItems
 import androidx.paging.compose.itemContentType
 import androidx.paging.compose.itemKey
-import androidx.paging.compose.items
+import com.wenubey.starwarswiki.core.Constants.UNDEFINED
 import com.wenubey.starwarswiki.domain.models.CharacterModel
 
 @Composable
@@ -54,7 +54,10 @@ fun CharacterScreen(
                 ) { index ->
                     val item = characters[index]
                     if (item != null) {
-                        Text(text = item.name)
+                        Column {
+                            Text(text = item.name)
+                            Text(text = item.films?.first()?.title ?: UNDEFINED)
+                        }
                     }
                 }
                 item {

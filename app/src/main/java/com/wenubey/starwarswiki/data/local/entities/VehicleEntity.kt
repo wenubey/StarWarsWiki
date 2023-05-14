@@ -1,10 +1,9 @@
 package com.wenubey.starwarswiki.data.local.entities
 
-import androidx.room.Entity
 import com.wenubey.starwarswiki.core.Constants.UNDEFINED
 import com.wenubey.starwarswiki.domain.models.VehicleModel
 
-@Entity(tableName = "vehicles")
+
 data class VehicleEntity(
     val vehicleName: String?,
     val vehicleModel: String?,

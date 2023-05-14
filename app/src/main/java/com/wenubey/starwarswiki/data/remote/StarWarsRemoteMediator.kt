@@ -59,6 +59,7 @@ class StarWarsRemoteMediator @Inject constructor(
                 if (loadType == LoadType.REFRESH) {
                     db.dao.clearAll()
                 }
+
                 db.dao.upsertAll(characters = characterEntities)
             }
             val endOfPaginationReached = characters.next == null

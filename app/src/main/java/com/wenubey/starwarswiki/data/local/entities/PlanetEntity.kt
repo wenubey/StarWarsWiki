@@ -1,10 +1,9 @@
 package com.wenubey.starwarswiki.data.local.entities
 
-import androidx.room.Entity
 import com.wenubey.starwarswiki.core.Constants.UNDEFINED
 import com.wenubey.starwarswiki.domain.models.PlanetModel
 
-@Entity(tableName = "planets")
+
 data class PlanetEntity(
     val planetName: String?= null,
     val climate: String?= null,
