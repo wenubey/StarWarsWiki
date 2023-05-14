@@ -2,11 +2,12 @@ package com.wenubey.starwarswiki.data.local.entities
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import com.wenubey.starwarswiki.core.Constants.DATABASE_TABLE_NAME
 import com.wenubey.starwarswiki.core.Constants.UNDEFINED
 import com.wenubey.starwarswiki.core.emptyPlanet
 import com.wenubey.starwarswiki.domain.models.CharacterModel
 
-@Entity(tableName = "characters")
+@Entity(tableName = DATABASE_TABLE_NAME)
 data class CharacterEntity(
     @PrimaryKey val id: Int,
     val name: String?,

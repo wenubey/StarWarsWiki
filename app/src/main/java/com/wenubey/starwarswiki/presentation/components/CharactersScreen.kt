@@ -1,12 +1,12 @@
-package com.wenubey.starwarswiki.presentation
+package com.wenubey.starwarswiki.presentation.components
 
 import android.widget.Toast
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -20,6 +20,7 @@ import androidx.paging.compose.itemContentType
 import androidx.paging.compose.itemKey
 import com.wenubey.starwarswiki.core.Constants.UNDEFINED
 import com.wenubey.starwarswiki.domain.models.CharacterModel
+import com.wenubey.starwarswiki.presentation.ProgressBarIndicator
 
 @Composable
 fun CharacterScreen(
@@ -38,9 +39,7 @@ fun CharacterScreen(
 
     Box(modifier = Modifier.fillMaxSize()) {
         if (characters.loadState.refresh is LoadState.Loading) {
-            CircularProgressIndicator(
-                modifier = Modifier.align(Alignment.Center)
-            )
+            ProgressBarIndicator()
         } else {
             LazyColumn(
                 modifier = Modifier.fillMaxSize(),
@@ -56,13 +55,16 @@ fun CharacterScreen(
                     if (item != null) {
                         Column {
                             Text(text = item.name)
-                            Text(text = item.films?.first()?.title ?: UNDEFINED)
+                            Text(text = item.homeWorld?.name ?: UNDEFINED)
                         }
                     }
                 }
                 item {
+
+                }
+                item {
                     if (characters.loadState.append is LoadState.Loading) {
-                        CircularProgressIndicator()
+                        ProgressBarIndicator(modifier = Modifier.size(50.dp))
                     }
                 }
             }

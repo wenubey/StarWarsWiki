@@ -3,15 +3,13 @@ package com.wenubey.starwarswiki.presentation
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
-import androidx.compose.material3.Text
 import androidx.compose.ui.Modifier
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.paging.compose.collectAsLazyPagingItems
-import com.wenubey.starwarswiki.data.remote.dto.FilmDto
+import com.wenubey.starwarswiki.presentation.components.CharacterScreen
 import com.wenubey.starwarswiki.presentation.ui.theme.StarWarsWikiTheme
 import dagger.hilt.android.AndroidEntryPoint
 
