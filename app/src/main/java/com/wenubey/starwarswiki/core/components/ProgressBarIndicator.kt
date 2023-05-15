@@ -1,4 +1,4 @@
-package com.wenubey.starwarswiki.presentation
+package com.wenubey.starwarswiki.core.components
 
 import androidx.compose.animation.core.Animatable
 import androidx.compose.animation.core.LinearEasing

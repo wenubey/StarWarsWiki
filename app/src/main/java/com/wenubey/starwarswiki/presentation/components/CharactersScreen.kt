@@ -20,7 +20,7 @@ import androidx.paging.compose.itemContentType
 import androidx.paging.compose.itemKey
 import com.wenubey.starwarswiki.core.Constants.UNDEFINED
 import com.wenubey.starwarswiki.domain.models.CharacterModel
-import com.wenubey.starwarswiki.presentation.ProgressBarIndicator
+import com.wenubey.starwarswiki.core.components.ProgressBarIndicator
 
 @Composable
 fun CharacterScreen(
