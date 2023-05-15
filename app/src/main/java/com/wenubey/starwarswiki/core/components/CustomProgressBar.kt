@@ -20,7 +20,7 @@ import androidx.compose.ui.unit.dp
 import com.wenubey.starwarswiki.R
 
 @Composable
-fun ProgressBarIndicator(
+fun CustomProgressBar(
     modifier: Modifier = Modifier
 ) {
     val visibleAlpha = remember { Animatable(0f) }

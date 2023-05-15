@@ -9,7 +9,7 @@ import androidx.compose.material3.Surface
 import androidx.compose.ui.Modifier
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.paging.compose.collectAsLazyPagingItems
-import com.wenubey.starwarswiki.presentation.components.CharacterScreen
+import com.wenubey.starwarswiki.presentation.components.CharacterListScreen
 import com.wenubey.starwarswiki.presentation.ui.theme.StarWarsWikiTheme
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -25,7 +25,7 @@ class MainActivity : ComponentActivity() {
                 ) {
                     val viewModel = hiltViewModel<StarWarsViewModel>()
                     val characters = viewModel.characterPagingFlow.collectAsLazyPagingItems()
-                    CharacterScreen(characters = characters)
+                    CharacterListScreen(characters = characters)
                 }
             }
 

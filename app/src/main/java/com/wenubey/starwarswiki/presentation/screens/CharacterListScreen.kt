@@ -20,10 +20,10 @@ import androidx.paging.compose.itemContentType
 import androidx.paging.compose.itemKey
 import com.wenubey.starwarswiki.core.Constants.UNDEFINED
 import com.wenubey.starwarswiki.domain.models.CharacterModel
-import com.wenubey.starwarswiki.core.components.ProgressBarIndicator
+import com.wenubey.starwarswiki.core.components.CustomProgressBar
 
 @Composable
-fun CharacterScreen(
+fun CharacterListScreen(
     characters: LazyPagingItems<CharacterModel>
 ) {
     val context = LocalContext.current
@@ -39,7 +39,7 @@ fun CharacterScreen(
 
     Box(modifier = Modifier.fillMaxSize()) {
         if (characters.loadState.refresh is LoadState.Loading) {
-            ProgressBarIndicator()
+            CustomProgressBar()
         } else {
             LazyColumn(
                 modifier = Modifier.fillMaxSize(),
@@ -60,11 +60,8 @@ fun CharacterScreen(
                     }
                 }
                 item {
-
-                }
-                item {
                     if (characters.loadState.append is LoadState.Loading) {
-                        ProgressBarIndicator(modifier = Modifier.size(50.dp))
+                        CustomProgressBar(modifier = Modifier.size(50.dp))
                     }
                 }
             }
