@@ -1,6 +1,5 @@
 package com.wenubey.starwarswiki.data.remote
 
-import com.wenubey.starwarswiki.data.remote.dto.CharacterDto
 import com.wenubey.starwarswiki.data.remote.dto.FilmDto
 import com.wenubey.starwarswiki.data.remote.dto.ListCharacterDto
 import com.wenubey.starwarswiki.data.remote.dto.PlanetDto
@@ -31,8 +30,6 @@ interface StarWarsApi {
     @GET("starships/{id}/")
     suspend fun getStarship(@Path("id") id: Int): StarshipDto
 
-    @GET("people/{id}")
-    suspend fun getPeople(@Path("id") id: Int): CharacterDto
 
     companion object {
         const val BASE_URL = "http://swapi.py4e.com/api/"

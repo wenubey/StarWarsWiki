@@ -1,7 +1,9 @@
 package com.wenubey.starwarswiki.domain.models
 
-import com.google.gson.annotations.SerializedName
+import android.os.Parcelable
+import kotlinx.parcelize.Parcelize
 
+@Parcelize
 data class CharacterModel(
     val id: Int,
     val name: String,
@@ -14,6 +16,6 @@ data class CharacterModel(
     val vehicles: List<VehicleModel>?,
     val species: List<SpecieModel>?,
     val starships: List<StarshipModel>?,
-)
+): Parcelable
 
 

@@ -12,8 +12,11 @@ import javax.inject.Inject
 
 @HiltViewModel
 class StarWarsViewModel @Inject constructor(
-    pager: Pager<Int, CharacterEntity>
+    pager: Pager<Int, CharacterEntity>,
 ): ViewModel() {
+
+
+
 
     val characterPagingFlow = pager
         .flow

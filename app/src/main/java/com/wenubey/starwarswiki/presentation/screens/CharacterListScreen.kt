@@ -21,7 +21,8 @@ import com.wenubey.starwarswiki.presentation.components.CharacterListCard
 
 @Composable
 fun CharacterListScreen(
-    characters: LazyPagingItems<CharacterModel>
+    characters: LazyPagingItems<CharacterModel>,
+    navigateToDetailScreen: (character: CharacterModel) -> Unit,
 ) {
     val context = LocalContext.current
     LaunchedEffect(key1 = characters.loadState) {
@@ -38,6 +39,7 @@ fun CharacterListScreen(
         if (characters.loadState.refresh is LoadState.Loading) {
             CustomProgressBar()
         } else {
+
             LazyColumn(
                 modifier = Modifier.fillMaxSize(),
                 horizontalAlignment = Alignment.CenterHorizontally
@@ -49,7 +51,7 @@ fun CharacterListScreen(
                 ) { index ->
                     val item = characters[index]
                     if (item != null) {
-                        CharacterListCard(navigateToDetailScreen = {}, character = item)
+                        CharacterListCard(navigateToDetailScreen = { navigateToDetailScreen(item) }, character = item)
                     }
                 }
                 item {

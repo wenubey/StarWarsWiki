@@ -51,6 +51,7 @@ object AppModule {
         )
     }
 
+
     @Singleton
     @Provides
     fun provideOkHttpClient(): OkHttpClient {
