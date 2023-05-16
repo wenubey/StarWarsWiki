@@ -6,7 +6,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.paging.compose.LazyPagingItems
 import com.wenubey.starwarswiki.domain.models.CharacterModel
-import com.wenubey.starwarswiki.presentation.components.CharacterListScreen
+import com.wenubey.starwarswiki.presentation.screens.CharacterListScreen
 
 @Composable
 fun NavGraph(

@@ -8,13 +8,16 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.ui.Modifier
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.navigation.NavHostController
+import androidx.navigation.compose.rememberNavController
 import androidx.paging.compose.collectAsLazyPagingItems
-import com.wenubey.starwarswiki.presentation.components.CharacterListScreen
+import com.wenubey.starwarswiki.presentation.navigation.NavGraph
 import com.wenubey.starwarswiki.presentation.ui.theme.StarWarsWikiTheme
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
+    private lateinit var navHostController: NavHostController
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
@@ -23,9 +26,10 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background,
                 ) {
+                    navHostController = rememberNavController()
                     val viewModel = hiltViewModel<StarWarsViewModel>()
                     val characters = viewModel.characterPagingFlow.collectAsLazyPagingItems()
-                    CharacterListScreen(characters = characters)
+                    NavGraph(navHostController = navHostController, characters = characters)
                 }
             }
 
