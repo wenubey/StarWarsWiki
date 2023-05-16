@@ -52,11 +52,11 @@ fun CharacterListScreen(
                     contentType = characters.itemContentType()
                 ) { index ->
                     val item = characters[index]
+                    Column {
+                        Text(text = item?.name ?: UNDEFINED)
+                        Text(text = item?.homeWorld?.name ?: UNDEFINED)
+                    }
                     if (item != null) {
-                        Column {
-                            Text(text = item.name)
-                            Text(text = item.homeWorld?.name ?: UNDEFINED)
-                        }
                     }
                 }
                 item {

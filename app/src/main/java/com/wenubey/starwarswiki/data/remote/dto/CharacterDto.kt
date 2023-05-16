@@ -13,8 +13,8 @@ data class CharacterDto(
     @SerializedName("gender") val gender: String?,
     @SerializedName("homeworld") val homeWorld: String?,
     @SerializedName("films") val films: List<String>?,
-    @SerializedName("vehicles") val vehicles: List<String>?,
     @SerializedName("species") val species: List<String>?,
+    @SerializedName("vehicles") val vehicles: List<String>?,
     @SerializedName("starships") val starships: List<String>?,
     @SerializedName("url") val url: String?,
 )  {
