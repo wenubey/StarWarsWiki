@@ -1,7 +1,8 @@
 package com.wenubey.starwarswiki.core
 
-import com.wenubey.starwarswiki.data.local.entities.PlanetEntity
+import com.wenubey.starwarswiki.core.Constants.UNDEFINED
 import com.wenubey.starwarswiki.domain.models.PlanetModel
+import com.wenubey.starwarswiki.domain.models.SpecieModel
 
 fun String?.getIdFromUrl() : Int {
     val pattern = "/(\\d+)/$".toRegex()
@@ -9,5 +10,14 @@ fun String?.getIdFromUrl() : Int {
 }
 
 fun emptyPlanet(): PlanetModel = PlanetModel("", "", "", "")
-fun emptyPlanetEntity(): PlanetEntity = PlanetEntity("", "", "", "")
+
+fun List<SpecieModel>?.getFirstOrNull(): String {
+    return if (this.isNullOrEmpty()) {
+        UNDEFINED
+    } else {
+        this.first().name!!
+    }
+}
+
+
 

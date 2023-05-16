@@ -1,13 +1,10 @@
-package com.wenubey.starwarswiki.presentation.components
+package com.wenubey.starwarswiki.presentation.screens
 
 import android.widget.Toast
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
@@ -18,9 +15,9 @@ import androidx.paging.LoadState
 import androidx.paging.compose.LazyPagingItems
 import androidx.paging.compose.itemContentType
 import androidx.paging.compose.itemKey
-import com.wenubey.starwarswiki.core.Constants.UNDEFINED
-import com.wenubey.starwarswiki.domain.models.CharacterModel
 import com.wenubey.starwarswiki.core.components.CustomProgressBar
+import com.wenubey.starwarswiki.domain.models.CharacterModel
+import com.wenubey.starwarswiki.presentation.components.CharacterListCard
 
 @Composable
 fun CharacterListScreen(
@@ -43,7 +40,6 @@ fun CharacterListScreen(
         } else {
             LazyColumn(
                 modifier = Modifier.fillMaxSize(),
-                verticalArrangement = Arrangement.spacedBy(16.dp),
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
                 items(
@@ -52,11 +48,8 @@ fun CharacterListScreen(
                     contentType = characters.itemContentType()
                 ) { index ->
                     val item = characters[index]
-                    Column {
-                        Text(text = item?.name ?: UNDEFINED)
-                        Text(text = item?.homeWorld?.name ?: UNDEFINED)
-                    }
                     if (item != null) {
+                        CharacterListCard(navigateToDetailScreen = {}, character = item)
                     }
                 }
                 item {
