@@ -7,7 +7,6 @@ import androidx.paging.PagingState
 import androidx.paging.RemoteMediator
 import androidx.room.withTransaction
 import com.wenubey.starwarswiki.core.Constants.TAG
-import com.wenubey.starwarswiki.core.Constants.UNDEFINED
 import com.wenubey.starwarswiki.core.getIdFromUrl
 import com.wenubey.starwarswiki.data.local.StarWarsDatabase
 import com.wenubey.starwarswiki.data.local.entities.CharacterEntity
@@ -18,7 +17,8 @@ import javax.inject.Inject
 @OptIn(ExperimentalPagingApi::class)
 class StarWarsRemoteMediator @Inject constructor(
     private val api: StarWarsApi,
-    private val db: StarWarsDatabase
+    private val db: StarWarsDatabase,
+    private val imageApi: StarWarsImageApi
 ) : RemoteMediator<Int, CharacterEntity>() {
 
     override suspend fun load(
@@ -41,6 +41,7 @@ class StarWarsRemoteMediator @Inject constructor(
 
             val characters = api.getCharacters(page)
 
+
             val characterEntities = characters.results.map { result ->
                 result.mapToEntity(
                     films = result.films?.map { filmUrl ->
@@ -55,7 +56,8 @@ class StarWarsRemoteMediator @Inject constructor(
                     },
                     starships = result.starships?.map { starshipUrl ->
                         api.getStarship(starshipUrl.getIdFromUrl())
-                    }
+                    },
+                    photoUrl = imageApi.getImageFromId(result.url.getIdFromUrl())
                 )
             }
 

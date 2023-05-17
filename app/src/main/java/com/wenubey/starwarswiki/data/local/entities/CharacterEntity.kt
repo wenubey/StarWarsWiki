@@ -20,6 +20,7 @@ data class CharacterEntity(
     val vehicles: List<VehicleEntity>?,
     val species: List<SpecieEntity>?,
     val starships: List<StarshipEntity>?,
+    val photoUrl: ImageEntity,
 ) {
     fun mapToDomainModel(): CharacterModel {
         return CharacterModel(
@@ -34,6 +35,7 @@ data class CharacterEntity(
             vehicles = vehicles?.map { it.mapToDomainModel() } ?: emptyList(),
             species = species?.map { it.mapToDomainModel() } ?: emptyList(),
             starships = starships?.map { it.mapToDomainModel() } ?: emptyList(),
+            photoUrl = photoUrl.mapToDomain()
         )
     }
 }

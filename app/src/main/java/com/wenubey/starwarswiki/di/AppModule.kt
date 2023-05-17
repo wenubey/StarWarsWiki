@@ -9,6 +9,7 @@ import com.wenubey.starwarswiki.data.local.StarWarsDatabase
 import com.wenubey.starwarswiki.data.local.entities.CharacterEntity
 import com.wenubey.starwarswiki.data.remote.StarWarsApi
 import com.wenubey.starwarswiki.data.remote.StarWarsRemoteMediator
+import com.wenubey.starwarswiki.data.remote.StarWarsImageApi
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -17,6 +18,7 @@ import dagger.hilt.components.SingletonComponent
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import retrofit2.create
 import java.util.concurrent.TimeUnit
 import javax.inject.Singleton
 
@@ -35,22 +37,21 @@ object AppModule {
         ).build()
     }
 
-
     @Singleton
     @Provides
-    fun provideStarWarsPager(db: StarWarsDatabase, api: StarWarsApi): Pager<Int, CharacterEntity> {
+    fun provideStarWarsPager(db: StarWarsDatabase, api: StarWarsApi, imageApi: StarWarsImageApi): Pager<Int, CharacterEntity> {
         return Pager(
             config = PagingConfig(pageSize = 10),
             remoteMediator = StarWarsRemoteMediator(
                 db = db,
                 api = api,
+                imageApi = imageApi
             ),
             pagingSourceFactory = {
                 db.dao.pagingSource()
             }
         )
     }
-
 
     @Singleton
     @Provides
@@ -67,19 +68,28 @@ object AppModule {
     fun provideRetrofit(
         gsonConverterFactory: GsonConverterFactory,
         okHttpClient: OkHttpClient
-    ): Retrofit {
+    ): StarWarsApi {
         return Retrofit.Builder().baseUrl(StarWarsApi.BASE_URL)
             .addConverterFactory(gsonConverterFactory)
             .client(okHttpClient)
             .build()
+            .create(StarWarsApi::class.java)
+    }
+
+    @Singleton
+    @Provides
+    fun provideRetrofitForImage(
+        okHttpClient: OkHttpClient
+    ): StarWarsImageApi {
+        return Retrofit.Builder().baseUrl(StarWarsImageApi.BASE_URL)
+            .addConverterFactory(GsonConverterFactory.create())
+            .client(okHttpClient)
+            .build()
+            .create()
     }
 
     @Singleton
     @Provides
     fun provideConverterFactory(): GsonConverterFactory = GsonConverterFactory.create()
 
-    @Singleton
-    @Provides
-    fun provideApiService(retrofit: Retrofit): StarWarsApi =
-        retrofit.create(StarWarsApi::class.java)
 }

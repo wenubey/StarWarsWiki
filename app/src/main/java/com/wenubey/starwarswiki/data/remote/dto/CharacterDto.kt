@@ -4,6 +4,7 @@ import com.google.gson.annotations.SerializedName
 import com.wenubey.starwarswiki.core.Constants.UNDEFINED
 import com.wenubey.starwarswiki.core.getIdFromUrl
 import com.wenubey.starwarswiki.data.local.entities.CharacterEntity
+import com.wenubey.starwarswiki.data.local.entities.ImageEntity
 
 data class CharacterDto(
     @SerializedName("name") val name: String?,
@@ -24,6 +25,7 @@ data class CharacterDto(
          vehicles: List<VehicleDto>?,
          species: List<SpecieDto>?,
          starships: List<StarshipDto>?,
+         photoUrl: ImageDto?,
      ): CharacterEntity {
         return CharacterEntity(
             name = name ?: UNDEFINED,
@@ -37,6 +39,7 @@ data class CharacterDto(
             species = species?.map { it.mapToEntity() } ?: emptyList(),
             starships = starships?.map { it.mapToEntity() } ?: emptyList(),
             id = url.getIdFromUrl(),
+            photoUrl = photoUrl?.mapToEntity() ?: ImageEntity("")
         )
     }
 }

@@ -2,6 +2,7 @@ package com.wenubey.starwarswiki.core
 
 import com.wenubey.starwarswiki.domain.models.CharacterModel
 import com.wenubey.starwarswiki.domain.models.FilmModel
+import com.wenubey.starwarswiki.domain.models.ImageModel
 import com.wenubey.starwarswiki.domain.models.PlanetModel
 import com.wenubey.starwarswiki.domain.models.SpecieModel
 import com.wenubey.starwarswiki.domain.models.StarshipModel
@@ -12,6 +13,8 @@ object Constants {
     const val TAG = "starWarsTAG"
     const val UNDEFINED = "Undefined"
     const val DATABASE_TABLE_NAME = "characters"
+
+    const val CHARACTER_PHOTO_DESC = "Character's Photo"
 
     val mockData = CharacterModel(
         id = 0,
@@ -66,6 +69,7 @@ object Constants {
                 passengers = "100",
                 starshipClass = "Cool Starship Class",
             )
-        )
+        ),
+        photoUrl = ImageModel("https://vignette.wikia.nocookie.net/starwars/images/2/20/LukeTLJ.jpg")
     )
 }

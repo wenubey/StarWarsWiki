@@ -16,6 +16,7 @@ data class CharacterModel(
     val vehicles: List<VehicleModel>?,
     val species: List<SpecieModel>?,
     val starships: List<StarshipModel>?,
+    val photoUrl: ImageModel,
 ): Parcelable
 
 

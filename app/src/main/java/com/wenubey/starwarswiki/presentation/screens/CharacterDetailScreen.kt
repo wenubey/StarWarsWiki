@@ -1,6 +1,5 @@
 package com.wenubey.starwarswiki.presentation.screens
 
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -12,10 +11,10 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.wenubey.starwarswiki.R
+import coil.compose.AsyncImage
+import com.wenubey.starwarswiki.core.Constants.CHARACTER_PHOTO_DESC
 import com.wenubey.starwarswiki.core.Constants.mockData
 import com.wenubey.starwarswiki.core.components.CustomProgressBar
 import com.wenubey.starwarswiki.core.getFirstOrNull
@@ -44,10 +43,11 @@ fun CharacterDetailScreen(
                             Text(text = character.name)
                             Text(text = character.species.getFirstOrNull())
                         }
-                        Image(
-                            painter = painterResource(id = R.drawable.progressbarindicator),
-                            contentDescription = "Character Image",
+                        AsyncImage(
+                            model = character.photoUrl.imageUrl,
+                            contentDescription = CHARACTER_PHOTO_DESC,
                         )
+
                     }
                 }
             } else {

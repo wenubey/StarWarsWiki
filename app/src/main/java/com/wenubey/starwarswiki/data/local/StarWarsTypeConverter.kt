@@ -4,6 +4,7 @@ import androidx.room.TypeConverter
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import com.wenubey.starwarswiki.data.local.entities.FilmEntity
+import com.wenubey.starwarswiki.data.local.entities.ImageEntity
 import com.wenubey.starwarswiki.data.local.entities.PlanetEntity
 import com.wenubey.starwarswiki.data.local.entities.SpecieEntity
 import com.wenubey.starwarswiki.data.local.entities.StarshipEntity
@@ -19,6 +20,14 @@ class StarWarsTypeConverter {
     private fun <T> toJson(data: T?): String? {
         return data?.let { Gson().toJson(it) }
     }
+
+    @TypeConverter
+    fun imageUrlFromJson(json: String?): ImageEntity? =
+        fromJson(json, object : TypeToken<ImageEntity>() {})
+
+    @TypeConverter
+    fun imageUrlToJson(imageUrl: ImageEntity?): String? =
+        toJson(imageUrl)
 
     @TypeConverter
     fun planetFromJson(json: String?): PlanetEntity? =
