@@ -1,13 +1,16 @@
 package com.wenubey.starwarswiki.presentation.navigation
 
+import android.net.Uri
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import androidx.navigation.navArgument
 import androidx.paging.compose.LazyPagingItems
+import com.google.gson.Gson
 import com.wenubey.starwarswiki.core.parcelable
-import com.wenubey.starwarswiki.domain.models.CharacterDetailArgs
 import com.wenubey.starwarswiki.domain.models.CharacterModel
+import com.wenubey.starwarswiki.domain.models.CharacterModelNavType
 import com.wenubey.starwarswiki.presentation.screens.CharacterDetailScreen
 import com.wenubey.starwarswiki.presentation.screens.CharacterListScreen
 
@@ -22,12 +25,17 @@ fun NavGraph(
     ) {
         composable(route = Screen.CharacterListScreen.route) {
             CharacterListScreen(characters = characters, navigateToDetailScreen = { character ->
-                navHostController.navigate(Screen.CharacterDetailScreen.route)
+                val json = Uri.encode(Gson().toJson(character))
+                navHostController.navigate(Screen.CharacterDetailScreen.route + "/$json")
+
             })
         }
-        composable(route = Screen.CharacterDetailScreen.route + "/{character}") { navBackStackEntry ->
-            val args = navBackStackEntry.arguments?.parcelable<CharacterDetailArgs>("character")
-            val character = args?.character
+        composable(route = Screen.CharacterDetailScreen.route + "/{character}", arguments = listOf(
+            navArgument("character") {
+                type = CharacterModelNavType()
+            }
+        )) {
+            val character = it.arguments?.parcelable<CharacterModel>("character")
             CharacterDetailScreen(character = character)
         }
 

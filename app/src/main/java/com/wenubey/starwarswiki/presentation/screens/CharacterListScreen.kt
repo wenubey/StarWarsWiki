@@ -39,7 +39,6 @@ fun CharacterListScreen(
         if (characters.loadState.refresh is LoadState.Loading) {
             CustomProgressBar()
         } else {
-
             LazyColumn(
                 modifier = Modifier.fillMaxSize(),
                 horizontalAlignment = Alignment.CenterHorizontally
