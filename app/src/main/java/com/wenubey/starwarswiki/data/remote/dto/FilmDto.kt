@@ -6,13 +6,13 @@ import com.wenubey.starwarswiki.data.local.entities.FilmEntity
 
 data class FilmDto(
     @SerializedName("title") val title: String?,
-    @SerializedName("opening_crawl") val description: String?,
+    @SerializedName("opening_crawl") val openingCrawl: String?,
     @SerializedName("release_date") val releaseDate: String?
 ) {
     fun mapToEntity(): FilmEntity {
         return FilmEntity(
             title = title ?: UNDEFINED,
-            description = description ?: UNDEFINED,
+            openingCrawl = openingCrawl ?: UNDEFINED,
             releaseDate = releaseDate ?: UNDEFINED,
         )
     }

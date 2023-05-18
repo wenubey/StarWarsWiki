@@ -15,6 +15,14 @@ object Constants {
     const val DATABASE_TABLE_NAME = "characters"
 
     const val CHARACTER_PHOTO_DESC = "Character's Photo"
+    const val CHARACTER_HEIGHT_DESC = "Character's Average Height"
+    const val CHARACTER_LIFESPAN_DESC = "Character's Average Lifespan"
+    const val CHARACTER_CLASSIFICATION_DESC = "Character's Classification"
+    const val CHARACTER_LANGUAGE_DESC = "Character's Language "
+    const val MOVIES_DESC = "Starring Movies"
+
+
+    const val MOVIES = "Movies"
 
     val mockData = CharacterModel(
         id = 0,
@@ -32,9 +40,29 @@ object Constants {
         films = listOf(
             FilmModel(
                 title = "Cool Film Title",
-                description = "Cool description",
+                openingCrawl = "Cool description",
                 releaseDate = "01.01.1111"
-            )
+            ),
+            FilmModel(
+                title = "Cool Film Title2",
+                openingCrawl = "Cool description2",
+                releaseDate = "02.02.2222"
+            ),
+            FilmModel(
+                title = "Cool Film Title3",
+                openingCrawl = "Cool description3",
+                releaseDate = "03.03.3333"
+            ),
+            FilmModel(
+                title = "Cool Film Title4",
+                openingCrawl = "Cool description4",
+                releaseDate = "04.04.4444"
+            ),
+            FilmModel(
+                title = "Cool Film Title5",
+                openingCrawl = "Cool description5",
+                releaseDate = "05.05.5555"
+            ),
         ),
         vehicles = listOf(
             VehicleModel(
@@ -54,7 +82,7 @@ object Constants {
                 name = "Cool Specie Name",
                 classification = "Cool Specie Classification",
                 averageHeight = "100",
-                averageLifespan = "10",
+                averageLifespan = "indefinite",
                 language = "Cool Specie Language"
             )
         ),

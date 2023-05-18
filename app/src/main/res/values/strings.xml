@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">StarWarsWiki</string>
+    <string name="specie_height">%s cm</string>
+    <string name="specie_lifespan">%s year</string>
+    <string name="specie_classification">%s</string>
+    <string name="specie_language">%s</string>
 </resources>

@@ -6,13 +6,13 @@ import com.wenubey.starwarswiki.domain.models.FilmModel
 
 data class FilmEntity(
     val title: String?,
-    val description: String?,
+    val openingCrawl: String?,
     val releaseDate: String?
 ) {
     fun mapToDomainModel(): FilmModel {
         return FilmModel(
             title = title ?: UNDEFINED,
-            description = description ?: UNDEFINED,
+            openingCrawl = openingCrawl ?: UNDEFINED,
             releaseDate = releaseDate ?: UNDEFINED,
         )
     }
