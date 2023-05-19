@@ -13,6 +13,7 @@ object Constants {
     const val TAG = "starWarsTAG"
     const val UNDEFINED = "Undefined"
     const val DATABASE_TABLE_NAME = "characters"
+    const val TOP_BAR_TITLE = "Star Wars Wiki"
 
     const val CHARACTER_PHOTO_DESC = "Character's Photo"
     const val CHARACTER_HEIGHT_DESC = "Character's Average Height"
@@ -20,6 +21,8 @@ object Constants {
     const val CHARACTER_CLASSIFICATION_DESC = "Character's Classification"
     const val CHARACTER_LANGUAGE_DESC = "Character's Language "
     const val MOVIES_DESC = "Starring Movies"
+    const val FILM_OPENING_CRAWL_NOT_FOUND_DESC = "Film Description Not Found"
+    const val GO_BACK_PREVIOUS_SCREEN_DESC = "Go back to previous screen"
 
 
     const val MOVIES = "Movies"

@@ -33,17 +33,25 @@ import com.wenubey.starwarswiki.core.Constants.MOVIES_DESC
 import com.wenubey.starwarswiki.core.Constants.UNDEFINED
 import com.wenubey.starwarswiki.core.Constants.mockData
 import com.wenubey.starwarswiki.core.components.CustomProgressBar
+import com.wenubey.starwarswiki.core.components.StarWarsTopBarWithBackButton
 import com.wenubey.starwarswiki.core.getFirstOrNull
 import com.wenubey.starwarswiki.domain.models.CharacterModel
+import com.wenubey.starwarswiki.domain.models.FilmModel
 import com.wenubey.starwarswiki.presentation.components.detail.CharacterSpecieList
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun CharacterDetailScreen(
     character: CharacterModel?,
-    navigateToFilmOpeningCrawl: (desc: String) -> Unit
+    navigateToFilmOpeningCrawl: (film: FilmModel) -> Unit,
+    navigateToBackScreen: () -> Unit,
 ) {
     Scaffold(
+        topBar = {
+            StarWarsTopBarWithBackButton(
+                navigateToBackScreen = navigateToBackScreen
+            )
+        },
         content = { paddingValues ->
             if (character != null) {
                 Column(
@@ -117,7 +125,7 @@ fun CharacterDetailScreen(
                                     ElevatedCard(
                                         modifier = Modifier.padding(4.dp),
                                         onClick = {
-                                            navigateToFilmOpeningCrawl(film.openingCrawl!!)
+                                            navigateToFilmOpeningCrawl(film)
                                         }
                                     ) {
                                         Column(
@@ -149,5 +157,5 @@ fun CharacterDetailScreen(
 @Preview(showBackground = false)
 @Composable
 fun CharacterDetailScreenPreview() {
-    CharacterDetailScreen(character = mockData, {})
+    CharacterDetailScreen(character = mockData, {}, {})
 }

@@ -3,7 +3,6 @@ package com.wenubey.starwarswiki.presentation.navigation
 import android.net.Uri
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
-import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
@@ -12,6 +11,8 @@ import com.google.gson.Gson
 import com.wenubey.starwarswiki.core.parcelable
 import com.wenubey.starwarswiki.domain.models.CharacterModel
 import com.wenubey.starwarswiki.domain.models.CharacterModelNavType
+import com.wenubey.starwarswiki.domain.models.FilmModel
+import com.wenubey.starwarswiki.domain.models.FilmModelNavType
 import com.wenubey.starwarswiki.presentation.screens.CharacterDetailScreen
 import com.wenubey.starwarswiki.presentation.screens.CharacterListScreen
 import com.wenubey.starwarswiki.presentation.screens.OpeningCrawlScreen
@@ -38,18 +39,27 @@ fun NavGraph(
             }
         )) {
             val character = it.arguments?.parcelable<CharacterModel>("character")
-            CharacterDetailScreen(character = character, navigateToFilmOpeningCrawl =  { openingCrawl ->
-                navHostController.navigate(Screen.OpeningCrawlScreen.route + "/$openingCrawl")
-            })
+            CharacterDetailScreen(
+                character = character,
+                navigateToFilmOpeningCrawl = { film ->
+                    val json = Uri.encode(Gson().toJson(film))
+                    navHostController.navigate(Screen.OpeningCrawlScreen.route + "/$json")
+                },
+                navigateToBackScreen = {
+                    navHostController.popBackStack()
+                }
+            )
         }
 
-        composable(route = Screen.OpeningCrawlScreen.route + "/{opening_crawl}", arguments = listOf(
-            navArgument("opening_crawl") {
-                type = NavType.StringType
+        composable(route = Screen.OpeningCrawlScreen.route + "/{film}", arguments = listOf(
+            navArgument("film") {
+                type = FilmModelNavType()
             }
         )) {
-            val openingCrawl = it.arguments?.getString("opening_crawl")
-            OpeningCrawlScreen(openingCrawl = openingCrawl, navController = navHostController)
+            val film = it.arguments?.parcelable<FilmModel>("film")
+            OpeningCrawlScreen(
+                film = film,
+                navigateToBackScreen = { navHostController.popBackStack() })
         }
     }
 }
