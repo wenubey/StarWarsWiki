@@ -6,7 +6,6 @@ import com.wenubey.starwarswiki.domain.models.ImageModel
 import com.wenubey.starwarswiki.domain.models.PlanetModel
 import com.wenubey.starwarswiki.domain.models.SpecieModel
 import com.wenubey.starwarswiki.domain.models.StarshipModel
-import com.wenubey.starwarswiki.domain.models.VehicleModel
 
 object Constants {
 
@@ -44,19 +43,35 @@ object Constants {
             population = "100000",
             terrain = "Cool Terrain"
         ),
-        films = emptyList(),
-        vehicles = listOf(
-            VehicleModel(
-                name = "Cool Vehicle Name",
-                model = "Cool Vehicle Model",
-                manufacturer = "Cool Vehicle Manufacturer",
-                costInCredits = "50000",
-                length = "1000",
-                crew = "10",
-                passengers = "5",
-                consumables = "Cool Consumable",
-                vehicleClass = "Cool Vehicle Class"
+        films = listOf(
+            FilmModel(
+                title = "Cool Film Title",
+                openingCrawl = "Cool Opening Crawl",
+                releaseDate = "1111.11.11"
+            ),
+            FilmModel(
+                title = "Cool Film Title2",
+                openingCrawl = "Cool Opening Crawl2",
+                releaseDate = "2222.22.22"
+            ),
+            FilmModel(
+                title = "Cool Film Title3",
+                openingCrawl = "Cool Opening Crawl3",
+                releaseDate = "3333.33.33"
             )
+        ),
+        vehicles = listOf(
+//            VehicleModel(
+//                name = "Cool Vehicle Name",
+//                model = "Cool Vehicle Model",
+//                manufacturer = "Cool Vehicle Manufacturer",
+//                costInCredits = "50000",
+//                length = "1000",
+//                crew = "10",
+//                passengers = "5",
+//                consumables = "Cool Consumable",
+//                vehicleClass = "Cool Vehicle Class"
+//            )
         ),
         species = listOf(
             SpecieModel(

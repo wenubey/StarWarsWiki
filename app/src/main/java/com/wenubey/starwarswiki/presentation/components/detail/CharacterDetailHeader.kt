@@ -9,7 +9,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.wenubey.starwarswiki.core.getFirstOrNull
+import androidx.compose.ui.unit.sp
 import com.wenubey.starwarswiki.domain.models.CharacterModel
 
 @Composable
@@ -20,10 +20,12 @@ fun CharacterDetailHeader(
         modifier = Modifier
             .fillMaxWidth()
             .padding(8.dp),
-        horizontalAlignment = Alignment.Start,
+        horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.spacedBy(4.dp)
     ) {
-        Text(text = character.name)
-        Text(text = character.species.getFirstOrNull())
+        Text(
+            text = character.name,
+            fontSize = 24.sp,
+        )
     }
 }
