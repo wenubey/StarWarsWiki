@@ -32,18 +32,17 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.wenubey.starwarswiki.R
 import com.wenubey.starwarswiki.core.Constants.FILM_OPENING_CRAWL_NOT_FOUND_DESC
+import com.wenubey.starwarswiki.core.components.ErrorScreen
 import com.wenubey.starwarswiki.core.components.StarWarsTopBarWithBackButton
 import com.wenubey.starwarswiki.domain.models.FilmModel
 
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun OpeningCrawlScreen(
     film: FilmModel?,
     navigateToBackScreen: () -> Unit,
 ) {
     var offsetY by remember { mutableStateOf(0.dp) }
-
 
     LaunchedEffect(Unit) {
         val animationSpec = keyframes {
@@ -90,7 +89,6 @@ fun OpeningCrawlScreen(
                         .offset(y = offsetY)
                         .wrapContentHeight(),
                 ) {
-
                     Column(
                         horizontalAlignment = Alignment.CenterHorizontally,
                         verticalArrangement = Arrangement.spacedBy(4.dp),
@@ -116,16 +114,7 @@ fun OpeningCrawlScreen(
 
                 }
             } else {
-                Box(
-                    modifier = Modifier
-                        .fillMaxSize()
-                        .padding(paddingValues)
-                ) {
-                    Image(
-                        painter = painterResource(id = R.drawable.placeholder),
-                        contentDescription = FILM_OPENING_CRAWL_NOT_FOUND_DESC
-                    )
-                }
+                ErrorScreen(paddingValues = paddingValues)
             }
 
         }

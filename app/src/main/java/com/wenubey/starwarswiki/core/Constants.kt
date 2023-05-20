@@ -23,9 +23,13 @@ object Constants {
     const val MOVIES_DESC = "Starring Movies"
     const val FILM_OPENING_CRAWL_NOT_FOUND_DESC = "Film Description Not Found"
     const val GO_BACK_PREVIOUS_SCREEN_DESC = "Go back to previous screen"
+    const val VEHICLES_DESC = "Character's riding vehicles"
+    const val STARSHIPS_DESC = "Character's riding starships"
 
 
     const val MOVIES = "Movies"
+    const val VEHICLES = "Vehicles"
+    const val STARSHIPS = "Starships"
 
     val mockData = CharacterModel(
         id = 0,
@@ -40,33 +44,7 @@ object Constants {
             population = "100000",
             terrain = "Cool Terrain"
         ),
-        films = listOf(
-            FilmModel(
-                title = "Cool Film Title",
-                openingCrawl = "Cool description",
-                releaseDate = "01.01.1111"
-            ),
-            FilmModel(
-                title = "Cool Film Title2",
-                openingCrawl = "Cool description2",
-                releaseDate = "02.02.2222"
-            ),
-            FilmModel(
-                title = "Cool Film Title3",
-                openingCrawl = "Cool description3",
-                releaseDate = "03.03.3333"
-            ),
-            FilmModel(
-                title = "Cool Film Title4",
-                openingCrawl = "Cool description4",
-                releaseDate = "04.04.4444"
-            ),
-            FilmModel(
-                title = "Cool Film Title5",
-                openingCrawl = "Cool description5",
-                releaseDate = "05.05.5555"
-            ),
-        ),
+        films = emptyList(),
         vehicles = listOf(
             VehicleModel(
                 name = "Cool Vehicle Name",
