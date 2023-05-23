@@ -48,12 +48,6 @@ fun NavGraph(
                 navigateToBackScreen = {
                     navHostController.popBackStack()
                 },
-                onClickVehicle = { vehicle ->
-
-                },
-                onClickStarship = { starship ->
-
-                }
             )
         }
 

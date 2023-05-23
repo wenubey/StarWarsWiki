@@ -4,4 +4,13 @@
     <string name="specie_lifespan">%s year</string>
     <string name="specie_classification">%s</string>
     <string name="specie_language">%s</string>
+
+    <string name="vehicle_starship_name">Name: %s</string>
+    <string name="vehicle_starship_model">Model: %s</string>
+    <string name="vehicle_starship_cost">Cost: %s Credits</string>
+    <string name="vehicle_starship_length">Length: %s m</string>
+    <string name="vehicle_starship_crew">Crew: %s person</string>
+    <string name="vehicle_starship_passengers">Passengers: %s person</string>
+    <string name="vehicle_starship_consumables">Consumables: %s</string>
+    <string name="vehicle_starship_class">Class: %s</string>
 </resources>
