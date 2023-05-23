@@ -20,9 +20,10 @@ import com.wenubey.starwarswiki.domain.models.FilmModel
 import com.wenubey.starwarswiki.domain.models.StarshipModel
 import com.wenubey.starwarswiki.domain.models.VehicleModel
 import com.wenubey.starwarswiki.presentation.components.detail.CharacterDetailHeader
-import com.wenubey.starwarswiki.presentation.components.detail.VehicleStarshipRow
 import com.wenubey.starwarswiki.presentation.components.detail.CharacterFilmList
 import com.wenubey.starwarswiki.presentation.components.detail.CharacterImageAndSpecieRow
+import com.wenubey.starwarswiki.presentation.components.detail.VehicleStarshipRow
+
 
 @Composable
 fun CharacterDetailScreen(
@@ -32,6 +33,7 @@ fun CharacterDetailScreen(
     onClickVehicle: (vehicle: VehicleModel) -> Unit,
     onClickStarship: (starship: StarshipModel) -> Unit,
 ) {
+
     Scaffold(
         topBar = {
             StarWarsTopBarWithBackButton(
@@ -49,8 +51,7 @@ fun CharacterDetailScreen(
                     ElevatedCard(
                         modifier = Modifier
                             .fillMaxWidth()
-                            .padding(4.dp)
-                        , colors = CardDefaults.cardColors(
+                            .padding(4.dp), colors = CardDefaults.cardColors(
                             containerColor = MaterialTheme.colorScheme.primaryContainer
                         )
                     ) {

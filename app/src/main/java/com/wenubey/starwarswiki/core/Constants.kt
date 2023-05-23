@@ -6,6 +6,7 @@ import com.wenubey.starwarswiki.domain.models.ImageModel
 import com.wenubey.starwarswiki.domain.models.PlanetModel
 import com.wenubey.starwarswiki.domain.models.SpecieModel
 import com.wenubey.starwarswiki.domain.models.StarshipModel
+import com.wenubey.starwarswiki.domain.models.VehicleModel
 
 object Constants {
 
@@ -61,17 +62,17 @@ object Constants {
             )
         ),
         vehicles = listOf(
-//            VehicleModel(
-//                name = "Cool Vehicle Name",
-//                model = "Cool Vehicle Model",
-//                manufacturer = "Cool Vehicle Manufacturer",
-//                costInCredits = "50000",
-//                length = "1000",
-//                crew = "10",
-//                passengers = "5",
-//                consumables = "Cool Consumable",
-//                vehicleClass = "Cool Vehicle Class"
-//            )
+            VehicleModel(
+                name = "Cool Vehicle Name",
+                model = "Cool Vehicle Model",
+                manufacturer = "Cool Vehicle Manufacturer",
+                costInCredits = "50000",
+                length = "1000",
+                crew = "10",
+                passengers = "5",
+                consumables = "Cool Consumable",
+                vehicleClass = "Cool Vehicle Class"
+            )
         ),
         species = listOf(
             SpecieModel(

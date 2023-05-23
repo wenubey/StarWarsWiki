@@ -26,7 +26,7 @@ fun CharacterFilmItem(
         Column(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(4.dp),
+                .padding(8.dp),
             horizontalAlignment = Alignment.Start
         ) {
             Text(text = film.title ?: Constants.UNDEFINED)

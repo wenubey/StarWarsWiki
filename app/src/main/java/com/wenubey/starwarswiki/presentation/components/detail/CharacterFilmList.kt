@@ -3,6 +3,7 @@ package com.wenubey.starwarswiki.presentation.components.detail
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
@@ -22,6 +23,7 @@ fun CharacterFilmList(
     navigateToFilmOpeningCrawl: (film: FilmModel) -> Unit
 ) {
     Row(
+        modifier = Modifier.padding(4.dp) ,
         horizontalArrangement = Arrangement.spacedBy(2.dp),
         verticalAlignment = Alignment.CenterVertically,
     ) {
