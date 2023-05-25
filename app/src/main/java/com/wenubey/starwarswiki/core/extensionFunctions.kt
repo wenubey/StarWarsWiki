@@ -33,4 +33,3 @@ inline fun <reified T : Parcelable> Bundle.parcelable(key: String): T? = when {
     else -> @Suppress("DEPRECATION") getParcelable(key) as? T
 }
 
-

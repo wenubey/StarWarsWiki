@@ -11,7 +11,6 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.wrapContentHeight
-import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -24,14 +23,14 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.TileMode
+import androidx.compose.ui.graphics.ColorFilter
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.wenubey.starwarswiki.R
-import com.wenubey.starwarswiki.core.Constants.FILM_OPENING_CRAWL_NOT_FOUND_DESC
 import com.wenubey.starwarswiki.core.components.ErrorScreen
 import com.wenubey.starwarswiki.core.components.StarWarsTopBarWithBackButton
 import com.wenubey.starwarswiki.domain.models.FilmModel
@@ -64,31 +63,30 @@ fun OpeningCrawlScreen(
         }
     }
 
+
     Scaffold(
         modifier = Modifier,
         topBar = {
             StarWarsTopBarWithBackButton(navigateToBackScreen = navigateToBackScreen)
         },
         content = { paddingValues ->
-
+            Image(
+                modifier = Modifier.fillMaxSize(),
+                painter = painterResource(id = R.drawable.starwars),
+                contentDescription = "",
+                contentScale = ContentScale.FillBounds,
+            )
             if (film != null && !film.openingCrawl.isNullOrEmpty() && !film.title.isNullOrEmpty()) {
                 Box(
                     modifier = Modifier
                         .fillMaxSize()
                         .padding(paddingValues)
-                        .background(
-                            brush = Brush.verticalGradient(
-                                listOf(
-                                    Color.Gray,
-                                    Color.Black
-                                ),
-                                tileMode = TileMode.Repeated
-                            )
-                        )
+                        .background(Color.Transparent)
                         .padding(4.dp)
-                        .offset(y = offsetY)
-                        .wrapContentHeight(),
+                        .wrapContentHeight()
+                        .offset(y = offsetY),
                 ) {
+
                     Column(
                         horizontalAlignment = Alignment.CenterHorizontally,
                         verticalArrangement = Arrangement.spacedBy(4.dp),
@@ -119,6 +117,7 @@ fun OpeningCrawlScreen(
 
         }
     )
+
 
 }
 
