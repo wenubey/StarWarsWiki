@@ -8,6 +8,7 @@ import androidx.compose.animation.core.tween
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -21,7 +22,7 @@ import com.wenubey.starwarswiki.R
 
 @Composable
 fun CustomProgressBar(
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
 ) {
     val visibleAlpha = remember { Animatable(0f) }
 
@@ -41,6 +42,7 @@ fun CustomProgressBar(
             contentDescription = null,
             modifier = modifier
                 .size(100.dp)
+                .padding(4.dp)
                 .alpha(visibleAlpha.value),
         )
     }

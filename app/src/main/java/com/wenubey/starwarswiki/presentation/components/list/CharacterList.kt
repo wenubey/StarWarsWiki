@@ -15,6 +15,7 @@ import androidx.paging.compose.itemContentType
 import androidx.paging.compose.itemKey
 import com.wenubey.starwarswiki.core.components.CustomProgressBar
 import com.wenubey.starwarswiki.domain.models.CharacterModel
+import com.wenubey.starwarswiki.presentation.components.list.CharacterListCard
 
 @Composable
 fun CharacterList(
