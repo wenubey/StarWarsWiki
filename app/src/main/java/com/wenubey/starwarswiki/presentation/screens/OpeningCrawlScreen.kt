@@ -52,21 +52,21 @@ fun OpeningCrawlScreen(
 
     LaunchedEffect(Unit) {
         val animationSpec = keyframes {
-            durationMillis = 12000
+            durationMillis = 24000
             1f at 0
-            0.50f at 6000
-            0f at 12000
-            //-0.5f at 18000
-            // -1f at 24000
-
+            0.50f at 4000
+            0f at 8000
+            -0.5f at 12000
+            -1f at 16000
+            -1.5f at 20000
+            -2f at 24000
         }
         val offsetAnim = Animatable(1f)
         offsetAnim.animateTo(
-            targetValue = 0f,
+            targetValue = -2f,
             animationSpec = animationSpec,
         ) {
             offsetY = (value * 500).dp
-            // Log.i(TAG, "OpeningCrawlScreen: offset: $offsetY")
             Log.i(TAG, "OpeningCrawlScreen: value: $value")
         }
         boxVisibility = false
