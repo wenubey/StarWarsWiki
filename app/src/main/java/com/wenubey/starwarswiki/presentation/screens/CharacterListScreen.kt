@@ -10,7 +10,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.paging.LoadState
 import androidx.paging.compose.LazyPagingItems
-import com.wenubey.starwarswiki.core.components.CustomProgressBar
+import com.wenubey.starwarswiki.core.components.OpeningQuote
 import com.wenubey.starwarswiki.core.components.StarWarsTopBar
 import com.wenubey.starwarswiki.domain.models.CharacterModel
 import com.wenubey.starwarswiki.presentation.components.CharacterList
@@ -38,7 +38,7 @@ fun CharacterListScreen(
         },
         content = { paddingValues ->
             if (characters.loadState.refresh is LoadState.Loading) {
-                CustomProgressBar()
+                OpeningQuote(paddingValues = paddingValues)
             } else {
                 CharacterList(
                     characters = characters,

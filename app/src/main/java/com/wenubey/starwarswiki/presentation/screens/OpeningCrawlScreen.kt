@@ -2,11 +2,11 @@ package com.wenubey.starwarswiki.presentation.screens
 
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
-import android.util.Log
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.core.Animatable
 import androidx.compose.animation.core.keyframes
 import androidx.compose.animation.shrinkVertically
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -25,6 +25,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.TransformOrigin
+import androidx.compose.ui.graphics.asImageBitmap
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
@@ -32,10 +33,9 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import coil.compose.AsyncImage
-import com.wenubey.starwarswiki.core.Constants.TAG
 import com.wenubey.starwarswiki.core.components.ErrorScreen
 import com.wenubey.starwarswiki.core.components.StarWarsTopBarWithBackButton
+import com.wenubey.starwarswiki.core.removeNewLineReturn
 import com.wenubey.starwarswiki.domain.models.FilmModel
 
 
@@ -49,6 +49,8 @@ fun OpeningCrawlScreen(
     var boxVisibility by remember { mutableStateOf(true) }
     val context = LocalContext.current
     val assetManager = context.assets
+    val imgFile = assetManager.open("Starfield.png")
+    val imgBitmap: Bitmap = BitmapFactory.decodeStream(imgFile)
 
     LaunchedEffect(Unit) {
         val animationSpec = keyframes {
@@ -67,13 +69,11 @@ fun OpeningCrawlScreen(
             animationSpec = animationSpec,
         ) {
             offsetY = (value * 500).dp
-            Log.i(TAG, "OpeningCrawlScreen: value: $value")
         }
         boxVisibility = false
     }
 
-    val imgFile = assetManager.open("Starfield.png")
-    val imgBitmap: Bitmap = BitmapFactory.decodeStream(imgFile)
+
 
     Scaffold(
         modifier = Modifier,
@@ -81,8 +81,8 @@ fun OpeningCrawlScreen(
             StarWarsTopBarWithBackButton(navigateToBackScreen = navigateToBackScreen)
         },
         content = { paddingValues ->
-            AsyncImage(
-                model = imgBitmap,
+            Image(
+                bitmap = imgBitmap.asImageBitmap(),
                 contentDescription = "",
                 contentScale = ContentScale.FillBounds,
                 modifier = Modifier.fillMaxSize()
@@ -117,7 +117,7 @@ fun OpeningCrawlScreen(
                                 )
                             )
                             Text(
-                                text = film.openingCrawl,
+                                text = film.openingCrawl.removeNewLineReturn(),
                                 modifier = Modifier
                                     .padding(16.dp),
                                 fontSize = 24.sp,

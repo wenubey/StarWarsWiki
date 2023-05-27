@@ -25,6 +25,8 @@ object Constants {
     const val GO_BACK_PREVIOUS_SCREEN_DESC = "Go back to previous screen"
     const val VEHICLES_DESC = "Character's riding vehicles"
     const val STARSHIPS_DESC = "Character's riding starships"
+
+
     const val MOVIES = "Movies"
     const val VEHICLES = "Vehicles"
     const val STARSHIPS = "Starships"

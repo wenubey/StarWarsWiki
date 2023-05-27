@@ -40,7 +40,7 @@ fun CharacterDetailScreen(
 ) {
     val sheetState = rememberBottomSheetScaffoldState(
         bottomSheetState = SheetState(
-            initialValue = SheetValue.Hidden,
+            initialValue = SheetValue.PartiallyExpanded,
             skipPartiallyExpanded = false
         )
     )
