@@ -10,6 +10,7 @@ import androidx.compose.material.icons.outlined.Translate
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.wenubey.starwarswiki.R
@@ -29,7 +30,7 @@ fun CharacterSpecieList(
         verticalArrangement = Arrangement.spacedBy(2.dp),
         horizontalAlignment = Alignment.End
     ) {
-        Text(text = specie.name ?: UNDEFINED)
+        Text(text = specie.name ?: UNDEFINED, overflow = TextOverflow.Ellipsis, maxLines = 1)
         CharacterSpecieItem(
             imageVector = Icons.Outlined.Straighten,
             contentDesc = CHARACTER_HEIGHT_DESC,

@@ -2,6 +2,7 @@ package com.wenubey.starwarswiki.presentation.components.detail
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -35,8 +36,15 @@ fun BottomSheet(
         modifier = Modifier
             .padding(16.dp)
             .height((ScreenSize().height() / 3).dp)
-            .clickable { scope.launch { sheetState.bottomSheetState.partialExpand() } },
-        contentAlignment = Alignment.Center
+            .clickable(
+                interactionSource = MutableInteractionSource(),
+                indication = null,
+                onClick = {
+                    scope.launch { sheetState.bottomSheetState.partialExpand() }
+                }
+            ),
+        contentAlignment = Alignment.Center,
+
     ) {
         Image(
             painter = painterResource(id = when(bottomSheetContent) {
@@ -53,7 +61,7 @@ fun BottomSheet(
             contentDescription = "",
             modifier = Modifier
                 .fillMaxSize()
-                .alpha(0.3f)
+                .alpha(0.1f)
         )
         Column(
             modifier = Modifier

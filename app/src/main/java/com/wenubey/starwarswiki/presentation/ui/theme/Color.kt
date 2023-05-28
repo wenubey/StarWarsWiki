@@ -2,6 +2,11 @@ package com.wenubey.starwarswiki.presentation.ui.theme
 
 import androidx.compose.ui.graphics.Color
 
+
+//Custom Colors for particular areas
+val OpeningQuoteColor = Color(0xFF1EB3BC)
+val OpeningCrawlColor = Color(0xFFC29621)
+//Theme Colors
 val md_theme_light_primary = Color(0xFF005FAF)
 val md_theme_light_onPrimary = Color(0xFFFFFFFF)
 val md_theme_light_primaryContainer = Color(0xFFD4E3FF)

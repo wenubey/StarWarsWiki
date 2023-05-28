@@ -64,10 +64,13 @@ fun CharacterListCard(
                 modifier = Modifier
                     .padding(8.dp),
                 horizontalAlignment = Alignment.Start,
-                verticalArrangement = Arrangement.spacedBy(4.dp),
-            ) {
-                Text(text = character.name)
-                Text(text = character.species.getFirstOrNull())
+
+                ) {
+                Text(text = character.name, style = MaterialTheme.typography.bodyLarge)
+                Text(
+                    text = character.species.getFirstOrNull(),
+                    style = MaterialTheme.typography.bodyMedium
+                )
             }
             Image(
                 painter = if (painter.state is AsyncImagePainter.State.Success) {
@@ -76,9 +79,9 @@ fun CharacterListCard(
                     painterResource(id = R.drawable.character_list_not_found)
                 },
                 contentDescription = Constants.CHARACTER_PHOTO_DESC,
-                modifier = Modifier.clip(RoundedCornerShape(4.dp)).size(48.dp),
-
-
+                modifier = Modifier
+                    .clip(RoundedCornerShape(4.dp))
+                    .size(48.dp),
             )
         }
 
@@ -89,11 +92,6 @@ fun CharacterListCard(
 @Preview(showBackground = true)
 @Composable
 fun CharacterListCardPreview() {
-    Column {
-        CharacterListCard(character = mockData, navigateToDetailScreen = {})
-        CharacterListCard(character = mockData, navigateToDetailScreen = {})
-        CharacterListCard(character = mockData, navigateToDetailScreen = {})
-    }
-
+    CharacterListCard(character = mockData, navigateToDetailScreen = {})
 }
 

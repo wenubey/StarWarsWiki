@@ -28,7 +28,28 @@ val Typography = Typography(
         fontWeight = FontWeight.Normal,
         fontSize = 16.sp,
         lineHeight = 24.sp,
-        letterSpacing = 0.5.sp
+        letterSpacing = 0.sp
+    ),
+    bodyMedium = TextStyle(
+        fontFamily = gothicA1Font,
+        fontWeight = FontWeight.Normal,
+        fontSize = 12.sp,
+        lineHeight = 12.sp,
+        letterSpacing = 0.sp
+    ),
+    headlineLarge = TextStyle(
+        fontFamily = gothicA1Font,
+        fontWeight = FontWeight.Bold,
+        fontSize = 36.sp,
+        lineHeight = 36.sp,
+        letterSpacing = 1.sp
+    ),
+    headlineMedium = TextStyle(
+        fontFamily = gothicA1Font,
+        fontWeight = FontWeight.SemiBold,
+        fontSize = 20.sp,
+        lineHeight = 20.sp,
+        letterSpacing = 1.sp
     )
     /* Other default text styles to override
     titleLarge = TextStyle(
