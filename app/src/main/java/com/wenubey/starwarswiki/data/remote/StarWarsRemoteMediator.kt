@@ -18,7 +18,8 @@ import javax.inject.Inject
 class StarWarsRemoteMediator @Inject constructor(
     private val api: StarWarsApi,
     private val db: StarWarsDatabase,
-    private val imageApi: StarWarsImageApi
+    private val imageApi: StarWarsImageApi,
+    private val searchQueryProvider: SearchQueryProvider
 ) : RemoteMediator<Int, CharacterEntity>() {
 
     override suspend fun load(
@@ -39,7 +40,19 @@ class StarWarsRemoteMediator @Inject constructor(
                 }
             }
 
-            val characters = api.getCharacters(page)
+            val searchQuery = searchQueryProvider.getSearchQuery()
+
+            val characters = if (searchQuery.isEmpty()) {
+                api.getCharacters(page)
+            } else {
+                api.searchCharacter(searchQuery)
+            }
+
+
+            characters.results.forEach {
+                Log.i(TAG, "Characters: ${it.name!!}")
+            }
+
 
 
             val characterEntities = characters.results.map { result ->

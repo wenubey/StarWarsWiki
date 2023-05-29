@@ -31,6 +31,7 @@ object Constants {
     const val MOVIES = "Movies"
     const val VEHICLES = "Vehicles"
     const val STARSHIPS = "Starships"
+    const val SEARCH = "Search Character"
 
     val mockData = CharacterModel(
         id = 0,

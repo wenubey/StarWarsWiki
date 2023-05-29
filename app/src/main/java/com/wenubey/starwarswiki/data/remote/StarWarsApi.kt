@@ -15,6 +15,9 @@ interface StarWarsApi {
     @GET("people/")
     suspend fun getCharacters(@Query("page") page: Int): ListCharacterDto
 
+    @GET("people/")
+    suspend fun searchCharacter(@Query("search") query: String): ListCharacterDto
+
     @GET("planets/{id}/")
     suspend fun getPlanet(@Path("id") id: Int): PlanetDto
 

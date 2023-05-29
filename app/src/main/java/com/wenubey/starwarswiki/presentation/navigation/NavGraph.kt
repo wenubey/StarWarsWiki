@@ -2,6 +2,7 @@ package com.wenubey.starwarswiki.presentation.navigation
 
 import android.net.Uri
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.State
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -20,18 +21,24 @@ import com.wenubey.starwarswiki.presentation.screens.OpeningCrawlScreen
 @Composable
 fun NavGraph(
     navHostController: NavHostController,
-    characters: LazyPagingItems<CharacterModel>
+    characters: LazyPagingItems<CharacterModel>,
+    searchQuery: State<String>,
+    setSearchQuery: (String) -> Unit,
 ) {
     NavHost(
         navController = navHostController,
         startDestination = Screen.CharacterListScreen.route
     ) {
         composable(route = Screen.CharacterListScreen.route) {
-            CharacterListScreen(characters = characters, navigateToDetailScreen = { character ->
-                val json = Uri.encode(Gson().toJson(character))
-                navHostController.navigate(Screen.CharacterDetailScreen.route + "/$json")
+            CharacterListScreen(
+                characters = characters, navigateToDetailScreen = { character ->
+                    val json = Uri.encode(Gson().toJson(character))
+                    navHostController.navigate(Screen.CharacterDetailScreen.route + "/$json")
 
-            })
+                },
+                searchQuery = searchQuery,
+                setSearchQuery = setSearchQuery
+            )
         }
         composable(route = Screen.CharacterDetailScreen.route + "/{character}", arguments = listOf(
             navArgument("character") {

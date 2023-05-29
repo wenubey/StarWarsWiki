@@ -15,6 +15,9 @@ interface StarWarsDao {
     @Query("SELECT * FROM characters")
     fun pagingSource(): PagingSource<Int, CharacterEntity>
 
+    @Query("SELECT * FROM characters WHERE name LIKE '%' || :query || '%'")
+    fun getSearchCharacters(query: String): List<CharacterEntity>
+
     @Query("DELETE FROM characters")
     suspend fun clearAll()
 }

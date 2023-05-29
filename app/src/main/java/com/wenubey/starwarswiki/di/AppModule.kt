@@ -7,6 +7,8 @@ import androidx.paging.PagingConfig
 import androidx.room.Room
 import com.wenubey.starwarswiki.data.local.StarWarsDatabase
 import com.wenubey.starwarswiki.data.local.entities.CharacterEntity
+import com.wenubey.starwarswiki.data.remote.SearchQueryProvider
+import com.wenubey.starwarswiki.data.remote.SearchQueryProviderImpl
 import com.wenubey.starwarswiki.data.remote.StarWarsApi
 import com.wenubey.starwarswiki.data.remote.StarWarsRemoteMediator
 import com.wenubey.starwarswiki.data.remote.StarWarsImageApi
@@ -39,13 +41,21 @@ object AppModule {
 
     @Singleton
     @Provides
-    fun provideStarWarsPager(db: StarWarsDatabase, api: StarWarsApi, imageApi: StarWarsImageApi): Pager<Int, CharacterEntity> {
+    fun provideSearchQueryProvider(): SearchQueryProvider {
+        return SearchQueryProviderImpl()
+    }
+
+
+    @Singleton
+    @Provides
+    fun provideStarWarsPager(db: StarWarsDatabase, api: StarWarsApi, imageApi: StarWarsImageApi, searchQueryProvider: SearchQueryProvider): Pager<Int, CharacterEntity> {
         return Pager(
             config = PagingConfig(pageSize = 10),
             remoteMediator = StarWarsRemoteMediator(
                 db = db,
                 api = api,
-                imageApi = imageApi
+                imageApi = imageApi,
+                searchQueryProvider = searchQueryProvider
             ),
             pagingSourceFactory = {
                 db.dao.pagingSource()

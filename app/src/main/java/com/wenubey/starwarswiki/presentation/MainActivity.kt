@@ -6,6 +6,7 @@ import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
+import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
@@ -28,8 +29,14 @@ class MainActivity : ComponentActivity() {
                 ) {
                     navHostController = rememberNavController()
                     val viewModel = hiltViewModel<StarWarsViewModel>()
+                    val searchQuery = viewModel.searchQuery.collectAsState()
                     val characters = viewModel.characterPagingFlow.collectAsLazyPagingItems()
-                    NavGraph(navHostController = navHostController, characters = characters)
+                    NavGraph(
+                        navHostController = navHostController,
+                        characters = characters,
+                        searchQuery = searchQuery,
+                        setSearchQuery = viewModel::setSearchQuery
+                    )
                 }
             }
 
