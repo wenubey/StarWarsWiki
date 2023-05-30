@@ -17,6 +17,7 @@ import com.wenubey.starwarswiki.domain.models.FilmModelNavType
 import com.wenubey.starwarswiki.presentation.screens.CharacterDetailScreen
 import com.wenubey.starwarswiki.presentation.screens.CharacterListScreen
 import com.wenubey.starwarswiki.presentation.screens.OpeningCrawlScreen
+import com.wenubey.starwarswiki.presentation.screens.OpeningQuoteScreen
 
 @Composable
 fun NavGraph(
@@ -27,7 +28,7 @@ fun NavGraph(
 ) {
     NavHost(
         navController = navHostController,
-        startDestination = Screen.CharacterListScreen.route
+        startDestination = Screen.OpeningQuoteScreen.route
     ) {
         composable(route = Screen.CharacterListScreen.route) {
             CharacterListScreen(
@@ -67,6 +68,14 @@ fun NavGraph(
             OpeningCrawlScreen(
                 film = film,
                 navigateToBackScreen = { navHostController.popBackStack() })
+        }
+
+        composable(route = Screen.OpeningQuoteScreen.route) {
+            OpeningQuoteScreen(
+                navigateToCharacterList = {
+                    navHostController.navigate(Screen.CharacterListScreen.route)
+                }
+            )
         }
     }
 }

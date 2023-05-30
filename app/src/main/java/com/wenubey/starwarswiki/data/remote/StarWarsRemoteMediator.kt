@@ -48,13 +48,6 @@ class StarWarsRemoteMediator @Inject constructor(
                 api.searchCharacter(searchQuery)
             }
 
-
-            characters.results.forEach {
-                Log.i(TAG, "Characters: ${it.name!!}")
-            }
-
-
-
             val characterEntities = characters.results.map { result ->
                 result.mapToEntity(
                     films = result.films?.map { filmUrl ->
