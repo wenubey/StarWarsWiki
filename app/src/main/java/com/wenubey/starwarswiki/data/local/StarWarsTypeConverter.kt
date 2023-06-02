@@ -1,5 +1,7 @@
 package com.wenubey.starwarswiki.data.local
 
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.toArgb
 import androidx.room.TypeConverter
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
@@ -19,6 +21,16 @@ class StarWarsTypeConverter {
 
     private fun <T> toJson(data: T?): String? {
         return data?.let { Gson().toJson(it) }
+    }
+
+    @TypeConverter
+    fun fromColorsList(colors: List<Color>?): String? {
+        return colors?.joinToString(",") { it.toArgb().toString() }
+    }
+
+    @TypeConverter
+    fun toColorsList(colors: String?): List<Color>? {
+        return colors?.split(",")?.map { Color(it.toInt()) }
     }
 
     @TypeConverter

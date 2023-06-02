@@ -6,6 +6,22 @@ import androidx.compose.ui.graphics.Color
 //Custom Colors for particular areas
 val OpeningQuoteColor = Color(0xFF1EB3BC)
 val OpeningCrawlColor = Color(0xFFC29621)
+
+//Eye colors
+val eyeBlue = Color(0xFF0000FF)
+val eyeYellow = Color(0xFFFFFF00)
+val eyeRed = Color(0xFFFF0000)
+val eyeBrown = Color(0xFF964B00)
+val eyeGray = Color(0xFF808080)
+val eyeOrange= Color(0xFFFFA500)
+val eyeHazel = Color(0xFF8E7618)
+val eyeBlack = Color(0xFF000000)
+val eyePink = Color(0xFFFFC0CB)
+val eyeGold = Color(0xFFFFD700)
+val eyeGreen = Color(0xFF00FF00)
+val eyeWhite = Color(0xFFFFFFFF)
+val eyeDark = Color(0xFF2C2C2C)
+
 //Theme Colors
 val md_theme_light_primary = Color(0xFF005FAF)
 val md_theme_light_onPrimary = Color(0xFFFFFFFF)

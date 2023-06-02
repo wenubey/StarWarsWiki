@@ -64,8 +64,8 @@ fun CharacterImageAndSpecieRow(
                     UndefinedBox(modifier = Modifier.width((ScreenSize().width() / 2).dp))
                 }
             } else {
-                items(character.species) { specie ->
-                    CharacterSpecieList(specie = specie)
+                items(character.species) {
+                    CharacterSpecieList(character = character)
                 }
             }
         }

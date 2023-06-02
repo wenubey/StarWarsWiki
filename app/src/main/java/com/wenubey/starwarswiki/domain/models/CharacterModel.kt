@@ -1,7 +1,9 @@
 package com.wenubey.starwarswiki.domain.models
 
 import android.os.Parcelable
+import androidx.compose.ui.graphics.Color
 import kotlinx.parcelize.Parcelize
+import kotlinx.parcelize.RawValue
 
 @Parcelize
 data class CharacterModel(
@@ -9,6 +11,9 @@ data class CharacterModel(
     val name: String,
     val height: String,
     val mass: String,
+    val eyeColor: @RawValue List<Color>,
+//    val skinColor: @RawValue List<Color>,
+//    val hairColor: @RawValue List<Color>,
     val birthYear: String,
     val gender: String,
     val homeWorld: PlanetModel?,

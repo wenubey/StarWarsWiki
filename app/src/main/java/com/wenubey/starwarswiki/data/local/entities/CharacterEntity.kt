@@ -1,5 +1,6 @@
 package com.wenubey.starwarswiki.data.local.entities
 
+import androidx.compose.ui.graphics.Color
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.wenubey.starwarswiki.core.Constants.DATABASE_TABLE_NAME
@@ -13,6 +14,9 @@ data class CharacterEntity(
     val name: String?,
     val height: String?,
     val mass: String?,
+//    val hairColor: List<Color>?,
+//    val skinColor: List<Color>?,
+    val eyeColor: List<Color>,
     val birthYear: String?,
     val gender: String?,
     val homeWorld: PlanetEntity?,
@@ -27,6 +31,7 @@ data class CharacterEntity(
             name = name ?: UNDEFINED,
             height = height ?: UNDEFINED,
             mass = mass ?: UNDEFINED,
+            eyeColor = eyeColor,
             birthYear = birthYear ?: UNDEFINED,
             gender = gender ?: UNDEFINED,
             id = id,

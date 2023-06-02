@@ -20,46 +20,57 @@ import com.wenubey.starwarswiki.core.Constants.CHARACTER_LANGUAGE_DESC
 import com.wenubey.starwarswiki.core.Constants.CHARACTER_LIFESPAN_DESC
 import com.wenubey.starwarswiki.core.Constants.UNDEFINED
 import com.wenubey.starwarswiki.core.Constants.mockData
-import com.wenubey.starwarswiki.domain.models.SpecieModel
+import com.wenubey.starwarswiki.core.ScreenSize
+import com.wenubey.starwarswiki.core.components.ErrorScreen
+import com.wenubey.starwarswiki.domain.models.CharacterModel
 
 @Composable
 fun CharacterSpecieList(
-    specie: SpecieModel
+    character: CharacterModel
 ) {
-    Column(
-        verticalArrangement = Arrangement.spacedBy(2.dp),
-        horizontalAlignment = Alignment.End
-    ) {
-        Text(text = specie.name ?: UNDEFINED, overflow = TextOverflow.Ellipsis, maxLines = 1)
-        CharacterSpecieItem(
-            imageVector = Icons.Outlined.Straighten,
-            contentDesc = CHARACTER_HEIGHT_DESC,
-            stringResource = R.string.specie_height,
-            stringArgs = specie.averageHeight ?: UNDEFINED
-        )
-        CharacterSpecieItem(
-            imageVector = Icons.Outlined.Favorite,
-            contentDesc = CHARACTER_LIFESPAN_DESC,
-            stringResource = R.string.specie_lifespan,
-            stringArgs = specie.averageLifespan ?: UNDEFINED
-        )
-        CharacterSpecieItem(
-            imageVector = Icons.Outlined.Spa,
-            contentDesc = CHARACTER_CLASSIFICATION_DESC,
-            stringResource = R.string.specie_classification,
-            stringArgs = specie.classification ?: UNDEFINED
-        )
-        CharacterSpecieItem(
-            imageVector = Icons.Outlined.Translate,
-            contentDesc = CHARACTER_LANGUAGE_DESC,
-            stringResource = R.string.specie_language,
-            stringArgs = specie.language ?: UNDEFINED
-        )
+
+    if (character.species.isNullOrEmpty()) {
+        ErrorScreen(size = (ScreenSize().width() / 2).dp)
+    } else {
+        val specie = character.species.first()
+        Column(
+            verticalArrangement = Arrangement.spacedBy(2.dp),
+            horizontalAlignment = Alignment.Start
+        ) {
+            Text(text = specie.name ?: UNDEFINED, overflow = TextOverflow.Ellipsis, maxLines = 1)
+            CharacterSpecieItem(
+                imageVector = Icons.Outlined.Straighten,
+                contentDesc = CHARACTER_HEIGHT_DESC,
+                stringResource = R.string.specie_height,
+                stringArgs = specie.averageHeight ?: UNDEFINED
+            )
+            CharacterSpecieItem(
+                imageVector = Icons.Outlined.Favorite,
+                contentDesc = CHARACTER_LIFESPAN_DESC,
+                stringResource = R.string.specie_lifespan,
+                stringArgs = specie.averageLifespan ?: UNDEFINED
+            )
+            CharacterSpecieItem(
+                imageVector = Icons.Outlined.Spa,
+                contentDesc = CHARACTER_CLASSIFICATION_DESC,
+                stringResource = R.string.specie_classification,
+                stringArgs = specie.classification ?: UNDEFINED
+            )
+            CharacterSpecieItem(
+                imageVector = Icons.Outlined.Translate,
+                contentDesc = CHARACTER_LANGUAGE_DESC,
+                stringResource = R.string.specie_language,
+                stringArgs = specie.language ?: UNDEFINED
+            )
+            CharacterEyeContent(eyeColors = character.eyeColor)
+        }
     }
+
 }
 
 @Preview(showBackground = true)
 @Composable
 fun CharacterSpecieListPreview() {
-    CharacterSpecieList(specie = mockData.species!!.first())
+    CharacterSpecieList(character = mockData)
 }
+

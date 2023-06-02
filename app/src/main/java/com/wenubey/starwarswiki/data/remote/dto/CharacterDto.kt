@@ -3,6 +3,7 @@ package com.wenubey.starwarswiki.data.remote.dto
 import com.google.gson.annotations.SerializedName
 import com.wenubey.starwarswiki.core.Constants.UNDEFINED
 import com.wenubey.starwarswiki.core.getIdFromUrl
+import com.wenubey.starwarswiki.core.mapToColor
 import com.wenubey.starwarswiki.data.local.entities.CharacterEntity
 import com.wenubey.starwarswiki.data.local.entities.ImageEntity
 
@@ -10,6 +11,9 @@ data class CharacterDto(
     @SerializedName("name") val name: String?,
     @SerializedName("height") val height: String?,
     @SerializedName("mass") val mass: String?,
+    @SerializedName("hair_color") val hairColor: String?,
+    @SerializedName("skin_color") val skinColor: String?,
+    @SerializedName("eye_color") val eyeColor: String?,
     @SerializedName("birth_year") val birthYear: String?,
     @SerializedName("gender") val gender: String?,
     @SerializedName("homeworld") val homeWorld: String?,
@@ -31,6 +35,7 @@ data class CharacterDto(
             name = name ?: UNDEFINED,
             height = height ?: UNDEFINED,
             mass = mass ?: UNDEFINED,
+            eyeColor = eyeColor.mapToColor(),
             birthYear = birthYear ?: UNDEFINED,
             gender = gender ?: UNDEFINED,
             homeWorld = homeWorld?.mapToEntity(),

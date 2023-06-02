@@ -7,6 +7,8 @@ import com.wenubey.starwarswiki.domain.models.PlanetModel
 import com.wenubey.starwarswiki.domain.models.SpecieModel
 import com.wenubey.starwarswiki.domain.models.StarshipModel
 import com.wenubey.starwarswiki.domain.models.VehicleModel
+import com.wenubey.starwarswiki.presentation.ui.theme.eyeBlue
+import com.wenubey.starwarswiki.presentation.ui.theme.eyeRed
 
 object Constants {
 
@@ -97,6 +99,7 @@ object Constants {
                 starshipClass = "Cool Starship Class",
             )
         ),
-        photoUrl = ImageModel("https://vignette.wikia.nocookie.net/starwars/images/2/20/LukeTLJ.jpg")
+        photoUrl = ImageModel("https://vignette.wikia.nocookie.net/starwars/images/2/20/LukeTLJ.jpg"),
+        eyeColor = listOf(eyeBlue, eyeRed)
     )
 }
