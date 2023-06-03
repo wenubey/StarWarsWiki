@@ -5,6 +5,7 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
@@ -49,6 +50,7 @@ fun CharacterImageAndSpecieRow(
             ),
             contentDescription = CHARACTER_PHOTO_DESC,
             modifier = Modifier
+                .size((ScreenSize().width() / 2).dp)
                 .clip(RoundedCornerShape(16.dp))
                 .padding(start = 4.dp)
 

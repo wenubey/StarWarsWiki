@@ -12,8 +12,8 @@ data class CharacterModel(
     val height: String,
     val mass: String,
     val eyeColor: @RawValue List<Color>,
-//    val skinColor: @RawValue List<Color>,
-//    val hairColor: @RawValue List<Color>,
+    val skinColor: @RawValue List<Color>,
+    val hairColor: @RawValue List<Color>,
     val birthYear: String,
     val gender: String,
     val homeWorld: PlanetModel?,
@@ -22,6 +22,6 @@ data class CharacterModel(
     val species: List<SpecieModel>?,
     val starships: List<StarshipModel>?,
     val photoUrl: ImageModel,
-): Parcelable
+) : Parcelable
 
 

@@ -14,8 +14,8 @@ data class CharacterEntity(
     val name: String?,
     val height: String?,
     val mass: String?,
-//    val hairColor: List<Color>?,
-//    val skinColor: List<Color>?,
+    val hairColor: List<Color>,
+    val skinColor: List<Color>,
     val eyeColor: List<Color>,
     val birthYear: String?,
     val gender: String?,
@@ -32,6 +32,8 @@ data class CharacterEntity(
             height = height ?: UNDEFINED,
             mass = mass ?: UNDEFINED,
             eyeColor = eyeColor,
+            hairColor = hairColor,
+            skinColor = skinColor,
             birthYear = birthYear ?: UNDEFINED,
             gender = gender ?: UNDEFINED,
             id = id,
@@ -40,7 +42,7 @@ data class CharacterEntity(
             vehicles = vehicles?.map { it.mapToDomainModel() } ?: emptyList(),
             species = species?.map { it.mapToDomainModel() } ?: emptyList(),
             starships = starships?.map { it.mapToDomainModel() } ?: emptyList(),
-            photoUrl = photoUrl.mapToDomain()
+            photoUrl = photoUrl.mapToDomain(),
         )
     }
 }

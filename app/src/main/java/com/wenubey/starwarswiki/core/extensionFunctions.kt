@@ -8,19 +8,29 @@ import androidx.compose.ui.graphics.Color
 import com.wenubey.starwarswiki.core.Constants.UNDEFINED
 import com.wenubey.starwarswiki.domain.models.PlanetModel
 import com.wenubey.starwarswiki.domain.models.SpecieModel
-import com.wenubey.starwarswiki.presentation.ui.theme.eyeBlack
-import com.wenubey.starwarswiki.presentation.ui.theme.eyeBlue
-import com.wenubey.starwarswiki.presentation.ui.theme.eyeBrown
-import com.wenubey.starwarswiki.presentation.ui.theme.eyeDark
-import com.wenubey.starwarswiki.presentation.ui.theme.eyeGold
-import com.wenubey.starwarswiki.presentation.ui.theme.eyeGray
-import com.wenubey.starwarswiki.presentation.ui.theme.eyeGreen
-import com.wenubey.starwarswiki.presentation.ui.theme.eyeHazel
-import com.wenubey.starwarswiki.presentation.ui.theme.eyeOrange
-import com.wenubey.starwarswiki.presentation.ui.theme.eyePink
-import com.wenubey.starwarswiki.presentation.ui.theme.eyeRed
-import com.wenubey.starwarswiki.presentation.ui.theme.eyeWhite
-import com.wenubey.starwarswiki.presentation.ui.theme.eyeYellow
+import com.wenubey.starwarswiki.presentation.ui.theme.Auburn
+import com.wenubey.starwarswiki.presentation.ui.theme.Black
+import com.wenubey.starwarswiki.presentation.ui.theme.Blond
+import com.wenubey.starwarswiki.presentation.ui.theme.Blue
+import com.wenubey.starwarswiki.presentation.ui.theme.Brown
+import com.wenubey.starwarswiki.presentation.ui.theme.Dark
+import com.wenubey.starwarswiki.presentation.ui.theme.Fair
+import com.wenubey.starwarswiki.presentation.ui.theme.Gold
+import com.wenubey.starwarswiki.presentation.ui.theme.Gray
+import com.wenubey.starwarswiki.presentation.ui.theme.Green
+import com.wenubey.starwarswiki.presentation.ui.theme.GreenTan
+import com.wenubey.starwarswiki.presentation.ui.theme.Hazel
+import com.wenubey.starwarswiki.presentation.ui.theme.Light
+import com.wenubey.starwarswiki.presentation.ui.theme.Metal
+import com.wenubey.starwarswiki.presentation.ui.theme.MottledBrown
+import com.wenubey.starwarswiki.presentation.ui.theme.MottledGreen
+import com.wenubey.starwarswiki.presentation.ui.theme.Orange
+import com.wenubey.starwarswiki.presentation.ui.theme.Pale
+import com.wenubey.starwarswiki.presentation.ui.theme.Pink
+import com.wenubey.starwarswiki.presentation.ui.theme.Red
+import com.wenubey.starwarswiki.presentation.ui.theme.Tan
+import com.wenubey.starwarswiki.presentation.ui.theme.White
+import com.wenubey.starwarswiki.presentation.ui.theme.Yellow
 
 fun String?.getIdFromUrl() : Int {
     val pattern = "/(\\d+)/$".toRegex()
@@ -37,27 +47,44 @@ fun List<SpecieModel>?.getFirstOrNull(): String {
     }
 }
 
-fun String?.mapToColor(): List<Color> {
-    val eyeColorMap = mapOf(
-        "blue" to listOf(eyeBlue),
-        "yellow" to listOf(eyeYellow),
-        "red" to listOf(eyeRed),
-        "brown" to listOf(eyeBrown),
-        "blue-gray" to listOf(eyeBlue, eyeGray),
-        "orange" to listOf(eyeOrange),
-        "hazel" to listOf(eyeHazel),
-        "black" to listOf(eyeBlack),
-        "pink" to listOf(eyePink),
-        "unknown" to listOf(eyeBlack),
-        "red, blue" to listOf(eyeRed, eyeBlue),
-        "gold" to listOf(eyeGold),
-        "green, yellow" to listOf(eyeGreen, eyeYellow),
-        "white" to listOf(eyeWhite),
-        "dark" to listOf(eyeDark)
-    )
+fun String?.toColorList(): List<Color>? {
+    val colorNames = this?.split(",")?.map { it.trim().lowercase() }
 
-    return eyeColorMap[this] ?: listOf(eyeBlack)
+    return colorNames?.map { colorName ->
+            when(colorName) {
+                "red" -> Red
+                "yellow" -> Yellow
+                "blue" -> Blue
+                "brown" -> Brown
+                "gray" -> Gray
+                "orange" -> Orange
+                "hazel" -> Hazel
+                "black" -> Black
+                "pink" -> Pink
+                "gold" -> Gold
+                "green" -> Green
+                "white" -> White
+                "dark" -> Dark
+                "blond" -> Blond
+                "grey" -> Gray
+                "auburn" -> Auburn
+                "fair" -> Fair
+                "light" -> Light
+                "green-tan" -> GreenTan
+                "pale" -> Pale
+                "metal" -> Metal
+                "brown mottle" -> MottledBrown
+                "mottled green" -> MottledGreen
+                "tan" -> Tan
+                else -> Color.Transparent
+            }
+        }
+
 }
+
+
+
+
 
 inline fun <reified T : Parcelable> Intent.parcelable(key: String): T? = when {
     SDK_INT >= 33 -> getParcelableExtra(key, T::class.java)
@@ -69,9 +96,4 @@ inline fun <reified T : Parcelable> Bundle.parcelable(key: String): T? = when {
     else -> @Suppress("DEPRECATION") getParcelable(key) as? T
 }
 
-fun <T> List<T>.second(): T {
-    if (isEmpty())
-        throw NoSuchElementException("List is empty.")
-    return this[1]
-}
 

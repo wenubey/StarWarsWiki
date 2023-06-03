@@ -18,6 +18,9 @@ import com.wenubey.starwarswiki.core.Constants.CHARACTER_CLASSIFICATION_DESC
 import com.wenubey.starwarswiki.core.Constants.CHARACTER_HEIGHT_DESC
 import com.wenubey.starwarswiki.core.Constants.CHARACTER_LANGUAGE_DESC
 import com.wenubey.starwarswiki.core.Constants.CHARACTER_LIFESPAN_DESC
+import com.wenubey.starwarswiki.core.Constants.EYE_COLOR
+import com.wenubey.starwarswiki.core.Constants.HAIR_COLOR
+import com.wenubey.starwarswiki.core.Constants.SKIN_COLOR
 import com.wenubey.starwarswiki.core.Constants.UNDEFINED
 import com.wenubey.starwarswiki.core.Constants.mockData
 import com.wenubey.starwarswiki.core.ScreenSize
@@ -62,7 +65,10 @@ fun CharacterSpecieList(
                 stringResource = R.string.specie_language,
                 stringArgs = specie.language ?: UNDEFINED
             )
-            CharacterEyeContent(eyeColors = character.eyeColor)
+            CharacterColorContent(colors = character.skinColor, desc = SKIN_COLOR)
+            CharacterColorContent(colors = character.eyeColor, desc = EYE_COLOR)
+            CharacterColorContent(colors = character.hairColor, desc = HAIR_COLOR)
+
         }
     }
 
@@ -73,4 +79,5 @@ fun CharacterSpecieList(
 fun CharacterSpecieListPreview() {
     CharacterSpecieList(character = mockData)
 }
+
 

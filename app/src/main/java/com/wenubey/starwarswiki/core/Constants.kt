@@ -1,5 +1,6 @@
 package com.wenubey.starwarswiki.core
 
+import androidx.compose.ui.graphics.Color
 import com.wenubey.starwarswiki.domain.models.CharacterModel
 import com.wenubey.starwarswiki.domain.models.FilmModel
 import com.wenubey.starwarswiki.domain.models.ImageModel
@@ -7,10 +8,14 @@ import com.wenubey.starwarswiki.domain.models.PlanetModel
 import com.wenubey.starwarswiki.domain.models.SpecieModel
 import com.wenubey.starwarswiki.domain.models.StarshipModel
 import com.wenubey.starwarswiki.domain.models.VehicleModel
-import com.wenubey.starwarswiki.presentation.ui.theme.eyeBlue
-import com.wenubey.starwarswiki.presentation.ui.theme.eyeRed
+import com.wenubey.starwarswiki.presentation.ui.theme.Blue
+import com.wenubey.starwarswiki.presentation.ui.theme.Pale
+import com.wenubey.starwarswiki.presentation.ui.theme.Red
+import com.wenubey.starwarswiki.presentation.ui.theme.Tan
 
 object Constants {
+
+
 
     const val TAG = "starWarsTAG"
     const val UNDEFINED = "Undefined"
@@ -30,10 +35,16 @@ object Constants {
     const val BACKGROUND_IMAGE_DESC = "Background Image"
 
 
+
     const val MOVIES = "Movies"
     const val VEHICLES = "Vehicles"
     const val STARSHIPS = "Starships"
     const val SEARCH = "Search Character"
+    const val EYE_COLOR = "Eye Color"
+    const val SKIN_COLOR = "Skin Color"
+    const val HAIR_COLOR = "Hair Color"
+
+    val UNDEFINED_COLOR = listOf(Color.Transparent)
 
     val mockData = CharacterModel(
         id = 0,
@@ -100,6 +111,8 @@ object Constants {
             )
         ),
         photoUrl = ImageModel("https://vignette.wikia.nocookie.net/starwars/images/2/20/LukeTLJ.jpg"),
-        eyeColor = listOf(eyeBlue, eyeRed)
+        eyeColor = listOf(Blue, Red),
+        hairColor = listOf(Blue, Red),
+        skinColor = listOf(Pale, Tan)
     )
 }

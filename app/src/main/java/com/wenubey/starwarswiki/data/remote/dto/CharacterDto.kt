@@ -3,7 +3,7 @@ package com.wenubey.starwarswiki.data.remote.dto
 import com.google.gson.annotations.SerializedName
 import com.wenubey.starwarswiki.core.Constants.UNDEFINED
 import com.wenubey.starwarswiki.core.getIdFromUrl
-import com.wenubey.starwarswiki.core.mapToColor
+import com.wenubey.starwarswiki.core.toColorList
 import com.wenubey.starwarswiki.data.local.entities.CharacterEntity
 import com.wenubey.starwarswiki.data.local.entities.ImageEntity
 
@@ -35,7 +35,9 @@ data class CharacterDto(
             name = name ?: UNDEFINED,
             height = height ?: UNDEFINED,
             mass = mass ?: UNDEFINED,
-            eyeColor = eyeColor.mapToColor(),
+            eyeColor = eyeColor.toColorList() ?: emptyList(),
+            hairColor = hairColor.toColorList() ?: emptyList(),
+            skinColor = skinColor.toColorList() ?: emptyList(),
             birthYear = birthYear ?: UNDEFINED,
             gender = gender ?: UNDEFINED,
             homeWorld = homeWorld?.mapToEntity(),
