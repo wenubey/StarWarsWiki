@@ -31,8 +31,29 @@ Below you can find the docs for each technology that is used in this app:
 
 ## Screenshots and Videos
 
+<div style="display:flex">
+    <img src="https://github.com/wenubey/StarWarsWiki/blob/readme-md/app/src/main/assets/gif-1.gif" alt="not found" width="240" height="480">
+    <img src="https://github.com/wenubey/StarWarsWiki/blob/readme-md/app/src/main/assets/gif-2.gif" alt="not found" width="240" height="480">
+    <img src="https://github.com/wenubey/StarWarsWiki/blob/readme-md/app/src/main/assets/gif-3.gif" alt="not found" width="240" height="480">
+</div>
 
+## Light Theme
 
+<div style="display:flex">
+    <img src="https://github.com/wenubey/StarWarsWiki/blob/readme-md/app/src/main/assets/light-1.png" alt="not found" width="240" height="480">
+    <img src="https://github.com/wenubey/StarWarsWiki/blob/readme-md/app/src/main/assets/light-2.png" alt="not found" width="240" height="480">
+    <img src="https://github.com/wenubey/StarWarsWiki/blob/readme-md/app/src/main/assets/light-3.png" alt="not found" width="240" height="480">
+    <img src="https://github.com/wenubey/StarWarsWiki/blob/readme-md/app/src/main/assets/light-4.png" alt="not found" width="240" height="480">
+</div>
+
+## Dark Theme
+
+<div style="display:flex">
+    <img src="https://github.com/wenubey/StarWarsWiki/blob/readme-md/app/src/main/assets/dark-1.png" alt="not found" width="240" height="480">
+    <img src="https://github.com/wenubey/StarWarsWiki/blob/readme-md/app/src/main/assets/dark-2.png" alt="not found" width="240" height="480">
+    <img src="https://github.com/wenubey/StarWarsWiki/blob/readme-md/app/src/main/assets/dark-3.png" alt="not found" width="240" height="480">
+    <img src="https://github.com/wenubey/StarWarsWiki/blob/readme-md/app/src/main/assets/dark-4.png" alt="not found" width="240" height="480">
+</div>
 
 
 [1]: https://kotlinlang.org/
