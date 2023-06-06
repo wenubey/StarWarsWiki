@@ -1,6 +1,7 @@
 package com.wenubey.starwarswiki.presentation.navigation
 
 import android.net.Uri
+import androidx.compose.material3.windowsizeclass.WindowSizeClass
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.State
 import androidx.navigation.NavHostController
@@ -25,6 +26,7 @@ fun NavGraph(
     characters: LazyPagingItems<CharacterModel>,
     searchQuery: State<String>,
     setSearchQuery: (String) -> Unit,
+    showAppBar: Boolean
 ) {
     NavHost(
         navController = navHostController,
@@ -38,7 +40,8 @@ fun NavGraph(
 
                 },
                 searchQuery = searchQuery,
-                setSearchQuery = setSearchQuery
+                setSearchQuery = setSearchQuery,
+                showAppBar = showAppBar
             )
         }
         composable(route = Screen.CharacterDetailScreen.route + "/{character}", arguments = listOf(
@@ -56,6 +59,7 @@ fun NavGraph(
                 navigateToBackScreen = {
                     navHostController.popBackStack()
                 },
+                showAppBar = showAppBar
             )
         }
 
@@ -67,14 +71,17 @@ fun NavGraph(
             val film = it.arguments?.parcelable<FilmModel>("film")
             OpeningCrawlScreen(
                 film = film,
-                navigateToBackScreen = { navHostController.popBackStack() })
+                navigateToBackScreen = { navHostController.popBackStack() },
+                showAppBar = showAppBar
+                )
         }
 
         composable(route = Screen.OpeningQuoteScreen.route) {
             OpeningQuoteScreen(
                 navigateToCharacterList = {
                     navHostController.navigate(Screen.CharacterListScreen.route)
-                }
+                },
+                showAppBar = showAppBar
             )
         }
     }

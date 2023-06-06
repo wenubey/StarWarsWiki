@@ -42,6 +42,7 @@ import com.wenubey.starwarswiki.presentation.ui.theme.OpeningCrawlColor
 fun OpeningCrawlScreen(
     film: FilmModel?,
     navigateToBackScreen: () -> Unit,
+    showAppBar: Boolean
 ) {
 
     var offsetY by remember { mutableStateOf(100.dp) }
@@ -75,7 +76,10 @@ fun OpeningCrawlScreen(
     Scaffold(
         modifier = Modifier,
         topBar = {
-            StarWarsTopBar(navigateToBackScreen = navigateToBackScreen)
+            StarWarsTopBar(
+                navigateToBackScreen = navigateToBackScreen,
+                showAppBar = showAppBar,
+            )
         },
         content = { paddingValues ->
             Image(

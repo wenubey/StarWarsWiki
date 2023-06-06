@@ -37,6 +37,7 @@ fun CharacterDetailScreen(
     character: CharacterModel?,
     navigateToFilmOpeningCrawl: (film: FilmModel) -> Unit,
     navigateToBackScreen: () -> Unit,
+    showAppBar: Boolean
 ) {
     val sheetState = rememberBottomSheetScaffoldState(
         bottomSheetState = SheetState(
@@ -56,7 +57,8 @@ fun CharacterDetailScreen(
         },
         topBar = {
             StarWarsTopBar(
-                navigateToBackScreen = navigateToBackScreen
+                navigateToBackScreen = navigateToBackScreen,
+                showAppBar = showAppBar
             )
         },
         content = { paddingValues ->
@@ -98,6 +100,6 @@ fun CharacterDetailScreen(
 @Preview(showBackground = true, showSystemUi = true)
 @Composable
 fun CharacterDetailScreenPreview() {
-    CharacterDetailScreen(character = mockData, {}, {})
+    CharacterDetailScreen(character = mockData, {}, {}, showAppBar = true)
 }
 

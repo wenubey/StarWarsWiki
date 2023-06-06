@@ -21,7 +21,7 @@ import com.wenubey.starwarswiki.domain.models.CharacterModel
 fun CharacterList(
     characters: LazyPagingItems<CharacterModel>,
     navigateToDetailScreen: (character: CharacterModel) -> Unit,
-    lazyListState: LazyListState
+    lazyListState: LazyListState,
 ) {
 
     LazyColumn(

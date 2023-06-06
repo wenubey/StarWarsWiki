@@ -28,41 +28,45 @@ import com.wenubey.starwarswiki.core.Constants.TOP_BAR_HEIGHT
 @Composable
 fun StarWarsTopBar(
     navigateToBackScreen: (() -> Unit)? = null,
-    lazyListState: LazyListState? = null
+    lazyListState: LazyListState? = null,
+    showAppBar: Boolean
 ) {
-    Box(
-        modifier = Modifier
-            .fillMaxWidth()
-            .background(MaterialTheme.colorScheme.surface)
-            .animateContentSize(animationSpec = tween(durationMillis = 300))
-            .height(height = if (lazyListState != null && lazyListState.canScrollBackward) 0.dp else TOP_BAR_HEIGHT.dp)
-    ) {
-        if (navigateToBackScreen != null) {
-            IconButton(
-                onClick = {
-                    navigateToBackScreen.invoke()
-                }, modifier = Modifier.align(
-                    Alignment.CenterStart
-                )
-            ) {
-                Icon(
-                    imageVector = Icons.Outlined.ArrowBack,
-                    contentDescription = Constants.GO_BACK_PREVIOUS_SCREEN_DESC
-                )
-            }
-        }
-        Text(
-            text = Constants.TOP_BAR_TITLE,
+    if (showAppBar) {
+        Box(
             modifier = Modifier
-                .align(Alignment.Center)
-                .padding(16.dp),
-            fontSize = 24.sp
-        )
+                .fillMaxWidth()
+                .background(MaterialTheme.colorScheme.surface)
+                .animateContentSize(animationSpec = tween(durationMillis = 300))
+                .height(height = if (lazyListState != null && lazyListState.canScrollBackward) 0.dp else TOP_BAR_HEIGHT.dp)
+        ) {
+            if (navigateToBackScreen != null) {
+                IconButton(
+                    onClick = {
+                        navigateToBackScreen.invoke()
+                    }, modifier = Modifier.align(
+                        Alignment.CenterStart
+                    )
+                ) {
+                    Icon(
+                        imageVector = Icons.Outlined.ArrowBack,
+                        contentDescription = Constants.GO_BACK_PREVIOUS_SCREEN_DESC
+                    )
+                }
+            }
+            Text(
+                text = Constants.TOP_BAR_TITLE,
+                modifier = Modifier
+                    .align(Alignment.Center)
+                    .padding(16.dp),
+                fontSize = 24.sp
+            )
+        }
     }
+
 }
 
 @Preview
 @Composable
 fun StarWarsTopBarPreview() {
-    StarWarsTopBar()
+    StarWarsTopBar(showAppBar = true)
 }
