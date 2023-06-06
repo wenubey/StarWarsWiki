@@ -1,7 +1,7 @@
 package com.wenubey.starwarswiki.presentation.navigation
 
 import android.net.Uri
-import androidx.compose.material3.windowsizeclass.WindowSizeClass
+import android.util.Log
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.State
 import androidx.navigation.NavHostController
@@ -10,11 +10,10 @@ import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
 import androidx.paging.compose.LazyPagingItems
 import com.google.gson.Gson
+import com.wenubey.starwarswiki.core.Constants.TAG
 import com.wenubey.starwarswiki.core.parcelable
 import com.wenubey.starwarswiki.domain.models.CharacterModel
-import com.wenubey.starwarswiki.domain.models.CharacterModelNavType
 import com.wenubey.starwarswiki.domain.models.FilmModel
-import com.wenubey.starwarswiki.domain.models.FilmModelNavType
 import com.wenubey.starwarswiki.presentation.screens.CharacterDetailScreen
 import com.wenubey.starwarswiki.presentation.screens.CharacterListScreen
 import com.wenubey.starwarswiki.presentation.screens.OpeningCrawlScreen
@@ -37,7 +36,7 @@ fun NavGraph(
                 characters = characters, navigateToDetailScreen = { character ->
                     val json = Uri.encode(Gson().toJson(character))
                     navHostController.navigate(Screen.CharacterDetailScreen.route + "/$json")
-
+                    Log.i(TAG, "NavGraph: ${character.name}")
                 },
                 searchQuery = searchQuery,
                 setSearchQuery = setSearchQuery,

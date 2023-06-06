@@ -1,6 +1,7 @@
 package com.wenubey.starwarswiki.presentation.screens
 
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.BottomSheetScaffold
@@ -55,44 +56,47 @@ fun CharacterDetailScreen(
         sheetContent = {
             BottomSheet(scope = scope, sheetState = sheetState, bottomSheetContent = bottomSheetContent.value)
         },
-        topBar = {
-            StarWarsTopBar(
-                navigateToBackScreen = navigateToBackScreen,
-                showAppBar = showAppBar
-            )
-        },
         content = { paddingValues ->
-            if (character != null) {
-                Column(
-                    modifier = Modifier
-                        .padding(paddingValues)
-                        .padding(8.dp),
-                    horizontalAlignment = Alignment.CenterHorizontally,
-                ) {
-                    ElevatedCard(
+            Column(
+                modifier = Modifier.fillMaxSize().padding(paddingValues),
+                horizontalAlignment = Alignment.CenterHorizontally
+            ) {
+                StarWarsTopBar(
+                    navigateToBackScreen = navigateToBackScreen,
+                    showAppBar = showAppBar
+                )
+                if (character != null) {
+                    Column(
                         modifier = Modifier
-                            .fillMaxWidth()
-                            .padding(4.dp), colors = CardDefaults.cardColors(
-                            containerColor = MaterialTheme.colorScheme.primaryContainer
-                        )
+                            .padding(8.dp),
+                        horizontalAlignment = Alignment.CenterHorizontally,
                     ) {
-                        CharacterDetailHeader(character = character)
-                        CharacterImageAndSpecieRow(character = character)
-                        CharacterFilmList(
-                            filmsList = character.films,
-                            navigateToFilmOpeningCrawl = navigateToFilmOpeningCrawl
-                        )
-                        VehicleStarshipRow(
-                            character = character,
-                            scope = scope,
-                            bottomSheetContent = bottomSheetContent,
-                            sheetState = sheetState
-                        )
+                        ElevatedCard(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .padding(4.dp), colors = CardDefaults.cardColors(
+                                containerColor = MaterialTheme.colorScheme.primaryContainer
+                            )
+                        ) {
+                            CharacterDetailHeader(character = character)
+                            CharacterImageAndSpecieRow(character = character)
+                            CharacterFilmList(
+                                filmsList = character.films,
+                                navigateToFilmOpeningCrawl = navigateToFilmOpeningCrawl
+                            )
+                            VehicleStarshipRow(
+                                character = character,
+                                scope = scope,
+                                bottomSheetContent = bottomSheetContent,
+                                sheetState = sheetState
+                            )
+                        }
                     }
+                } else {
+                    CustomProgressBar()
                 }
-            } else {
-                CustomProgressBar()
             }
+
         }
     )
 }

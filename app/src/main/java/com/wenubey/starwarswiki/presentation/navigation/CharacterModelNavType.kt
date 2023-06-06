@@ -1,11 +1,13 @@
-package com.wenubey.starwarswiki.domain.models
+package com.wenubey.starwarswiki.presentation.navigation
 
 import android.os.Bundle
 import androidx.navigation.NavType
 import com.google.gson.Gson
+import com.wenubey.starwarswiki.domain.models.CharacterModel
 
 
 class CharacterModelNavType : NavType<CharacterModel>(isNullableAllowed = false) {
+    @Suppress("DEPRECATION")
     override fun get(bundle: Bundle, key: String): CharacterModel? {
         return bundle.getParcelable(key)
     }

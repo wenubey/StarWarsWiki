@@ -28,8 +28,6 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             StarWarsWikiTheme {
-
-
                 Surface(
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background,
@@ -40,6 +38,8 @@ class MainActivity : ComponentActivity() {
                     val characters = viewModel.characterPagingFlow.collectAsLazyPagingItems()
                     val windowSizeClass = calculateWindowSizeClass(activity = this)
                     val showAppBar = windowSizeClass.heightSizeClass != WindowHeightSizeClass.Compact
+
+
                     NavGraph(
                         navHostController = navHostController,
                         characters = characters,
@@ -49,7 +49,6 @@ class MainActivity : ComponentActivity() {
                     )
                 }
             }
-
         }
     }
 }
