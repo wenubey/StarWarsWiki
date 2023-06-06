@@ -21,7 +21,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.wenubey.starwarswiki.core.Constants.mockData
 import com.wenubey.starwarswiki.core.components.CustomProgressBar
-import com.wenubey.starwarswiki.core.components.StarWarsTopBarWithBackButton
+import com.wenubey.starwarswiki.core.components.StarWarsTopBar
 import com.wenubey.starwarswiki.domain.models.CharacterModel
 import com.wenubey.starwarswiki.domain.models.FilmModel
 import com.wenubey.starwarswiki.presentation.components.detail.BottomSheet
@@ -55,7 +55,7 @@ fun CharacterDetailScreen(
             BottomSheet(scope = scope, sheetState = sheetState, bottomSheetContent = bottomSheetContent.value)
         },
         topBar = {
-            StarWarsTopBarWithBackButton(
+            StarWarsTopBar(
                 navigateToBackScreen = navigateToBackScreen
             )
         },

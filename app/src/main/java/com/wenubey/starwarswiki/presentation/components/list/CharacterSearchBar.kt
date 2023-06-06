@@ -30,9 +30,9 @@ fun CharacterSearchBar(
     val focusManager = LocalFocusManager.current
     TextField(
         modifier = Modifier
-            .clip(RoundedCornerShape(16.dp))
+            .clip(RoundedCornerShape(8.dp))
             .fillMaxWidth()
-            .padding(horizontal = 4.dp),
+            .padding(8.dp),
         colors = TextFieldDefaults.colors(
             unfocusedContainerColor = MaterialTheme.colorScheme.primaryContainer,
             focusedContainerColor = MaterialTheme.colorScheme.primaryContainer,

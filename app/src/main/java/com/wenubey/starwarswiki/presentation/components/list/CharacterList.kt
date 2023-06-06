@@ -3,6 +3,7 @@ package com.wenubey.starwarswiki.presentation.components.list
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.LazyListState
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -20,11 +21,13 @@ import com.wenubey.starwarswiki.domain.models.CharacterModel
 fun CharacterList(
     characters: LazyPagingItems<CharacterModel>,
     navigateToDetailScreen: (character: CharacterModel) -> Unit,
+    lazyListState: LazyListState
 ) {
 
     LazyColumn(
         modifier = Modifier
             .fillMaxSize(),
+        state = lazyListState,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         if (characters.itemCount > 0) {
@@ -41,18 +44,18 @@ fun CharacterList(
                     )
                 }
             }
-        } else{
+        } else {
             item {
                 ErrorScreen()
             }
         }
-
         item {
             if (characters.loadState.append is LoadState.Loading) {
                 CustomProgressBar(modifier = Modifier.size(50.dp))
             }
         }
-    }
 
+
+    }
 }
 

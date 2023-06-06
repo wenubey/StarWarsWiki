@@ -33,7 +33,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.wenubey.starwarswiki.core.Constants.BACKGROUND_IMAGE_DESC
 import com.wenubey.starwarswiki.core.components.ErrorScreen
-import com.wenubey.starwarswiki.core.components.StarWarsTopBarWithBackButton
+import com.wenubey.starwarswiki.core.components.StarWarsTopBar
 import com.wenubey.starwarswiki.domain.models.FilmModel
 import com.wenubey.starwarswiki.presentation.ui.theme.OpeningCrawlColor
 
@@ -75,7 +75,7 @@ fun OpeningCrawlScreen(
     Scaffold(
         modifier = Modifier,
         topBar = {
-            StarWarsTopBarWithBackButton(navigateToBackScreen = navigateToBackScreen)
+            StarWarsTopBar(navigateToBackScreen = navigateToBackScreen)
         },
         content = { paddingValues ->
             Image(
