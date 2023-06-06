@@ -25,7 +25,6 @@ fun NavGraph(
     characters: LazyPagingItems<CharacterModel>,
     searchQuery: State<String>,
     setSearchQuery: (String) -> Unit,
-    showAppBar: Boolean
 ) {
     NavHost(
         navController = navHostController,
@@ -40,7 +39,6 @@ fun NavGraph(
                 },
                 searchQuery = searchQuery,
                 setSearchQuery = setSearchQuery,
-                showAppBar = showAppBar
             )
         }
         composable(route = Screen.CharacterDetailScreen.route + "/{character}", arguments = listOf(
@@ -58,7 +56,6 @@ fun NavGraph(
                 navigateToBackScreen = {
                     navHostController.popBackStack()
                 },
-                showAppBar = showAppBar
             )
         }
 
@@ -71,7 +68,6 @@ fun NavGraph(
             OpeningCrawlScreen(
                 film = film,
                 navigateToBackScreen = { navHostController.popBackStack() },
-                showAppBar = showAppBar
                 )
         }
 
@@ -80,7 +76,6 @@ fun NavGraph(
                 navigateToCharacterList = {
                     navHostController.navigate(Screen.CharacterListScreen.route)
                 },
-                showAppBar = showAppBar
             )
         }
     }

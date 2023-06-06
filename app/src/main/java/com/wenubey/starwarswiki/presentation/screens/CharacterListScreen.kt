@@ -39,7 +39,7 @@ fun CharacterListScreen(
     navigateToDetailScreen: (character: CharacterModel) -> Unit,
     searchQuery: State<String>,
     setSearchQuery: (String) -> Unit,
-    showAppBar: Boolean,
+
 ) {
     val context = LocalContext.current
     val lazyListState = rememberLazyListState()
@@ -60,7 +60,7 @@ fun CharacterListScreen(
         topBar = {
             StarWarsTopBar(
                 lazyListState = lazyListState,
-                showAppBar = showAppBar
+
             )
         },
         content = { paddingValues ->

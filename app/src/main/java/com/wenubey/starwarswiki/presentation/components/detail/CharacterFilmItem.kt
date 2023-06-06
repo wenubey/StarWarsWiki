@@ -17,7 +17,8 @@ import com.wenubey.starwarswiki.domain.models.FilmModel
 @Composable
 fun CharacterFilmItem(
     film: FilmModel,
-    onClick: () -> Unit
+    onClick: () -> Unit,
+    isExpanded: Boolean
 ) {
     ElevatedCard(
         modifier = Modifier.padding(4.dp),
@@ -29,8 +30,14 @@ fun CharacterFilmItem(
                 .padding(8.dp),
             horizontalAlignment = Alignment.Start
         ) {
-            Text(text = film.title ?: Constants.UNDEFINED)
-            Text(text = film.releaseDate ?: Constants.UNDEFINED)
+
+            if (isExpanded) {
+                Text(text = film.title ?: Constants.UNDEFINED)
+                Text(text = film.releaseDate ?: Constants.UNDEFINED)
+            } else {
+                Text(text = film.title ?: Constants.UNDEFINED )
+            }
+
         }
     }
 }

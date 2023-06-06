@@ -6,9 +6,6 @@ import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
-import androidx.compose.material3.windowsizeclass.ExperimentalMaterial3WindowSizeClassApi
-import androidx.compose.material3.windowsizeclass.WindowHeightSizeClass
-import androidx.compose.material3.windowsizeclass.calculateWindowSizeClass
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -23,7 +20,7 @@ import dagger.hilt.android.AndroidEntryPoint
 class MainActivity : ComponentActivity() {
     private lateinit var navHostController: NavHostController
 
-    @OptIn(ExperimentalMaterial3WindowSizeClassApi::class)
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
@@ -36,16 +33,11 @@ class MainActivity : ComponentActivity() {
                     val viewModel = hiltViewModel<StarWarsViewModel>()
                     val searchQuery = viewModel.searchQuery.collectAsState()
                     val characters = viewModel.characterPagingFlow.collectAsLazyPagingItems()
-                    val windowSizeClass = calculateWindowSizeClass(activity = this)
-                    val showAppBar = windowSizeClass.heightSizeClass != WindowHeightSizeClass.Compact
-
-
                     NavGraph(
                         navHostController = navHostController,
                         characters = characters,
                         searchQuery = searchQuery,
                         setSearchQuery = viewModel::setSearchQuery,
-                        showAppBar = showAppBar
                     )
                 }
             }

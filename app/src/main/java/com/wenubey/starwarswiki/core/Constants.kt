@@ -6,8 +6,8 @@ import com.wenubey.starwarswiki.domain.models.FilmModel
 import com.wenubey.starwarswiki.domain.models.ImageModel
 import com.wenubey.starwarswiki.domain.models.PlanetModel
 import com.wenubey.starwarswiki.domain.models.SpecieModel
-import com.wenubey.starwarswiki.domain.models.StarshipModel
-import com.wenubey.starwarswiki.domain.models.VehicleModel
+import com.wenubey.starwarswiki.domain.models.StarshipVehicleStarshipModel
+import com.wenubey.starwarswiki.domain.models.VehicleVehicleStarshipModel
 import com.wenubey.starwarswiki.presentation.ui.theme.Blue
 import com.wenubey.starwarswiki.presentation.ui.theme.Pale
 import com.wenubey.starwarswiki.presentation.ui.theme.Red
@@ -34,7 +34,6 @@ object Constants {
     const val SCROLL_UP_DESC = "Scroll to the top of the list"
 
     const val TOP_BAR_HEIGHT = 64
-    const val SCROLL_ANIMATION = -15000f
 
     const val MOVIES = "Movies"
     const val VEHICLES = "Vehicles"
@@ -77,7 +76,7 @@ object Constants {
             )
         ),
         vehicles = listOf(
-            VehicleModel(
+            VehicleVehicleStarshipModel(
                 name = "Cool Vehicle Name",
                 model = "Cool Vehicle Model",
                 manufacturer = "Cool Vehicle Manufacturer",
@@ -86,7 +85,7 @@ object Constants {
                 crew = "10",
                 passengers = "5",
                 consumables = "Cool Consumable",
-                vehicleClass = "Cool Vehicle Class"
+                modelClass = "Cool Vehicle Class"
             )
         ),
         species = listOf(
@@ -99,7 +98,7 @@ object Constants {
             )
         ),
         starships = listOf(
-            StarshipModel(
+            StarshipVehicleStarshipModel(
                 name = "Cool Starship Name",
                 model = "Cool Starship Name",
                 manufacturer = "Cool Starship Manufacturer",
@@ -107,7 +106,7 @@ object Constants {
                 length = "1000",
                 crew = "100",
                 passengers = "100",
-                starshipClass = "Cool Starship Class",
+                modelClass = "Cool Starship Class",
             )
         ),
         photoUrl = ImageModel("https://vignette.wikia.nocookie.net/starwars/images/2/20/LukeTLJ.jpg"),

@@ -18,9 +18,9 @@ data class CharacterModel(
     val gender: String,
     val homeWorld: PlanetModel?,
     val films: List<FilmModel>?,
-    val vehicles: List<VehicleModel>?,
+    val vehicles: List<VehicleVehicleStarshipModel>?,
     val species: List<SpecieModel>?,
-    val starships: List<StarshipModel>?,
+    val starships: List<StarshipVehicleStarshipModel>?,
     val photoUrl: ImageModel,
 ) : Parcelable
 

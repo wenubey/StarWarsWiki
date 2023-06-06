@@ -3,7 +3,6 @@ package com.wenubey.starwarswiki.presentation.components.detail
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.material3.BottomSheetScaffoldState
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.runtime.Composable
@@ -21,7 +20,8 @@ fun VehicleStarshipRow(
     character: CharacterModel,
     scope: CoroutineScope,
     bottomSheetContent: MutableState<BottomSheetContent>,
-    sheetState: BottomSheetScaffoldState
+    sheetState: BottomSheetScaffoldState,
+    modifier: Modifier = Modifier
 ) {
      fun setBottomSheetContent(content: BottomSheetContent) {
         scope.launch {
@@ -35,8 +35,8 @@ fun VehicleStarshipRow(
     }
 
     Row(
-        modifier = Modifier.fillMaxWidth(),
-        horizontalArrangement = Arrangement.spacedBy(2.dp)
+        horizontalArrangement = Arrangement.spacedBy(2.dp),
+        modifier = modifier
     ) {
         Column(
             modifier = Modifier.weight(0.5f),

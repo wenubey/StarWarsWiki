@@ -6,6 +6,7 @@ import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -20,8 +21,9 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.wenubey.starwarswiki.R
-import com.wenubey.starwarswiki.core.Constants
+import com.wenubey.starwarswiki.core.Constants.UNDEFINED
 import com.wenubey.starwarswiki.core.ScreenSize
+import com.wenubey.starwarswiki.domain.models.VehicleStarshipModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 
@@ -30,39 +32,59 @@ import kotlinx.coroutines.launch
 fun BottomSheet(
     scope: CoroutineScope,
     sheetState: BottomSheetScaffoldState,
-    bottomSheetContent: BottomSheetContent
+    bottomSheetContent: BottomSheetContent,
+    isPortrait: Boolean
 ) {
     Box(
         modifier = Modifier
             .padding(16.dp)
             .height((ScreenSize().height() / 3).dp)
-            .clickable(
-                interactionSource = MutableInteractionSource(),
+            .clickable(interactionSource = MutableInteractionSource(),
                 indication = null,
                 onClick = {
                     scope.launch { sheetState.bottomSheetState.partialExpand() }
-                }
-            ),
+                }),
         contentAlignment = Alignment.Center,
 
-    ) {
+        ) {
         Image(
-            painter = painterResource(id = when(bottomSheetContent) {
-                is BottomSheetContent.VehicleContent -> {
-                    R.drawable.vehicle
+            painter = painterResource(
+                id = when (bottomSheetContent) {
+                    is BottomSheetContent.VehicleContent -> {
+                        R.drawable.vehicle
+                    }
+                    is BottomSheetContent.StarshipContent -> {
+                        R.drawable.starship
+                    }
+                    is BottomSheetContent.EmptyContent -> {
+                        R.drawable.placeholder
+                    }
                 }
-                is BottomSheetContent.StarshipContent -> {
-                    R.drawable.starship
-                }
-                is BottomSheetContent.EmptyContent -> {
-                    R.drawable.placeholder
-                }
-            }),
-            contentDescription = "",
-            modifier = Modifier
+            ), contentDescription = "", modifier = Modifier
                 .fillMaxSize()
-                .alpha(0.1f)
+                .alpha(0.15f)
         )
+        when(bottomSheetContent) {
+            is BottomSheetContent.VehicleContent ->{
+                VehicleContentTexts(vehicleStarshipModel = bottomSheetContent.vehicle, isPortrait = isPortrait)
+            }
+            is BottomSheetContent.StarshipContent -> {
+                VehicleContentTexts(
+                    vehicleStarshipModel = bottomSheetContent.starship,
+                    isPortrait = isPortrait
+                )
+            }
+            is BottomSheetContent.EmptyContent -> {}
+        }
+
+    }
+}
+
+
+
+@Composable
+fun VehicleContentTexts(vehicleStarshipModel: VehicleStarshipModel, isPortrait: Boolean) {
+    if (isPortrait) {
         Column(
             modifier = Modifier
                 .fillMaxSize()
@@ -70,105 +92,40 @@ fun BottomSheet(
             horizontalAlignment = Alignment.Start,
             verticalArrangement = Arrangement.spacedBy(4.dp)
         ) {
+            Text(text = stringResource(id = R.string.vehicle_starship_name, vehicleStarshipModel.name ?: UNDEFINED))
+            Text(text = stringResource(id = R.string.vehicle_starship_model, vehicleStarshipModel.model ?: UNDEFINED))
+            Text(text = stringResource(id = R.string.vehicle_starship_cost, vehicleStarshipModel.costInCredits ?: UNDEFINED))
+            Text(text = stringResource(id = R.string.vehicle_starship_length, vehicleStarshipModel.length ?: UNDEFINED))
+            Text(text = stringResource(id = R.string.vehicle_starship_crew, vehicleStarshipModel.crew ?: UNDEFINED))
+            Text(text = stringResource(id = R.string.vehicle_starship_passengers, vehicleStarshipModel.passengers ?: UNDEFINED))
+            Text(text = stringResource(id = R.string.vehicle_starship_class, vehicleStarshipModel.modelClass ?: UNDEFINED))
+            Text(text = stringResource(id = R.string.vehicle_starship_consumables, vehicleStarshipModel.consumables ?: UNDEFINED))
 
-            when (bottomSheetContent) {
-                is BottomSheetContent.VehicleContent -> {
-                    Text(
-                        text = stringResource(
-                            id = R.string.vehicle_starship_name,
-                            bottomSheetContent.vehicle.name ?: Constants.UNDEFINED
-                        )
-                    )
-                    Text(
-                        text = stringResource(
-                            id = R.string.vehicle_starship_model,
-                            bottomSheetContent.vehicle.model ?: Constants.UNDEFINED
-                        )
-                    )
-                    Text(
-                        text = stringResource(
-                            id = R.string.vehicle_starship_cost,
-                            bottomSheetContent.vehicle.costInCredits ?: Constants.UNDEFINED
-                        )
-                    )
-                    Text(
-                        text = stringResource(
-                            id = R.string.vehicle_starship_length,
-                            bottomSheetContent.vehicle.length ?: Constants.UNDEFINED
-                        )
-                    )
-                    Text(
-                        text = stringResource(
-                            id = R.string.vehicle_starship_crew,
-                            bottomSheetContent.vehicle.crew ?: Constants.UNDEFINED
-                        )
-                    )
-                    Text(
-                        text = stringResource(
-                            id = R.string.vehicle_starship_passengers,
-                            bottomSheetContent.vehicle.passengers ?: Constants.UNDEFINED
-                        )
-                    )
-                    Text(
-                        text = stringResource(
-                            id = R.string.vehicle_starship_consumables,
-                            bottomSheetContent.vehicle.consumables ?: Constants.UNDEFINED
-                        )
-                    )
-                    Text(
-                        text = stringResource(
-                            id = R.string.vehicle_starship_class,
-                            bottomSheetContent.vehicle.vehicleClass ?: Constants.UNDEFINED
-                        )
-                    )
-                }
-
-                is BottomSheetContent.StarshipContent -> {
-                    Text(
-                        text = stringResource(
-                            id = R.string.vehicle_starship_name,
-                            bottomSheetContent.starship.name ?: Constants.UNDEFINED
-                        )
-                    )
-                    Text(
-                        text = stringResource(
-                            id = R.string.vehicle_starship_model,
-                            bottomSheetContent.starship.model ?: Constants.UNDEFINED
-                        )
-                    )
-                    Text(
-                        text = stringResource(
-                            id = R.string.vehicle_starship_cost,
-                            bottomSheetContent.starship.costInCredits ?: Constants.UNDEFINED
-                        )
-                    )
-                    Text(
-                        text = stringResource(
-                            id = R.string.vehicle_starship_length,
-                            bottomSheetContent.starship.length ?: Constants.UNDEFINED
-                        )
-                    )
-                    Text(
-                        text = stringResource(
-                            id = R.string.vehicle_starship_crew,
-                            bottomSheetContent.starship.crew ?: Constants.UNDEFINED
-                        )
-                    )
-                    Text(
-                        text = stringResource(
-                            id = R.string.vehicle_starship_passengers,
-                            bottomSheetContent.starship.passengers ?: Constants.UNDEFINED
-                        )
-                    )
-                    Text(
-                        text = stringResource(
-                            id = R.string.vehicle_starship_class,
-                            bottomSheetContent.starship.starshipClass ?: Constants.UNDEFINED
-                        )
-                    )
-                }
-                is BottomSheetContent.EmptyContent -> {}
+        }
+    } else {
+        Row(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(4.dp),
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.spacedBy(4.dp),
+        ) {
+            Column(modifier = Modifier.weight(0.5f)) {
+                Text(text = stringResource(id = R.string.vehicle_starship_name, vehicleStarshipModel.name ?: UNDEFINED))
+                Text(text = stringResource(id = R.string.vehicle_starship_model, vehicleStarshipModel.model ?: UNDEFINED))
+                Text(text = stringResource(id = R.string.vehicle_starship_cost, vehicleStarshipModel.costInCredits ?: UNDEFINED))
+                Text(text = stringResource(id = R.string.vehicle_starship_length, vehicleStarshipModel.length ?: UNDEFINED))
+            }
+            Column(modifier = Modifier.weight(0.5f)) {
+                Text(text = stringResource(id = R.string.vehicle_starship_crew, vehicleStarshipModel.crew ?: UNDEFINED))
+                Text(text = stringResource(id = R.string.vehicle_starship_passengers, vehicleStarshipModel.passengers ?: UNDEFINED))
+                Text(text = stringResource(id = R.string.vehicle_starship_class, vehicleStarshipModel.modelClass ?: UNDEFINED))
+                Text(text = stringResource(id = R.string.vehicle_starship_consumables, vehicleStarshipModel.consumables ?: UNDEFINED))
             }
         }
     }
 }
+
+
+
+

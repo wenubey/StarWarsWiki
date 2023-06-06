@@ -1,7 +1,7 @@
 package com.wenubey.starwarswiki.data.local.entities
 
 import com.wenubey.starwarswiki.core.Constants.UNDEFINED
-import com.wenubey.starwarswiki.domain.models.StarshipModel
+import com.wenubey.starwarswiki.domain.models.StarshipVehicleStarshipModel
 
 
 data class StarshipEntity(
@@ -14,8 +14,8 @@ data class StarshipEntity(
     val starshipPassengers: String?,
     val starshipClass: String?,
 ) {
-    fun mapToDomainModel(): StarshipModel {
-        return StarshipModel(
+    fun mapToDomainModel(): StarshipVehicleStarshipModel {
+        return StarshipVehicleStarshipModel(
             name = starshipName ?: UNDEFINED,
             model = starshipModel ?: UNDEFINED,
             manufacturer = starshipManufacturer ?: UNDEFINED,
@@ -23,7 +23,7 @@ data class StarshipEntity(
             length = starshipLength ?: UNDEFINED,
             crew = starshipCrew ?: UNDEFINED,
             passengers = starshipPassengers ?: UNDEFINED,
-            starshipClass = starshipClass ?: UNDEFINED,
+            modelClass = starshipClass ?: UNDEFINED,
         )
     }
 }

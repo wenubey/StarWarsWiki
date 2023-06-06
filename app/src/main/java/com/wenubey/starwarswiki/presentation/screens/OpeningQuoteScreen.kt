@@ -12,7 +12,6 @@ import kotlinx.coroutines.delay
 @Composable
 fun OpeningQuoteScreen(
     navigateToCharacterList: () -> Unit,
-    showAppBar: Boolean
 ) {
     LaunchedEffect(Unit) {
         delay(5000)
@@ -20,9 +19,7 @@ fun OpeningQuoteScreen(
     }
     Scaffold(
         modifier = Modifier.fillMaxSize(),
-        topBar = { StarWarsTopBar(
-            showAppBar = showAppBar
-        ) },
+        topBar = { StarWarsTopBar() },
         content = { paddingValues ->
             OpeningQuote(paddingValues = paddingValues)
         },

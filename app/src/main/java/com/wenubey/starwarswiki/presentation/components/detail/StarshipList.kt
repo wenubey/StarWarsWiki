@@ -1,7 +1,6 @@
 package com.wenubey.starwarswiki.presentation.components.detail
 
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
@@ -14,12 +13,12 @@ import com.wenubey.starwarswiki.core.Constants
 import com.wenubey.starwarswiki.core.ScreenSize
 import com.wenubey.starwarswiki.core.components.UndefinedBox
 import com.wenubey.starwarswiki.domain.models.CharacterModel
-import com.wenubey.starwarswiki.domain.models.StarshipModel
+import com.wenubey.starwarswiki.domain.models.StarshipVehicleStarshipModel
 
 @Composable
 fun StarshipList(
     character: CharacterModel,
-    onClickStarship: (starship: StarshipModel) -> Unit
+    onClickStarship: (starship: StarshipVehicleStarshipModel) -> Unit
 ) {
     VehicleStarshipHeader(
         painterResource = R.drawable.starship,
@@ -27,7 +26,7 @@ fun StarshipList(
         text = Constants.STARSHIPS
     )
     Spacer(modifier = Modifier.height(4.dp))
-    LazyColumn(modifier = Modifier.fillMaxHeight()) {
+    LazyColumn {
         if (character.starships.isNullOrEmpty()) {
             item {
                 UndefinedBox(

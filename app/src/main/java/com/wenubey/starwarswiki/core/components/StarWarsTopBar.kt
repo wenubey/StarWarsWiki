@@ -29,9 +29,7 @@ import com.wenubey.starwarswiki.core.Constants.TOP_BAR_HEIGHT
 fun StarWarsTopBar(
     navigateToBackScreen: (() -> Unit)? = null,
     lazyListState: LazyListState? = null,
-    showAppBar: Boolean
 ) {
-    if (showAppBar) {
         Box(
             modifier = Modifier
                 .fillMaxWidth()
@@ -61,12 +59,11 @@ fun StarWarsTopBar(
                 fontSize = 24.sp
             )
         }
-    }
 
 }
 
 @Preview
 @Composable
 fun StarWarsTopBarPreview() {
-    StarWarsTopBar(showAppBar = true)
+    StarWarsTopBar()
 }

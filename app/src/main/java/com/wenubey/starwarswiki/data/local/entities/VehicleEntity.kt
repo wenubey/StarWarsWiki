@@ -1,7 +1,7 @@
 package com.wenubey.starwarswiki.data.local.entities
 
 import com.wenubey.starwarswiki.core.Constants.UNDEFINED
-import com.wenubey.starwarswiki.domain.models.VehicleModel
+import com.wenubey.starwarswiki.domain.models.VehicleVehicleStarshipModel
 
 
 data class VehicleEntity(
@@ -15,8 +15,8 @@ data class VehicleEntity(
     val consumables: String?,
     val vehicleClass: String?,
 ) {
-    fun mapToDomainModel(): VehicleModel {
-        return VehicleModel(
+    fun mapToDomainModel(): VehicleVehicleStarshipModel {
+        return VehicleVehicleStarshipModel(
             name = vehicleName ?: UNDEFINED,
             model = vehicleModel ?: UNDEFINED,
             manufacturer = vehicleManufacturer ?: UNDEFINED,
@@ -25,7 +25,7 @@ data class VehicleEntity(
             crew = vehicleCrew ?: UNDEFINED,
             passengers = passengers ?: UNDEFINED,
             consumables = consumables ?: UNDEFINED,
-            vehicleClass = vehicleClass ?: UNDEFINED,
+            modelClass = vehicleClass ?: UNDEFINED,
         )
     }
 }
