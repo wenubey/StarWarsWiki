@@ -59,7 +59,10 @@ fun CharacterDetailScreen(
     val bottomSheetContent =
         remember { mutableStateOf<BottomSheetContent>(BottomSheetContent.EmptyContent) }
     val configuration = LocalConfiguration.current
-    val isPortrait = configuration.orientation == Configuration.ORIENTATION_PORTRAIT
+    val isPortrait = remember {
+        configuration.orientation == Configuration.ORIENTATION_PORTRAIT
+    }
+
         BottomSheetScaffold(
             scaffoldState = sheetState,
             sheetContainerColor = MaterialTheme.colorScheme.primaryContainer,
