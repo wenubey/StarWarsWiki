@@ -26,6 +26,7 @@ fun NavGraph(
     searchQuery: State<String>,
     setSearchQuery: (String) -> Unit,
 ) {
+
     NavHost(
         navController = navHostController,
         startDestination = Screen.OpeningQuoteScreen.route

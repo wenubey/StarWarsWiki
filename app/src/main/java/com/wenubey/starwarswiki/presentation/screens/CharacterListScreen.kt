@@ -1,6 +1,5 @@
 package com.wenubey.starwarswiki.presentation.screens
 
-import android.util.Log
 import android.widget.Toast
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -24,7 +23,6 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.paging.LoadState
 import androidx.paging.compose.LazyPagingItems
-import com.wenubey.starwarswiki.core.Constants.TAG
 import com.wenubey.starwarswiki.core.components.CustomProgressBar
 import com.wenubey.starwarswiki.core.components.ScrollToTheTopButton
 import com.wenubey.starwarswiki.core.components.StarWarsTopBar
@@ -45,7 +43,7 @@ fun CharacterListScreen(
     val lazyListState = rememberLazyListState()
     val showButton by remember { derivedStateOf { lazyListState.firstVisibleItemIndex > 0 } }
     val scope = rememberCoroutineScope()
-    Log.i(TAG, "CharacterListScreen list size: ${characters.itemCount}")
+
     LaunchedEffect(key1 = characters.loadState) {
         if (characters.loadState.refresh is LoadState.Error) {
             Toast.makeText(

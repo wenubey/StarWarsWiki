@@ -13,6 +13,7 @@ import kotlinx.coroutines.delay
 fun OpeningQuoteScreen(
     navigateToCharacterList: () -> Unit,
 ) {
+
     LaunchedEffect(Unit) {
         delay(5000)
         navigateToCharacterList()

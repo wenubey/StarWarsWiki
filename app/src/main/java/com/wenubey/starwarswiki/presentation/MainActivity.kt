@@ -33,6 +33,8 @@ class MainActivity : ComponentActivity() {
                     val viewModel = hiltViewModel<StarWarsViewModel>()
                     val searchQuery = viewModel.searchQuery.collectAsState()
                     val characters = viewModel.characterPagingFlow.collectAsLazyPagingItems()
+
+
                     NavGraph(
                         navHostController = navHostController,
                         characters = characters,

@@ -30,7 +30,7 @@ fun DotsFlashing(
     minAlpha: Float = 0.1f,
     duration: Int = 2400,
     delayUnit: Int = 300,
-    dotCount: Int = 4
+    dotCount: Int = 4,
 ) {
 
     @Composable

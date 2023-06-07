@@ -59,11 +59,9 @@ fun CharacterDetailScreen(
     val bottomSheetContent =
         remember { mutableStateOf<BottomSheetContent>(BottomSheetContent.EmptyContent) }
     val configuration = LocalConfiguration.current
-    val isPortrait = remember {
-        configuration.orientation == Configuration.ORIENTATION_PORTRAIT
-    }
+    val isPortrait = configuration.orientation == Configuration.ORIENTATION_PORTRAIT
 
-        BottomSheetScaffold(
+    BottomSheetScaffold(
             scaffoldState = sheetState,
             sheetContainerColor = MaterialTheme.colorScheme.primaryContainer,
             sheetContent = {
@@ -88,7 +86,6 @@ fun CharacterDetailScreen(
                                 bottomSheetContent = bottomSheetContent,
                                 sheetState = sheetState,
                                 navigateToFilmOpeningCrawl = navigateToFilmOpeningCrawl,
-                                isPortrait = isPortrait,
                                 navigateToBackScreen = navigateToBackScreen
                             )
                         } else {
@@ -98,7 +95,6 @@ fun CharacterDetailScreen(
                                 bottomSheetContent = bottomSheetContent,
                                 sheetState = sheetState,
                                 navigateToFilmOpeningCrawl = navigateToFilmOpeningCrawl,
-                                isPortrait = maxWidth < 400.dp
                             )
                         }
                     } else {
@@ -109,11 +105,7 @@ fun CharacterDetailScreen(
         )
 }
 
-@Preview(showBackground = true, showSystemUi = true)
-@Composable
-fun CharacterDetailPortraitPreview() {
-    CharacterDetailScreen(character = mockData, {}, {})
-}
+
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -123,7 +115,6 @@ fun CharacterDetailLandscape(
     bottomSheetContent: MutableState<BottomSheetContent>,
     sheetState: BottomSheetScaffoldState,
     navigateToFilmOpeningCrawl: (film: FilmModel) -> Unit,
-    isPortrait: Boolean
 ) {
     if (character != null) {
         ElevatedCard(
@@ -149,7 +140,7 @@ fun CharacterDetailLandscape(
                         filmsList = character.films,
                         navigateToFilmOpeningCrawl = navigateToFilmOpeningCrawl,
                         modifier = Modifier.weight(0.3f),
-                        isPortrait = isPortrait
+                        isPortrait = false
                     )
                 }
             }
@@ -165,7 +156,6 @@ fun CharacterDetailPortrait(
     bottomSheetContent: MutableState<BottomSheetContent>,
     sheetState: BottomSheetScaffoldState,
     navigateToFilmOpeningCrawl: (film: FilmModel) -> Unit,
-    isPortrait: Boolean,
     navigateToBackScreen: () -> Unit
 ) {
     if (character != null) {
@@ -198,7 +188,7 @@ fun CharacterDetailPortrait(
                 CharacterFilmList(
                     filmsList = character.films,
                     navigateToFilmOpeningCrawl = navigateToFilmOpeningCrawl,
-                    isPortrait = isPortrait
+                    isPortrait = true
                 )
                 VehicleStarshipRow(
                     character = character,
@@ -224,5 +214,11 @@ fun CharacterDetailLandscapePreview() {
 @Composable
 fun CharacterDetailTabletPreview() {
     CharacterDetailScreen(character = mockData, navigateToFilmOpeningCrawl = {}, {})
+}
+
+@Preview(showBackground = true, showSystemUi = true)
+@Composable
+fun CharacterDetailPortraitPreview() {
+    CharacterDetailScreen(character = mockData, {}, {})
 }
 
