@@ -3,6 +3,7 @@ package com.wenubey.starwarswiki.presentation.components.detail
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.BottomSheetScaffoldState
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.runtime.Composable
@@ -35,8 +36,8 @@ fun VehicleStarshipRow(
     }
 
     Row(
-        horizontalArrangement = Arrangement.spacedBy(2.dp),
-        modifier = modifier
+        horizontalArrangement = Arrangement.spacedBy(4.dp),
+        modifier = modifier.padding(4.dp)
     ) {
         Column(
             modifier = Modifier.weight(0.5f),

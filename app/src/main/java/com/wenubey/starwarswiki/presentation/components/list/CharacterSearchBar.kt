@@ -1,6 +1,5 @@
 package com.wenubey.starwarswiki.presentation.components.list
 
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardActions
@@ -23,15 +22,15 @@ import com.wenubey.starwarswiki.core.Constants
 @Composable
 fun CharacterSearchBar(
     searchQuery: String,
-    setSearchQuery: (String) -> Unit
+    setSearchQuery: (String) -> Unit,
+    modifier: Modifier = Modifier
 ) {
 
     val keyboard = LocalSoftwareKeyboardController.current
     val focusManager = LocalFocusManager.current
     TextField(
-        modifier = Modifier
+        modifier = modifier
             .clip(RoundedCornerShape(8.dp))
-            .fillMaxWidth()
             .padding(8.dp),
         colors = TextFieldDefaults.colors(
             unfocusedContainerColor = MaterialTheme.colorScheme.primaryContainer,

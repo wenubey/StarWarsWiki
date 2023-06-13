@@ -159,9 +159,9 @@ fun CharacterDetailPortrait(
     navigateToBackScreen: () -> Unit
 ) {
     if (character != null) {
-
         Column(
             modifier = Modifier
+                .fillMaxSize()
                 .padding(8.dp),
             horizontalAlignment = Alignment.CenterHorizontally,
         ) {
@@ -170,7 +170,7 @@ fun CharacterDetailPortrait(
             )
             ElevatedCard(
                 modifier = Modifier
-                    .fillMaxWidth()
+                    .fillMaxSize()
                     .padding(4.dp), colors = CardDefaults.cardColors(
                     containerColor = MaterialTheme.colorScheme.primaryContainer
                 )
@@ -180,7 +180,7 @@ fun CharacterDetailPortrait(
                     modifier = Modifier
                         .fillMaxWidth()
                         .padding(4.dp),
-                    horizontalArrangement = Arrangement.spacedBy(8.dp)
+                    horizontalArrangement = Arrangement.SpaceAround
                 ) {
                     CharacterPhoto(character = character)
                     CharacterSpecie(character = character)

@@ -8,9 +8,10 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.lazy.LazyListState
+import androidx.compose.foundation.lazy.grid.LazyGridState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.ArrowUpward
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
@@ -25,8 +26,9 @@ import kotlinx.coroutines.launch
 @Composable
 fun ScrollToTheTopButton(
     showButton: Boolean,
-    lazyListState: LazyListState,
-    scope: CoroutineScope
+    lazyGridState: LazyGridState,
+    scope: CoroutineScope,
+    isPortrait: Boolean
 ) {
     AnimatedVisibility(
         visible = showButton,
@@ -44,9 +46,9 @@ fun ScrollToTheTopButton(
                     interactionSource = MutableInteractionSource(),
                     indication = null,
                     onClick = {
-                        if (!lazyListState.isScrollInProgress) {
+                        if (!lazyGridState.isScrollInProgress) {
                             scope.launch {
-                                lazyListState.animateScrollToItem(0)
+                                lazyGridState.animateScrollToItem(0)
                             }
                         }
                     }
@@ -54,8 +56,8 @@ fun ScrollToTheTopButton(
         ) {
             Icon(
                 modifier = Modifier.padding(4.dp),
-                imageVector = Icons.Default.ArrowUpward,
-                contentDescription = Constants.SCROLL_UP_DESC
+                imageVector = if (isPortrait) Icons.Default.ArrowUpward else Icons.Default.ArrowBack,
+                contentDescription = Constants.SCROLL_TOP_DESC
             )
         }
     }

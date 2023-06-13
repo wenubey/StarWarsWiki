@@ -31,7 +31,7 @@ object Constants {
     const val VEHICLES_DESC = "Character's riding vehicles"
     const val STARSHIPS_DESC = "Character's riding starships"
     const val BACKGROUND_IMAGE_DESC = "Background Image"
-    const val SCROLL_UP_DESC = "Scroll to the top of the list"
+    const val SCROLL_TOP_DESC = "Scroll to the top of the list"
 
     const val TOP_BAR_HEIGHT = 64
 

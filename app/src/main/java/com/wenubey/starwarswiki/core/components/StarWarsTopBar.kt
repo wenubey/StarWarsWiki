@@ -9,7 +9,6 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.lazy.LazyListState
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.ArrowBack
 import androidx.compose.material3.Icon
@@ -28,14 +27,14 @@ import com.wenubey.starwarswiki.core.Constants.TOP_BAR_HEIGHT
 @Composable
 fun StarWarsTopBar(
     navigateToBackScreen: (() -> Unit)? = null,
-    lazyListState: LazyListState? = null,
+    isScrolled: Boolean = false,
 ) {
         Box(
             modifier = Modifier
                 .fillMaxWidth()
                 .background(MaterialTheme.colorScheme.surface)
                 .animateContentSize(animationSpec = tween(durationMillis = 300))
-                .height(height = if (lazyListState != null && lazyListState.canScrollBackward) 0.dp else TOP_BAR_HEIGHT.dp)
+                .height(height = if (isScrolled) 0.dp else TOP_BAR_HEIGHT.dp)
         ) {
             if (navigateToBackScreen != null) {
                 IconButton(
