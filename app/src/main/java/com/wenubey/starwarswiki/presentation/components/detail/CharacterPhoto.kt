@@ -2,6 +2,7 @@ package com.wenubey.starwarswiki.presentation.components.detail
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -14,6 +15,7 @@ import coil.compose.rememberAsyncImagePainter
 import coil.request.ImageRequest
 import com.wenubey.starwarswiki.R
 import com.wenubey.starwarswiki.core.Constants
+import com.wenubey.starwarswiki.core.ScreenSize
 import com.wenubey.starwarswiki.domain.models.CharacterModel
 
 @Composable
@@ -35,6 +37,7 @@ fun CharacterPhoto(
         ),
         contentDescription = Constants.CHARACTER_PHOTO_DESC,
         modifier = modifier
+            .width((ScreenSize().width() / 2).dp)
             .clip(RoundedCornerShape(16.dp))
             .padding(start = 4.dp)
 

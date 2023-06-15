@@ -15,7 +15,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.grid.rememberLazyGridState
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.GridOn
-import androidx.compose.material.icons.filled.Window
+import androidx.compose.material.icons.outlined.Window
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
@@ -98,7 +98,7 @@ fun CharacterListScreen(
                         )
                         if (isPortrait) {
                             Icon(
-                                imageVector = if (gridChanged.value) Icons.Default.GridOn else Icons.Default.Window,
+                                imageVector = if (gridChanged.value) Icons.Default.GridOn else Icons.Outlined.Window,
                                 contentDescription = "",
                                 modifier = Modifier
                                     .padding(8.dp)
@@ -124,7 +124,7 @@ fun CharacterListScreen(
                             navigateToDetailScreen = navigateToDetailScreen,
                             lazyGridState = lazyGridState,
                             isPortrait = isPortrait,
-                            gridChanged = gridChanged.value
+                            gridChanged = gridChanged.value,
                         )
                     }
                 }

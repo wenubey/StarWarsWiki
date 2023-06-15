@@ -96,7 +96,7 @@ fun CharacterListCard(
                         .weight(0.7f)
                         .padding(4.dp)
                         .clip(RoundedCornerShape(4.dp)),
-                    contentScale = ContentScale.FillHeight
+                    contentScale = ContentScale.FillBounds
                 )
             }
 
