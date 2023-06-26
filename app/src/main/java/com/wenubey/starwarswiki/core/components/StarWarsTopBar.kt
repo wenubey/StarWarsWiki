@@ -6,6 +6,7 @@ import androidx.compose.animation.animateContentSize
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -28,7 +29,10 @@ import com.wenubey.starwarswiki.core.Constants.TOP_BAR_HEIGHT
 fun StarWarsTopBar(
     navigateToBackScreen: (() -> Unit)? = null,
     isScrolled: Boolean = false,
+    checked: Boolean = false,
+    onCheckedChanged: ((checked: Boolean) -> Unit)? = null,
 ) {
+    Row {
         Box(
             modifier = Modifier
                 .fillMaxWidth()
@@ -36,6 +40,7 @@ fun StarWarsTopBar(
                 .animateContentSize(animationSpec = tween(durationMillis = 300))
                 .height(height = if (isScrolled) 0.dp else TOP_BAR_HEIGHT.dp)
         ) {
+
             if (navigateToBackScreen != null) {
                 IconButton(
                     onClick = {
@@ -57,9 +62,22 @@ fun StarWarsTopBar(
                     .padding(16.dp),
                 fontSize = 24.sp
             )
+            if(onCheckedChanged != null) {
+                ThemeModeSwitch(
+                    modifier = Modifier
+                        .align(Alignment.CenterEnd)
+                        .padding(end = 4.dp),
+                    checked = checked,
+                    onCheckedChanged = onCheckedChanged
+                )
+            }
         }
 
+    }
+
 }
+
+
 
 @Preview
 @Composable

@@ -25,6 +25,8 @@ fun NavGraph(
     characters: LazyPagingItems<CharacterModel>,
     searchQuery: State<String>,
     setSearchQuery: (String) -> Unit,
+    checked: Boolean,
+    onCheckedChanged: (checked: Boolean) -> Unit
 ) {
 
     NavHost(
@@ -40,6 +42,8 @@ fun NavGraph(
                 },
                 searchQuery = searchQuery,
                 setSearchQuery = setSearchQuery,
+                checked = checked,
+                onCheckedChanged = onCheckedChanged
             )
         }
         composable(route = Screen.CharacterDetailScreen.route + "/{character}", arguments = listOf(
@@ -57,6 +61,8 @@ fun NavGraph(
                 navigateToBackScreen = {
                     navHostController.popBackStack()
                 },
+                checked = checked,
+                onCheckedChanged = onCheckedChanged
             )
         }
 
@@ -69,7 +75,7 @@ fun NavGraph(
             OpeningCrawlScreen(
                 film = film,
                 navigateToBackScreen = { navHostController.popBackStack() },
-                )
+            )
         }
 
         composable(route = Screen.OpeningQuoteScreen.route) {

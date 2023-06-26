@@ -48,6 +48,8 @@ fun CharacterDetailScreen(
     character: CharacterModel?,
     navigateToFilmOpeningCrawl: (film: FilmModel) -> Unit,
     navigateToBackScreen: () -> Unit,
+    checked: Boolean,
+    onCheckedChanged: (checked: Boolean) -> Unit
 ) {
     val sheetState = rememberBottomSheetScaffoldState(
         bottomSheetState = SheetState(
@@ -62,49 +64,50 @@ fun CharacterDetailScreen(
     val isPortrait = configuration.orientation == Configuration.ORIENTATION_PORTRAIT
 
     BottomSheetScaffold(
-            scaffoldState = sheetState,
-            sheetContainerColor = MaterialTheme.colorScheme.primaryContainer,
-            sheetContent = {
-                BottomSheet(
-                    scope = scope,
-                    sheetState = sheetState,
-                    bottomSheetContent = bottomSheetContent.value,
-                    isPortrait = isPortrait
-                )
-            },
-            content = { paddingValues ->
-                BoxWithConstraints(
-                    modifier = Modifier
-                        .fillMaxSize()
-                        .padding(paddingValues),
-                ) {
-                    if (character != null) {
-                        if (isPortrait) {
-                            CharacterDetailPortrait(
-                                character = character,
-                                scope = scope,
-                                bottomSheetContent = bottomSheetContent,
-                                sheetState = sheetState,
-                                navigateToFilmOpeningCrawl = navigateToFilmOpeningCrawl,
-                                navigateToBackScreen = navigateToBackScreen
-                            )
-                        } else {
-                            CharacterDetailLandscape(
-                                character = character,
-                                scope = scope,
-                                bottomSheetContent = bottomSheetContent,
-                                sheetState = sheetState,
-                                navigateToFilmOpeningCrawl = navigateToFilmOpeningCrawl,
-                            )
-                        }
+        scaffoldState = sheetState,
+        sheetContainerColor = MaterialTheme.colorScheme.primaryContainer,
+        sheetContent = {
+            BottomSheet(
+                scope = scope,
+                sheetState = sheetState,
+                bottomSheetContent = bottomSheetContent.value,
+                isPortrait = isPortrait
+            )
+        },
+        content = { paddingValues ->
+            BoxWithConstraints(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .padding(paddingValues),
+            ) {
+                if (character != null) {
+                    if (isPortrait) {
+                        CharacterDetailPortrait(
+                            character = character,
+                            scope = scope,
+                            bottomSheetContent = bottomSheetContent,
+                            sheetState = sheetState,
+                            navigateToFilmOpeningCrawl = navigateToFilmOpeningCrawl,
+                            navigateToBackScreen = navigateToBackScreen,
+                            checked = checked,
+                            onCheckedChanged = onCheckedChanged
+                        )
                     } else {
-                        CustomProgressBar()
+                        CharacterDetailLandscape(
+                            character = character,
+                            scope = scope,
+                            bottomSheetContent = bottomSheetContent,
+                            sheetState = sheetState,
+                            navigateToFilmOpeningCrawl = navigateToFilmOpeningCrawl,
+                        )
                     }
+                } else {
+                    CustomProgressBar()
                 }
             }
-        )
+        }
+    )
 }
-
 
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -156,7 +159,9 @@ fun CharacterDetailPortrait(
     bottomSheetContent: MutableState<BottomSheetContent>,
     sheetState: BottomSheetScaffoldState,
     navigateToFilmOpeningCrawl: (film: FilmModel) -> Unit,
-    navigateToBackScreen: () -> Unit
+    navigateToBackScreen: () -> Unit,
+    checked: Boolean,
+    onCheckedChanged: (checked: Boolean) -> Unit
 ) {
     if (character != null) {
         Column(
@@ -167,6 +172,8 @@ fun CharacterDetailPortrait(
         ) {
             StarWarsTopBar(
                 navigateToBackScreen = navigateToBackScreen,
+                checked = checked,
+                onCheckedChanged = onCheckedChanged
             )
             ElevatedCard(
                 modifier = Modifier
@@ -207,18 +214,28 @@ fun CharacterDetailPortrait(
 )
 @Composable
 fun CharacterDetailLandscapePreview() {
-    CharacterDetailScreen(character = mockData, navigateToFilmOpeningCrawl = {}, {})
+    CharacterDetailScreen(
+        character = mockData,
+        navigateToFilmOpeningCrawl = {},
+        {},
+        checked = false,
+        {})
 }
 
 @Preview(showBackground = true, showSystemUi = true, device = Devices.TABLET)
 @Composable
 fun CharacterDetailTabletPreview() {
-    CharacterDetailScreen(character = mockData, navigateToFilmOpeningCrawl = {}, {})
+    CharacterDetailScreen(
+        character = mockData,
+        navigateToFilmOpeningCrawl = {},
+        {},
+        checked = false,
+        {})
 }
 
 @Preview(showBackground = true, showSystemUi = true)
 @Composable
 fun CharacterDetailPortraitPreview() {
-    CharacterDetailScreen(character = mockData, {}, {})
+    CharacterDetailScreen(character = mockData, {}, {}, checked = false, {})
 }
 

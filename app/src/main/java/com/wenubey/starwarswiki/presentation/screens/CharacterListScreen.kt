@@ -49,6 +49,8 @@ fun CharacterListScreen(
     navigateToDetailScreen: (character: CharacterModel) -> Unit,
     searchQuery: State<String>,
     setSearchQuery: (String) -> Unit,
+    checked: Boolean,
+    onCheckedChanged: (checked: Boolean) -> Unit,
 ) {
     val context = LocalContext.current
     val lazyGridState = rememberLazyGridState()
@@ -72,6 +74,8 @@ fun CharacterListScreen(
         topBar = {
             StarWarsTopBar(
                 isScrolled = lazyGridState.canScrollBackward,
+                checked = checked,
+                onCheckedChanged = onCheckedChanged
             )
         },
         content = { paddingValues ->
