@@ -12,6 +12,8 @@ import kotlinx.coroutines.delay
 @Composable
 fun OpeningQuoteScreen(
     navigateToCharacterList: () -> Unit,
+    checked: Boolean,
+    onCheckedChanged: (checked: Boolean) -> Unit
 ) {
 
     LaunchedEffect(Unit) {
@@ -20,7 +22,10 @@ fun OpeningQuoteScreen(
     }
     Scaffold(
         modifier = Modifier.fillMaxSize(),
-        topBar = { StarWarsTopBar() },
+        topBar = { StarWarsTopBar(
+            checked = checked,
+            onCheckedChanged = onCheckedChanged
+        ) },
         content = { paddingValues ->
             OpeningQuote(paddingValues = paddingValues)
         },

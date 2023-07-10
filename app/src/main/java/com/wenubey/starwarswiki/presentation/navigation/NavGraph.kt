@@ -83,6 +83,8 @@ fun NavGraph(
                 navigateToCharacterList = {
                     navHostController.navigate(Screen.CharacterListScreen.route)
                 },
+                checked = checked,
+                onCheckedChanged = onCheckedChanged
             )
         }
     }

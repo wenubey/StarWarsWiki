@@ -32,8 +32,25 @@ object Constants {
     const val STARSHIPS_DESC = "Character's riding starships"
     const val BACKGROUND_IMAGE_DESC = "Background Image"
     const val SCROLL_TOP_DESC = "Scroll to the top of the list"
+    const val COPYRIGHT_DESC = "Copyright Section"
 
     const val TOP_BAR_HEIGHT = 64
+
+    const val DISNEY = "DISNEY"
+    const val LUCASFILM = "LUCASFILM"
+    const val LUCASFILM_ADDRESS = "https://www.lucasfilm.com/"
+    const val DISNEY_ADDRESS = "https://thewaltdisneycompany.eu/"
+    const val COPYRIGHT_HEADER = "Copyright ©"
+    const val COPYRIGHT_FIRST = "Star Wars and all associated names are copyrighted by "
+    const val COPYRIGHT_SECOND = "Lucasfilm Ltd. "
+    const val COPYRIGHT_THIRD = "and "
+    const val COPYRIGHT_FOURTH = "Disney."
+    const val COPYRIGHT_FIFTH = "\n" +
+            "The data and images are used without claim of" +
+            " ownership and belong to their respective owners. " +
+            "I do not own the rights to any material provided in " +
+            "this API."
+
 
     const val MOVIES = "Movies"
     const val VEHICLES = "Vehicles"
