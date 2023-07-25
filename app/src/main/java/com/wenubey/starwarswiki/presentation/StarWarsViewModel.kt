@@ -28,22 +28,19 @@ class StarWarsViewModel @Inject constructor(
     var searchQuery = MutableStateFlow("")
 
     @OptIn(FlowPreview::class)
-    val characterPagingFlow = searchQuery
-        .debounce(500)
-        .distinctUntilChanged()
-        .flatMapLatest { query ->
-            if (query.isEmpty()) {
+    val characterPagingFlow =
+        searchQuery
+            .debounce(500)
+            .distinctUntilChanged()
+            .flatMapLatest { query ->
                 pager.flow
-            } else {
-                pager.flow.map { pagingData ->
-                    pagingData.filter { character ->
-                        character.name!!.contains(query, ignoreCase = true)
-                    }
-                }
-            }.map { pagingData ->
-                pagingData.map { it.mapToDomainModel() }
-            }.cachedIn(viewModelScope)
-        }
+                    .map { pagingData ->
+                        pagingData.filter { character ->
+                            character.name!!.contains(query, ignoreCase = true)
+                        }
+                        pagingData.map { it.mapToDomainModel() }
+                    }.cachedIn(viewModelScope)
+            }
 
     fun setSearchQuery(query: String) {
         searchQuery.value = query

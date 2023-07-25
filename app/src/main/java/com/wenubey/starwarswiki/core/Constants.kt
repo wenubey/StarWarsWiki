@@ -63,8 +63,8 @@ object Constants {
     val UNDEFINED_COLOR = listOf(Color.Transparent)
 
     val mockData = CharacterModel(
-        id = 0,
-        name = "Cool Name",
+        id = 1,
+        name = "Luke Skywalker",
         height = "Cool Height",
         mass = "100",
         birthYear = "100BBY",
