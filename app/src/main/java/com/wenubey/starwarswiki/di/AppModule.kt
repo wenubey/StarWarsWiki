@@ -12,6 +12,8 @@ import com.wenubey.starwarswiki.data.remote.SearchQueryProviderImpl
 import com.wenubey.starwarswiki.data.remote.StarWarsApi
 import com.wenubey.starwarswiki.data.remote.StarWarsRemoteMediator
 import com.wenubey.starwarswiki.data.remote.StarWarsImageApi
+import com.wenubey.starwarswiki.domain.StarWarsRepository
+import com.wenubey.starwarswiki.domain.StarWarsRepositoryImpl
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -102,4 +104,9 @@ object AppModule {
     @Provides
     fun provideConverterFactory(): GsonConverterFactory = GsonConverterFactory.create()
 
+    @Singleton
+    @Provides
+    fun provideStarWarsRepository(starWarsPager: Pager<Int, CharacterEntity>): StarWarsRepository {
+        return StarWarsRepositoryImpl(starWarsPager)
+    }
 }
