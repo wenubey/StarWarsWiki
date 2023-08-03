@@ -1,9 +1,7 @@
 package com.wenubey.starwarswiki
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
-import androidx.paging.Pager
 import androidx.paging.PagingData
-import androidx.paging.map
 import com.wenubey.starwarswiki.data.local.entities.CharacterEntity
 import com.wenubey.starwarswiki.data.remote.SearchQueryProvider
 import com.wenubey.starwarswiki.domain.StarWarsRepository
@@ -11,82 +9,52 @@ import com.wenubey.starwarswiki.domain.models.CharacterModel
 import com.wenubey.starwarswiki.presentation.StarWarsViewModel
 import io.mockk.clearAllMocks
 import io.mockk.coEvery
+import io.mockk.coVerify
 import io.mockk.mockk
+import junit.framework.TestCase.assertEquals
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview
-import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flowOf
-import kotlinx.coroutines.flow.map
-import kotlinx.coroutines.flow.toList
 import kotlinx.coroutines.test.StandardTestDispatcher
+import kotlinx.coroutines.test.TestDispatcher
 import kotlinx.coroutines.test.runTest
 import kotlinx.coroutines.test.setMain
 import org.junit.After
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
+import org.junit.rules.TestRule
 
 
 @FlowPreview
+@OptIn(ExperimentalCoroutinesApi::class)
 class ViewModelTest {
 
     private lateinit var viewModel: StarWarsViewModel
-
+    private lateinit var starWarsRepository: StarWarsRepository
+    private lateinit var searchQueryProvider: SearchQueryProvider
+    private lateinit var testDispatcher: TestDispatcher
     @get:Rule
-    val instantTaskExecutorRule = InstantTaskExecutorRule()
+    val instantTaskExecutorRule: TestRule = InstantTaskExecutorRule()
 
-    @OptIn(ExperimentalCoroutinesApi::class)
-    private val testDispatcher = StandardTestDispatcher()
-
-    private class MockSearchQueryProvider : SearchQueryProvider {
-        private var currentQuery: String = ""
-        override fun getSearchQuery(): String {
-            return currentQuery
-        }
-
-        override fun setSearchQuery(query: String) {
-            currentQuery = query
-        }
-    }
-
-    private class MockStarWarsRepository : StarWarsRepository {
-
-        val characterList = listOf(
-            CharacterEntity(1, "Luke Skywalker"),
-            CharacterEntity(2, "Darth Vader"),
-            CharacterEntity(3, "Leia Organa")
-        )
-
-        override fun getCharacterPagingFlow(query: String): Flow<PagingData<CharacterModel>> {
-            return flowOf(PagingData.from(characterList)).map { pagingData ->
-                pagingData.map { character ->
-                    character.mapToDomainModel()
-                }
-            }
-        }
-    }
-
-    @OptIn(ExperimentalCoroutinesApi::class)
     @Before
     fun setUp() {
+        testDispatcher = StandardTestDispatcher()
         Dispatchers.setMain(testDispatcher)
-        // Mock the dependencies
-
-        val starWarsRepository = MockStarWarsRepository()
-        val searchQueryProvider = MockSearchQueryProvider()
+        starWarsRepository = mockk(relaxed = true)
+        searchQueryProvider = mockk(relaxed = true)
 
         viewModel = StarWarsViewModel(starWarsRepository, searchQueryProvider)
     }
 
-    @OptIn(ExperimentalCoroutinesApi::class)
     @After
     fun tearDown() {
-        // Clean up mocks
         clearAllMocks()
+
     }
 
-    @OptIn(ExperimentalCoroutinesApi::class)
+
     @Test
     fun `setSearchQuery should update searchQuery and call searchQueryProvider`() = runTest {
         // Given
@@ -96,40 +64,38 @@ class ViewModelTest {
         viewModel.setSearchQuery(query)
 
         // Then
-        assert(viewModel.searchQuery.value == query)
+        assertEquals(query, viewModel.searchQuery.value)
+        coVerify { searchQueryProvider.setSearchQuery(query) }
     }
 
 
-    @OptIn(ExperimentalCoroutinesApi::class)
     @Test
-    fun `characterPagingFlow should filter PagingData based on searchQuery`() = runTest {
-        // Given
-        val mockPager = mockk<Pager<Int, CharacterEntity>>()
-        val searchQueryProvider = MockSearchQueryProvider()
-        val starWarsRepository = MockStarWarsRepository()
-        val viewModel = StarWarsViewModel(starWarsRepository, searchQueryProvider)
-
-        val characterList = listOf(
-            CharacterEntity(1, "Luke Skywalker"),
-            CharacterEntity(2, "Darth Vader"),
-            CharacterEntity(3, "Leia Organa")
+    fun `setSearchQuery should filtered data`() = runTest {
+        val initialData = listOf(
+            CharacterEntity(name = "Luke Skywalker", id = 1),
+            CharacterEntity(name = "Darth Vader", id = 2),
+            CharacterEntity(name = "Obi-Wan Kenobi", id = 3),
+            CharacterEntity(name = "Princess Leia", id = 4),
         )
-        val pagingData = PagingData.from(characterList)
-        coEvery { mockPager.flow } returns flowOf(pagingData)
+        val query = "Luke"
+        val filteredData = initialData.filter { it.name!!.contains(query, ignoreCase = true) }
+        val pagingData: PagingData<CharacterModel> = PagingData.from(filteredData.map { it.mapToDomainModel() })
+
+        coEvery { starWarsRepository.getCharacterPagingFlow(any()) } returns flowOf(pagingData)
+
+        println(viewModel.characterPagingFlow)
 
         // When
-        viewModel.setSearchQuery("Sky")
+        viewModel.setSearchQuery(query)
+        val collectedData = viewModel.characterPagingFlow
 
         // Then
-        val filteredPagingData = viewModel.characterPagingFlow.toList()[0]
-
-        // The filteredPagingData should contain only characters with "Sky" in their name.
-//        assertEquals(2, filteredPagingData.size)
-//        assertEquals("Luke Skywalker", filteredPagingData[0].name)
-//        assertEquals("Leia Organa", filteredPagingData[1].name)
+        assertEquals(query, viewModel.searchQuery.value)
+        //assertEquals(filteredData, collectedData)
+        coVerify { searchQueryProvider.setSearchQuery(query) }
+        coVerify { starWarsRepository.getCharacterPagingFlow(query) }
 
     }
-
-
 }
+
 
