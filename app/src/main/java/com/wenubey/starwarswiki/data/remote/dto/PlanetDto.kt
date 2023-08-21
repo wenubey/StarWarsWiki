@@ -5,10 +5,10 @@ import com.wenubey.starwarswiki.core.Constants.UNDEFINED
 import com.wenubey.starwarswiki.data.local.entities.PlanetEntity
 
 data class PlanetDto(
-    @SerializedName("name") val name: String?,
-    @SerializedName("climate") val climate: String?,
-    @SerializedName("population") val population: String?,
-    @SerializedName("terrain") val terrain: String?,
+    @SerializedName("name") val name: String? = null,
+    @SerializedName("climate") val climate: String? = null,
+    @SerializedName("population") val population: String? = null,
+    @SerializedName("terrain") val terrain: String? = null,
 ) {
     fun mapToEntity(): PlanetEntity {
         return PlanetEntity(

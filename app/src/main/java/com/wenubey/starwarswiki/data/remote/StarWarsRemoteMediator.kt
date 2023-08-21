@@ -5,10 +5,9 @@ import androidx.paging.ExperimentalPagingApi
 import androidx.paging.LoadType
 import androidx.paging.PagingState
 import androidx.paging.RemoteMediator
-import androidx.room.withTransaction
 import com.wenubey.starwarswiki.core.Constants.TAG
 import com.wenubey.starwarswiki.core.getIdFromUrl
-import com.wenubey.starwarswiki.data.local.StarWarsDatabase
+import com.wenubey.starwarswiki.data.local.StarWarsDao
 import com.wenubey.starwarswiki.data.local.entities.CharacterEntity
 import retrofit2.HttpException
 import java.io.IOException
@@ -17,7 +16,8 @@ import javax.inject.Inject
 @OptIn(ExperimentalPagingApi::class)
 class StarWarsRemoteMediator @Inject constructor(
     private val api: StarWarsApi,
-    private val db: StarWarsDatabase,
+    //private val db: StarWarsDatabase,
+    private val dao: StarWarsDao,
     private val imageApi: StarWarsImageApi,
     private val searchQueryProvider: SearchQueryProvider
 ) : RemoteMediator<Int, CharacterEntity>() {
@@ -47,7 +47,7 @@ class StarWarsRemoteMediator @Inject constructor(
             } else {
                 api.searchCharacter(searchQuery)
             }
-
+            // bunlari parcala
             val characterEntities = characters.results.map { result ->
                 result.mapToEntity(
                     films = result.films?.map { filmUrl ->
@@ -67,13 +67,12 @@ class StarWarsRemoteMediator @Inject constructor(
                 )
             }
 
-
-            db.withTransaction {
-                if (loadType == LoadType.REFRESH) {
-                    db.dao.clearAll()
-                }
-                db.dao.upsertAll(characters = characterEntities)
+            if (loadType == LoadType.REFRESH) {
+                dao.clearAll()
             }
+            dao.upsertAll(characters = characterEntities)
+
+
             val endOfPaginationReached = characters.next == null
             return MediatorResult.Success(endOfPaginationReached = endOfPaginationReached)
         } catch (e: IOException) {
