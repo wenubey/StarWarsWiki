@@ -9,6 +9,7 @@ import com.wenubey.starwarswiki.core.Constants.TAG
 import com.wenubey.starwarswiki.core.getIdFromUrl
 import com.wenubey.starwarswiki.data.local.StarWarsDao
 import com.wenubey.starwarswiki.data.local.entities.CharacterEntity
+import com.wenubey.starwarswiki.data.remote.dto.ListCharacterDto
 import retrofit2.HttpException
 import java.io.IOException
 import javax.inject.Inject
@@ -47,25 +48,7 @@ class StarWarsRemoteMediator @Inject constructor(
             } else {
                 api.searchCharacter(searchQuery)
             }
-            // bunlari parcala
-            val characterEntities = characters.results.map { result ->
-                result.mapToEntity(
-                    films = result.films?.map { filmUrl ->
-                        api.getFilm(filmUrl.getIdFromUrl())
-                    },
-                    homeWorld = api.getPlanet(result.homeWorld.getIdFromUrl()),
-                    vehicles = result.vehicles?.map { vehicleUrl ->
-                        api.getVehicle(vehicleUrl.getIdFromUrl())
-                    },
-                    species = result.species?.map { specieUrl ->
-                        api.getSpecie(specieUrl.getIdFromUrl())
-                    },
-                    starships = result.starships?.map { starshipUrl ->
-                        api.getStarship(starshipUrl.getIdFromUrl())
-                    },
-                    photoUrl = imageApi.getImageFromId(result.url.getIdFromUrl())
-                )
-            }
+            val characterEntities = getListCharacter(characters, api)
 
             if (loadType == LoadType.REFRESH) {
                 dao.clearAll()
@@ -81,6 +64,27 @@ class StarWarsRemoteMediator @Inject constructor(
         } catch (e: HttpException) {
             Log.e(TAG, "HTTPError: ${e.message}")
             return MediatorResult.Error(e)
+        }
+    }
+
+    private suspend fun getListCharacter(characters: ListCharacterDto, api: StarWarsApi): List<CharacterEntity> {
+        return characters.results.map { result ->
+            result.mapToEntity(
+                films = result.films?.map { filmUrl ->
+                    api.getFilm(filmUrl.getIdFromUrl())
+                },
+                homeWorld = api.getPlanet(result.homeWorld.getIdFromUrl()),
+                vehicles = result.vehicles?.map { vehicleUrl ->
+                    api.getVehicle(vehicleUrl.getIdFromUrl())
+                },
+                species = result.species?.map { specieUrl ->
+                    api.getSpecie(specieUrl.getIdFromUrl())
+                },
+                starships = result.starships?.map { starshipUrl ->
+                    api.getStarship(starshipUrl.getIdFromUrl())
+                },
+                photoUrl = imageApi.getImageFromId(result.url.getIdFromUrl())
+            )
         }
     }
 }
