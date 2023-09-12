@@ -30,9 +30,13 @@ import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.test.StandardTestDispatcher
 import kotlinx.coroutines.test.TestDispatcher
 import kotlinx.coroutines.test.setMain
+import okhttp3.ResponseBody.Companion.toResponseBody
 import org.junit.After
 import org.junit.Before
 import org.junit.Test
+import retrofit2.HttpException
+import retrofit2.Response
+import java.io.IOException
 
 
 @OptIn(ExperimentalCoroutinesApi::class)
@@ -48,6 +52,7 @@ class RemoteMediatorTest {
     private val pagingState = mockk<PagingState<Int, CharacterEntity>> {
         every { config } returns PagingConfig(10)
     }
+
     private lateinit var testDispatcher: TestDispatcher
 
     private val fakeData = ListCharacterDto(
@@ -173,14 +178,52 @@ class RemoteMediatorTest {
         coVerify(exactly = 1) { api.searchCharacter(fakeSearchQuery) }
     }
 
+    @OptIn(ExperimentalPagingApi::class)
+    @Test
+    fun `Remote Mediator IOException Handling`() = runBlocking {
+        // Given
+        coEvery { api.getCharacters(1) } throws IOException("Network Error")
+        coEvery { searchQueryProvider.getSearchQuery() } returns ""
+        coEvery { api.searchCharacter(fakeSearchQuery) } throws IOException("Network Error")
+        coEvery { api.getPlanet(1) } coAnswers { fakePlanet }
+        coEvery { imageApi.getImageFromId(1) } coAnswers { fakeImage }
 
 
+        // When
+        val result =  createRemoteMediator().load(LoadType.REFRESH,  pagingState)
 
+        //Then
+        assert(result is RemoteMediator.MediatorResult.Error)
+        val errorResult = result as RemoteMediator.MediatorResult.Error
+        assert(errorResult.throwable is IOException)
+        assert(errorResult.throwable.localizedMessage == "Network Error")
 
+    }
+
+    @OptIn(ExperimentalPagingApi::class)
+    @Test
+    fun `Remote Mediator HttpException Handling`() = runBlocking {
+        // Given
+        coEvery { api.getCharacters(1) } throws HttpException(createFake404Response())
+        coEvery { searchQueryProvider.getSearchQuery() } returns ""
+        coEvery { api.searchCharacter(fakeSearchQuery) } throws HttpException(createFake404Response())
+        coEvery { api.getPlanet(1) } coAnswers { fakePlanet }
+        coEvery { imageApi.getImageFromId(1) } coAnswers { fakeImage }
+
+        // When
+        val result =  createRemoteMediator().load(LoadType.REFRESH,  pagingState)
+
+        //Then
+        assert(result is RemoteMediator.MediatorResult.Error)
+        val errorResult = result as RemoteMediator.MediatorResult.Error
+        assert(errorResult.throwable is HttpException)
+    }
 
     private fun createRemoteMediator() =
         StarWarsRemoteMediator(api, dao, imageApi, searchQueryProvider)
 
-
+    private fun createFake404Response(): Response<Unit> {
+        return Response.error(404, "Not Found".toResponseBody(null))
+    }
 }
 

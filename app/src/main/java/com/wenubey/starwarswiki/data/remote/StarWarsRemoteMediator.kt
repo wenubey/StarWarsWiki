@@ -1,11 +1,9 @@
 package com.wenubey.starwarswiki.data.remote
 
-import android.util.Log
 import androidx.paging.ExperimentalPagingApi
 import androidx.paging.LoadType
 import androidx.paging.PagingState
 import androidx.paging.RemoteMediator
-import com.wenubey.starwarswiki.core.Constants.TAG
 import com.wenubey.starwarswiki.core.getIdFromUrl
 import com.wenubey.starwarswiki.data.local.StarWarsDao
 import com.wenubey.starwarswiki.data.local.entities.CharacterEntity
@@ -17,12 +15,10 @@ import javax.inject.Inject
 @OptIn(ExperimentalPagingApi::class)
 class StarWarsRemoteMediator @Inject constructor(
     private val api: StarWarsApi,
-    //private val db: StarWarsDatabase,
     private val dao: StarWarsDao,
     private val imageApi: StarWarsImageApi,
     private val searchQueryProvider: SearchQueryProvider
 ) : RemoteMediator<Int, CharacterEntity>() {
-
     override suspend fun load(
         loadType: LoadType,
         state: PagingState<Int, CharacterEntity>
@@ -59,10 +55,8 @@ class StarWarsRemoteMediator @Inject constructor(
             val endOfPaginationReached = characters.next == null
             return MediatorResult.Success(endOfPaginationReached = endOfPaginationReached)
         } catch (e: IOException) {
-            Log.e(TAG, "IOError: ${e.localizedMessage}")
             return MediatorResult.Error(e)
         } catch (e: HttpException) {
-            Log.e(TAG, "HTTPError: ${e.message}")
             return MediatorResult.Error(e)
         }
     }
