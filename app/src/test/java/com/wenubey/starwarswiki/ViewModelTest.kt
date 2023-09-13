@@ -92,7 +92,6 @@ class ViewModelTest {
         job.cancel()
     }
 
-    // daha guzel bi test ismi yazabilecegine inaniyorum, yukardakinden kopya cekebilirsin
 
     private fun createViewModel(): StarWarsViewModel {
         return StarWarsViewModel(
