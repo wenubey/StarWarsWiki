@@ -19,6 +19,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -26,6 +27,7 @@ import coil.compose.rememberAsyncImagePainter
 import coil.request.ImageRequest
 import coil.size.Size
 import com.wenubey.starwarswiki.R
+import com.wenubey.starwarswiki.core.Constants.CHARACTER_LIST_CARD_TEST_TAG
 import com.wenubey.starwarswiki.core.Constants.CHARACTER_PHOTO_DESC
 import com.wenubey.starwarswiki.core.Constants.mockData
 import com.wenubey.starwarswiki.core.ScreenSize
@@ -42,7 +44,7 @@ fun CharacterListCard(
     val context = LocalContext.current
     val painter = rememberAsyncImagePainter(
         model = ImageRequest.Builder(context)
-            .data(character.photoUrl.imageUrl)
+            .data(character.photoUrl?.imageUrl)
             .crossfade(false)
             .size(Size.ORIGINAL)
             .placeholder(R.drawable.character_list_not_found)
@@ -61,7 +63,8 @@ fun CharacterListCard(
         elevation = CardDefaults.cardElevation(defaultElevation = 4.dp),
         modifier = Modifier
             .then(cardSizeModifier)
-            .padding(4.dp),
+            .padding(4.dp)
+            .testTag(CHARACTER_LIST_CARD_TEST_TAG),
         colors = CardDefaults.cardColors(
             containerColor = MaterialTheme.colorScheme.primaryContainer
         )

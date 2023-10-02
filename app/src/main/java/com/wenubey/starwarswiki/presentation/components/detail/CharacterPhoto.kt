@@ -26,7 +26,7 @@ fun CharacterPhoto(
     val context = LocalContext.current
     val painter = rememberAsyncImagePainter(
         model = ImageRequest.Builder(context)
-            .data(character.photoUrl.imageUrl)
+            .data(character.photoUrl?.imageUrl)
             .crossfade(true)
             .size(600)
             .build()

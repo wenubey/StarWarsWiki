@@ -32,9 +32,12 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.unit.dp
 import androidx.paging.LoadState
 import androidx.paging.compose.LazyPagingItems
+import com.wenubey.starwarswiki.core.Constants.CUSTOM_PROGRESS_BAR_TEST_TAG
+import com.wenubey.starwarswiki.core.Constants.GRID_COUNT_CHANGE_DESC
 import com.wenubey.starwarswiki.core.components.CustomProgressBar
 import com.wenubey.starwarswiki.core.components.ScrollToTheTopButton
 import com.wenubey.starwarswiki.core.components.StarWarsTopBar
@@ -70,7 +73,8 @@ fun CharacterListScreen(
         }
     }
     Scaffold(
-        modifier = Modifier.fillMaxSize(),
+        modifier = Modifier
+            .fillMaxSize(),
         topBar = {
             StarWarsTopBar(
                 isScrolled = lazyGridState.canScrollBackward,
@@ -103,7 +107,7 @@ fun CharacterListScreen(
                         if (isPortrait) {
                             Icon(
                                 imageVector = if (gridChanged.value) Icons.Default.GridOn else Icons.Outlined.Window,
-                                contentDescription = "",
+                                contentDescription = GRID_COUNT_CHANGE_DESC,
                                 modifier = Modifier
                                     .padding(8.dp)
                                     .clickable(
@@ -114,13 +118,16 @@ fun CharacterListScreen(
                                             gridChanged.value = !gridChanged.value
                                         }
                                     )
+                                    .testTag(GRID_COUNT_CHANGE_DESC)
                             )
                         }
                     }
 
                     if (refreshState is LoadState.Loading) {
                         CustomProgressBar(
-                            modifier = Modifier.background(Color.Transparent)
+                            modifier = Modifier
+                                .background(Color.Transparent)
+                                .testTag(CUSTOM_PROGRESS_BAR_TEST_TAG)
                         )
                     } else {
                         CharacterList(

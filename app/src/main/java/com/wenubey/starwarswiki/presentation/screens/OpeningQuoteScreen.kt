@@ -13,7 +13,8 @@ import kotlinx.coroutines.delay
 fun OpeningQuoteScreen(
     navigateToCharacterList: () -> Unit,
     checked: Boolean,
-    onCheckedChanged: (checked: Boolean) -> Unit
+    onCheckedChanged: (checked: Boolean) -> Unit,
+    modifier: Modifier = Modifier
 ) {
 
     LaunchedEffect(Unit) {
@@ -21,7 +22,7 @@ fun OpeningQuoteScreen(
         navigateToCharacterList()
     }
     Scaffold(
-        modifier = Modifier.fillMaxSize(),
+        modifier = modifier.fillMaxSize(),
         topBar = { StarWarsTopBar(
             checked = checked,
             onCheckedChanged = onCheckedChanged

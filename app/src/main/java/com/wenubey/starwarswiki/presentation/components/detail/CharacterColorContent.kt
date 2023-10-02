@@ -22,7 +22,7 @@ import com.wenubey.starwarswiki.core.Constants.mockData
 
 @Composable
 fun CharacterColorContent(
-    colors: List<Color>,
+    colors: List<Color>?,
     desc: String
 ) {
     Row(
@@ -30,7 +30,7 @@ fun CharacterColorContent(
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.spacedBy(4.dp)
     ) {
-        if (colors.isEmpty()) {
+        if (colors.isNullOrEmpty()) {
             ColorContent(colors = UNDEFINED_COLOR)
             Text(text = UNDEFINED)
         } else {

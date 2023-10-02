@@ -33,6 +33,7 @@ object Constants {
     const val BACKGROUND_IMAGE_DESC = "Background Image"
     const val SCROLL_TOP_DESC = "Scroll to the top of the list"
     const val COPYRIGHT_DESC = "Copyright Section"
+    const val GRID_COUNT_CHANGE_DESC = "GridCountChangeButton"
 
     const val TOP_BAR_HEIGHT = 64
 
@@ -131,4 +132,9 @@ object Constants {
         hairColor = listOf(Blue, Red),
         skinColor = listOf(Pale, Tan)
     )
+
+    //TEST TAGS
+
+    const val CHARACTER_LIST_CARD_TEST_TAG = "CharacterListCard"
+    const val CUSTOM_PROGRESS_BAR_TEST_TAG = "CustomProgressBar"
 }

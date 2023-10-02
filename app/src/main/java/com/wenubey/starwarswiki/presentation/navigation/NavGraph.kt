@@ -1,16 +1,17 @@
 package com.wenubey.starwarswiki.presentation.navigation
 
 import android.net.Uri
-import android.util.Log
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.State
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.semantics.contentDescription
+import androidx.compose.ui.semantics.semantics
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
 import androidx.paging.compose.LazyPagingItems
 import com.google.gson.Gson
-import com.wenubey.starwarswiki.core.Constants.TAG
 import com.wenubey.starwarswiki.core.parcelable
 import com.wenubey.starwarswiki.domain.models.CharacterModel
 import com.wenubey.starwarswiki.domain.models.FilmModel
@@ -31,14 +32,13 @@ fun NavGraph(
 
     NavHost(
         navController = navHostController,
-        startDestination = Screen.OpeningQuoteScreen.route
+        startDestination = Screen.OpeningQuoteScreen.route,
     ) {
         composable(route = Screen.CharacterListScreen.route) {
             CharacterListScreen(
                 characters = characters, navigateToDetailScreen = { character ->
                     val json = Uri.encode(Gson().toJson(character))
                     navHostController.navigate(Screen.CharacterDetailScreen.route + "/$json")
-                    Log.i(TAG, "NavGraph: ${character.name}")
                 },
                 searchQuery = searchQuery,
                 setSearchQuery = setSearchQuery,
@@ -84,7 +84,10 @@ fun NavGraph(
                     navHostController.navigate(Screen.CharacterListScreen.route)
                 },
                 checked = checked,
-                onCheckedChanged = onCheckedChanged
+                onCheckedChanged = onCheckedChanged,
+                modifier = Modifier.semantics {
+                    contentDescription = Screen.OpeningQuoteScreen.route
+                }
             )
         }
     }
